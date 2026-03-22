@@ -133,6 +133,22 @@ htdocs/
 - **3.6秒後**: 青背景がスライドイン、文字が白に変化
 - 他のテキスト（SOUNDS / THAT / YOU.）は通常のrevealアニメーション
 
+### COMPANYページ 装飾スクロール
+
+- **装飾テキスト**: "SOUNDS THAT MOVE YOU." を無限スクロール
+- **スクロール速度**: 75px/秒（`mission-ticker.js`）
+- **配置**: `.company-mission`セクション内に配置（PC: 50%、SP: 48vw）
+- **スタイル**: `opacity: 0.1`、フォントサイズ13.24vw（PC）/ 62px（SP）
+
+### 下層ページ共通仕様
+
+- **セクションタイトル**: 英語＋日本語を縦並びで表示
+  - PC: 英語 1vw / 日本語 1.8vw
+  - SP: 英語 13px / 日本語 11px
+- **コンテンツ幅**: PC 10vw左右padding（min-width: 1200px）/ SP 100%（padding: 40px 20px）
+- **SP改行**: `.br-sp`クラスでSP専用改行を実装
+- **text-highlightアニメーション**: 下層ページ遷移時に初期状態を`opacity: 0`で非表示、アニメーションで表示
+
 ---
 
 ## Figmaデザインファイル

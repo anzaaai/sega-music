@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.wave-master.com)",
+      "mcp__figma__get_metadata",
+      "mcp__figma__generate_figma_design",
+      "Bash(open \"http://localhost:8787/#figmacapture=67a4a85a-4f82-49f9-ad7d-8e24c8572739&figmaendpoint=https%3A%2F%2Fmcp.figma.com%2Fmcp%2Fcapture%2F67a4a85a-4f82-49f9-ad7d-8e24c8572739%2Fsubmit&figmadelay=2000\")",
+      "Bash(open \"http://localhost:8765/top_a.html#figmacapture=adc668e5-fa12-4215-b472-35bc34d59fe5&figmaendpoint=https%3A%2F%2Fmcp.figma.com%2Fmcp%2Fcapture%2Fadc668e5-fa12-4215-b472-35bc34d59fe5%2Fsubmit&figmadelay=2000\")",
+      "mcp__figma__get_design_context",
+      "Bash(open \"http://localhost:8080/news/#figmacapture=8e459e9e-5416-4127-aa85-4e12f6363c26&figmaendpoint=https%3A%2F%2Fmcp.figma.com%2Fmcp%2Fcapture%2F8e459e9e-5416-4127-aa85-4e12f6363c26%2Fsubmit&figmadelay=2000\")",
+      "Bash(open:*)",
+      "Bash(npx html-validate:*)"
+    ]
+  }
+}

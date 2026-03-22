@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEGA MUSIC — TOP</title>
+<style>
+/* ===== RESET ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',Meiryo,sans-serif;
+  background:#FFFFFF;
+  color:#0F172A;
+  overflow-x:hidden;
+}
+a{text-decoration:none;color:inherit;}
+img{display:block;max-width:100%;}
+
+/* ===== DESIGN TOKENS ===== */
+:root{
+  --blue:#2563EB;
+  --blue-mid:#3B82F6;
+  --blue-light:#60A5FA;
+  --blue-xlight:#DBEAFE;
+  --blue-xxlight:#EFF6FF;
+  --blue-dark:#1D4ED8;
+  --navy:#0A1628;
+  --text:#0F172A;
+  --text-sub:#334155;
+  --text-muted:#64748B;
+  --border:#E2E8F0;
+  --bg:#FFFFFF;
+  --bg-soft:#F8FAFC;
+  --bg-blue:#EFF6FF;
+  --radius:12px;
+  --shadow:0 4px 24px rgba(37,99,235,.10);
+  --shadow-lg:0 8px 48px rgba(37,99,235,.18);
+}
+
+/* ===== UTILITY ===== */
+.container{max-width:1200px;margin:0 auto;padding:0 48px;}
+@media(max-width:768px){.container{padding:0 24px;}}
+
+/* ===== HEADER ===== */
+.header{
+  position:fixed;top:0;left:0;width:100%;z-index:100;
+  background:rgba(255,255,255,.9);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  transition:box-shadow .3s;
+}
+.header.scrolled{box-shadow:0 2px 20px rgba(37,99,235,.12);}
+.header-inner{
+  max-width:1200px;margin:0 auto;padding:0 48px;
+  height:64px;display:flex;align-items:center;justify-content:space-between;
+}
+.logo{
+  font-size:20px;font-weight:900;letter-spacing:.1em;
+  color:var(--navy);
+  display:flex;align-items:center;gap:8px;
+}
+.logo span{
+  color:var(--blue);
+  background:var(--blue);
+  color:#fff;
+  padding:2px 8px;
+  border-radius:4px;
+  font-size:18px;
+}
+.nav{display:flex;align-items:center;gap:32px;}
+.nav a{
+  font-size:13px;font-weight:500;color:var(--text-sub);
+  position:relative;padding-bottom:2px;
+  transition:color .2s;
+}
+.nav a::after{
+  content:'';position:absolute;bottom:0;left:0;width:0;height:1.5px;
+  background:var(--blue);transition:width .2s;
+}
+.nav a:hover{color:var(--blue);}
+.nav a:hover::after{width:100%;}
+.nav-cta{
+  background:var(--blue);color:#fff!important;
+  padding:8px 20px;border-radius:8px;
+  font-size:13px;font-weight:700;letter-spacing:.02em;
+  transition:background .2s,transform .15s!important;
+}
+.nav-cta:hover{background:var(--blue-dark)!important;transform:translateY(-1px);}
+.nav-cta::after{display:none!important;}
+@media(max-width:768px){.nav{gap:16px;}.nav a:not(.nav-cta){display:none;}}
+
+/* ===== HERO ===== */
+.hero{
+  min-height:100vh;
+  display:flex;align-items:center;
+  position:relative;overflow:hidden;
+  padding-top:64px;
+}
+.hero-bg{
+  position:absolute;inset:0;z-index:0;
+  background:linear-gradient(135deg,#EFF6FF 0%,#FFFFFF 50%,#F0F9FF 100%);
+}
+/* geometric shapes */
+.hero-shape{position:absolute;border-radius:50%;pointer-events:none;}
+.hs1{
+  width:600px;height:600px;
+  top:-200px;right:-150px;
+  background:radial-gradient(circle,rgba(37,99,235,.08) 0%,transparent 70%);
+}
+.hs2{
+  width:400px;height:400px;
+  bottom:-100px;left:-100px;
+  background:radial-gradient(circle,rgba(96,165,250,.1) 0%,transparent 70%);
+}
+.hs3{
+  width:200px;height:200px;
+  top:30%;left:45%;
+  background:radial-gradient(circle,rgba(37,99,235,.06) 0%,transparent 70%);
+}
+/* grid lines */
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(37,99,235,.04) 1px, transparent 1px),
+    linear-gradient(90deg,rgba(37,99,235,.04) 1px, transparent 1px);
+  background-size:60px 60px;
+  mask-image:radial-gradient(ellipse 80% 60% at 50% 50%,black 40%,transparent 100%);
+}
+/* floating cards */
+.hero-float{
+  position:absolute;right:6%;top:50%;transform:translateY(-50%);
+  width:340px;
+  animation:floatY 6s ease-in-out infinite;
+}
+@keyframes floatY{
+  0%,100%{transform:translateY(-50%);}
+  50%{transform:translateY(calc(-50% - 16px));}
+}
+.float-card{
+  background:#fff;border-radius:16px;
+  box-shadow:0 8px 40px rgba(37,99,235,.15);
+  padding:20px;margin-bottom:16px;
+  border:1px solid rgba(37,99,235,.08);
+  animation:fadeSlideIn .8s ease both;
+}
+.float-card:nth-child(1){animation-delay:.2s;}
+.float-card:nth-child(2){animation-delay:.4s;}
+.float-card:nth-child(3){animation-delay:.6s;}
+@keyframes fadeSlideIn{
+  from{opacity:0;transform:translateX(24px);}
+  to{opacity:1;transform:translateX(0);}
+}
+.fc-label{
+  font-size:10px;font-weight:700;letter-spacing:.12em;color:var(--blue);
+  text-transform:uppercase;margin-bottom:8px;
+}
+.fc-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px;}
+.fc-sub{font-size:12px;color:var(--text-muted);}
+.fc-bar{height:4px;background:var(--border);border-radius:2px;margin-top:10px;overflow:hidden;}
+.fc-bar-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--blue),var(--blue-light));animation:barGrow 1.5s 1s ease both;}
+@keyframes barGrow{from{width:0;}to{width:var(--w,100%);}}
+.fc-nums{display:flex;gap:16px;margin-top:8px;}
+.fc-num{text-align:center;}
+.fc-num strong{display:block;font-size:20px;font-weight:900;color:var(--blue);}
+.fc-num span{font-size:10px;color:var(--text-muted);}
+
+.hero-content{
+  position:relative;z-index:1;
+  max-width:580px;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--blue-xxlight);border:1px solid rgba(37,99,235,.2);
+  color:var(--blue);font-size:12px;font-weight:700;letter-spacing:.1em;
+  padding:6px 16px;border-radius:20px;
+  margin-bottom:24px;
+  animation:fadeUp .6s .1s ease both;
+}
+.hero-eyebrow::before{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:var(--blue);animation:pulse 2s infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.5);}}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px);}
+  to{opacity:1;transform:translateY(0);}
+}
+.hero-h1{
+  font-size:clamp(40px,5vw,64px);
+  font-weight:900;line-height:1.1;
+  letter-spacing:-.02em;
+  color:var(--navy);
+  margin-bottom:20px;
+  animation:fadeUp .7s .2s ease both;
+}
+.hero-h1 em{
+  font-style:normal;
+  background:linear-gradient(135deg,var(--blue),var(--blue-light));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.hero-desc{
+  font-size:17px;line-height:1.7;color:var(--text-sub);
+  margin-bottom:36px;
+  animation:fadeUp .7s .3s ease both;
+}
+.hero-cta{
+  display:flex;gap:12px;flex-wrap:wrap;
+  animation:fadeUp .7s .4s ease both;
+}
+.btn-primary{
+  background:var(--blue);color:#fff;
+  font-size:14px;font-weight:700;
+  padding:14px 32px;border-radius:10px;
+  border:none;cursor:pointer;
+  display:inline-flex;align-items:center;gap:8px;
+  box-shadow:0 4px 20px rgba(37,99,235,.35);
+  transition:all .2s;
+}
+.btn-primary:hover{background:var(--blue-dark);transform:translateY(-2px);box-shadow:0 8px 28px rgba(37,99,235,.4);}
+.btn-primary svg{transition:transform .2s;}
+.btn-primary:hover svg{transform:translateX(3px);}
+.btn-secondary{
+  background:#fff;color:var(--blue);
+  font-size:14px;font-weight:700;
+  padding:14px 32px;border-radius:10px;
+  border:1.5px solid rgba(37,99,235,.3);
+  display:inline-flex;align-items:center;gap:8px;
+  transition:all .2s;
+}
+.btn-secondary:hover{border-color:var(--blue);background:var(--blue-xxlight);transform:translateY(-2px);}
+.hero-stats{
+  display:flex;gap:32px;margin-top:48px;
+  animation:fadeUp .7s .5s ease both;
+}
+.hs-item{border-left:2px solid var(--blue-xlight);padding-left:16px;}
+.hs-item strong{display:block;font-size:26px;font-weight:900;color:var(--blue);}
+.hs-item span{font-size:12px;color:var(--text-muted);font-weight:500;}
+
+/* ===== MARQUEE ===== */
+.marquee-section{
+  background:var(--navy);
+  padding:16px 0;overflow:hidden;
+}
+.marquee-track{
+  display:flex;gap:48px;
+  animation:marquee 20s linear infinite;
+  white-space:nowrap;
+}
+@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.marquee-item{
+  font-size:12px;font-weight:700;letter-spacing:.15em;
+  text-transform:uppercase;color:rgba(255,255,255,.5);
+  display:flex;align-items:center;gap:16px;
+}
+.marquee-item span{color:var(--blue-light);}
+.marquee-dot{width:4px;height:4px;border-radius:50%;background:var(--blue-mid);}
+
+/* ===== SECTION BASE ===== */
+.section{padding:96px 0;}
+.section-eyebrow{
+  display:inline-block;
+  font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--blue);
+  margin-bottom:12px;
+  position:relative;padding-left:20px;
+}
+.section-eyebrow::before{
+  content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);
+  width:12px;height:2px;background:var(--blue);
+}
+.section-title{
+  font-size:clamp(28px,3vw,40px);font-weight:900;
+  color:var(--navy);line-height:1.15;
+  letter-spacing:-.02em;
+}
+.section-title em{font-style:normal;color:var(--blue);}
+.section-sub{
+  font-size:15px;color:var(--text-muted);line-height:1.7;
+  margin-top:12px;max-width:560px;
+}
+.section-header{margin-bottom:56px;}
+.section-header-row{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  flex-wrap:wrap;gap:16px;
+  margin-bottom:56px;
+}
+.link-more{
+  font-size:13px;font-weight:700;color:var(--blue);
+  display:inline-flex;align-items:center;gap:6px;
+  padding:10px 20px;border:1.5px solid rgba(37,99,235,.25);
+  border-radius:8px;transition:all .2s;white-space:nowrap;
+}
+.link-more:hover{background:var(--blue-xxlight);border-color:var(--blue);}
+.link-more svg{transition:transform .2s;}
+.link-more:hover svg{transform:translateX(3px);}
+
+/* ===== NEWS ===== */
+.news-section{background:var(--bg);}
+.news-list{display:flex;flex-direction:column;gap:0;}
+.news-item{
+  display:grid;grid-template-columns:120px auto 1fr auto;
+  align-items:center;gap:20px;
+  padding:20px 0;
+  border-bottom:1px solid var(--border);
+  transition:background .15s;
+}
+.news-item:first-child{border-top:1px solid var(--border);}
+.news-item:hover{padding-left:8px;padding-right:8px;margin:0 -8px;border-radius:8px;border-color:transparent;background:var(--bg-soft);}
+.news-date{
+  font-size:12px;color:var(--text-muted);
+  font-variant-numeric:tabular-nums;letter-spacing:.05em;
+}
+.news-tag{
+  font-size:10px;font-weight:700;letter-spacing:.08em;
+  padding:4px 10px;border-radius:4px;
+  background:var(--blue-xxlight);color:var(--blue);
+  white-space:nowrap;
+}
+.news-tag.red{background:#FEF2F2;color:#DC2626;}
+.news-title{font-size:14px;font-weight:500;color:var(--text);line-height:1.5;}
+.news-arrow{
+  width:28px;height:28px;border-radius:50%;
+  border:1.5px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--text-muted);
+  transition:all .2s;flex-shrink:0;
+}
+.news-item:hover .news-arrow{background:var(--blue);border-color:var(--blue);color:#fff;}
+
+/* ===== WORKS ===== */
+.works-section{background:var(--bg-soft);}
+.works-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+}
+@media(max-width:900px){.works-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:580px){.works-grid{grid-template-columns:1fr;}}
+.work-card{
+  background:#fff;border-radius:var(--radius);
+  overflow:hidden;
+  border:1px solid var(--border);
+  transition:transform .25s,box-shadow .25s;
+  position:relative;
+}
+.work-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);}
+.work-thumb{
+  aspect-ratio:16/9;
+  position:relative;overflow:hidden;
+  background:linear-gradient(135deg,var(--navy) 0%,#0D2251 100%);
+  display:flex;align-items:center;justify-content:center;
+}
+.work-thumb-pattern{
+  position:absolute;inset:0;
+  background-image:radial-gradient(circle,rgba(37,99,235,.15) 1px,transparent 1px);
+  background-size:20px 20px;
+}
+.work-thumb-icon{
+  width:56px;height:56px;
+  background:rgba(37,99,235,.25);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;z-index:1;
+  border:1.5px solid rgba(96,165,250,.3);
+}
+.work-badge{
+  position:absolute;top:12px;left:12px;
+  font-size:10px;font-weight:700;letter-spacing:.08em;
+  padding:4px 10px;border-radius:4px;
+  background:rgba(37,99,235,.85);color:#fff;
+  backdrop-filter:blur(4px);
+}
+.work-year{
+  position:absolute;bottom:12px;right:12px;
+  font-size:11px;color:rgba(255,255,255,.5);
+  font-variant-numeric:tabular-nums;
+}
+.work-body{padding:20px;}
+.work-game{
+  font-size:10px;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--blue);margin-bottom:6px;
+}
+.work-title{font-size:16px;font-weight:800;color:var(--navy);margin-bottom:6px;}
+.work-desc{font-size:13px;color:var(--text-muted);line-height:1.6;}
+.work-footer{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 20px 16px;margin-top:4px;
+}
+.work-tags{display:flex;gap:6px;flex-wrap:wrap;}
+.work-chip{
+  font-size:10px;padding:3px 8px;border-radius:4px;
+  background:var(--blue-xxlight);color:var(--blue);font-weight:600;
+}
+.work-play{
+  width:32px;height:32px;border-radius:50%;
+  background:var(--blue);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  transition:transform .2s,box-shadow .2s;
+}
+.work-card:hover .work-play{transform:scale(1.1);box-shadow:0 4px 12px rgba(37,99,235,.4);}
+/* featured card */
+.work-card.featured{grid-column:1/-1;}
+.work-card.featured .work-thumb{aspect-ratio:21/9;}
+.work-card.featured .work-title{font-size:22px;}
+
+/* ===== FEATURES ===== */
+.features-section{background:#fff;}
+.features-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:32px;
+}
+@media(max-width:900px){.features-grid{grid-template-columns:1fr;}}
+.feature-card{
+  padding:32px;border-radius:var(--radius);
+  border:1px solid var(--border);
+  transition:border-color .2s,box-shadow .2s;
+  position:relative;overflow:hidden;
+}
+.feature-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--blue),var(--blue-light));
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .3s;
+}
+.feature-card:hover::before{transform:scaleX(1);}
+.feature-card:hover{border-color:rgba(37,99,235,.2);box-shadow:var(--shadow);}
+.feature-icon{
+  width:52px;height:52px;border-radius:12px;
+  background:var(--blue-xxlight);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:20px;
+  color:var(--blue);
+  transition:background .2s;
+}
+.feature-card:hover .feature-icon{background:var(--blue);color:#fff;}
+.feature-title{font-size:18px;font-weight:800;color:var(--navy);margin-bottom:8px;}
+.feature-desc{font-size:14px;color:var(--text-muted);line-height:1.7;}
+
+/* ===== STATS BAND ===== */
+.stats-band{
+  background:linear-gradient(135deg,var(--navy) 0%,#112244 100%);
+  padding:80px 0;
+  position:relative;overflow:hidden;
+}
+.stats-band::before{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle,rgba(37,99,235,.15) 1px,transparent 1px);
+  background-size:32px 32px;
+  opacity:.5;
+}
+.stats-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:0;position:relative;z-index:1;
+}
+@media(max-width:768px){.stats-grid{grid-template-columns:repeat(2,1fr);gap:32px;}}
+.stat-item{
+  text-align:center;padding:0 24px;
+  border-right:1px solid rgba(255,255,255,.07);
+}
+.stat-item:last-child{border-right:none;}
+.stat-num{
+  font-size:clamp(40px,4vw,56px);font-weight:900;
+  color:#fff;line-height:1;margin-bottom:8px;
+  font-variant-numeric:tabular-nums;
+}
+.stat-num span{color:var(--blue-light);font-size:.6em;}
+.stat-label{font-size:13px;color:rgba(255,255,255,.5);letter-spacing:.05em;}
+
+/* ===== COMPOSERS ===== */
+.composers-section{background:var(--bg-soft);}
+.composers-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:24px;
+}
+@media(max-width:900px){.composers-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:540px){.composers-grid{grid-template-columns:repeat(2,1fr);}}
+.composer-card{
+  background:#fff;border-radius:var(--radius);
+  padding:28px 20px;text-align:center;
+  border:1px solid var(--border);
+  transition:all .25s;
+}
+.composer-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:rgba(37,99,235,.15);}
+.composer-avatar{
+  width:80px;height:80px;border-radius:50%;
+  background:linear-gradient(135deg,var(--blue) 0%,var(--blue-light) 100%);
+  margin:0 auto 16px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:28px;font-weight:900;color:#fff;
+  position:relative;
+}
+.composer-avatar::after{
+  content:'';position:absolute;inset:-3px;border-radius:50%;
+  border:1.5px solid rgba(37,99,235,.2);
+}
+.composer-name{font-size:15px;font-weight:800;color:var(--navy);margin-bottom:4px;}
+.composer-role{font-size:12px;color:var(--blue);font-weight:600;margin-bottom:8px;}
+.composer-works{font-size:12px;color:var(--text-muted);line-height:1.5;}
+
+/* ===== CTA BAND ===== */
+.cta-band{
+  background:linear-gradient(135deg,var(--blue) 0%,var(--blue-dark) 100%);
+  padding:80px 0;
+  text-align:center;
+  position:relative;overflow:hidden;
+}
+.cta-band::before{
+  content:'';position:absolute;
+  width:500px;height:500px;border-radius:50%;
+  background:rgba(255,255,255,.05);
+  top:-250px;right:-100px;
+}
+.cta-band::after{
+  content:'';position:absolute;
+  width:300px;height:300px;border-radius:50%;
+  background:rgba(255,255,255,.05);
+  bottom:-150px;left:-50px;
+}
+.cta-inner{position:relative;z-index:1;}
+.cta-eyebrow{
+  font-size:11px;font-weight:700;letter-spacing:.2em;
+  text-transform:uppercase;color:rgba(255,255,255,.7);
+  margin-bottom:16px;
+}
+.cta-title{
+  font-size:clamp(32px,4vw,48px);font-weight:900;
+  color:#fff;line-height:1.15;
+  margin-bottom:16px;
+}
+.cta-desc{
+  font-size:16px;color:rgba(255,255,255,.75);
+  line-height:1.7;max-width:480px;margin:0 auto 36px;
+}
+.btn-white{
+  background:#fff;color:var(--blue);
+  font-size:14px;font-weight:700;
+  padding:14px 36px;border-radius:10px;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:all .2s;
+  box-shadow:0 4px 20px rgba(0,0,0,.15);
+}
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.2);}
+
+/* ===== FOOTER ===== */
+.footer{background:var(--navy);padding:64px 0 32px;}
+.footer-top{
+  display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;
+  gap:48px;padding-bottom:48px;
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+@media(max-width:900px){.footer-top{grid-template-columns:1fr 1fr;gap:32px;}}
+@media(max-width:540px){.footer-top{grid-template-columns:1fr;}}
+.footer-brand .f-logo{
+  font-size:20px;font-weight:900;letter-spacing:.1em;color:#fff;
+  margin-bottom:12px;display:flex;align-items:center;gap:8px;
+}
+.footer-brand .f-logo span{
+  background:var(--blue);color:#fff;
+  padding:2px 8px;border-radius:4px;font-size:18px;
+}
+.footer-brand p{font-size:13px;color:rgba(255,255,255,.45);line-height:1.7;max-width:240px;}
+.footer-col h5{
+  font-size:11px;font-weight:700;letter-spacing:.15em;
+  text-transform:uppercase;color:rgba(255,255,255,.4);
+  margin-bottom:16px;
+}
+.footer-col ul{list-style:none;}
+.footer-col ul li{margin-bottom:10px;}
+.footer-col ul li a{
+  font-size:13px;color:rgba(255,255,255,.6);
+  transition:color .15s;
+}
+.footer-col ul li a:hover{color:#fff;}
+.footer-bottom{
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:12px;
+  padding-top:28px;
+}
+.footer-copy{font-size:12px;color:rgba(255,255,255,.3);}
+.footer-links{display:flex;gap:20px;}
+.footer-links a{font-size:12px;color:rgba(255,255,255,.35);transition:color .15s;}
+.footer-links a:hover{color:rgba(255,255,255,.7);}
+
+/* ===== SCROLL REVEAL ===== */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-delay-1{transition-delay:.1s;}
+.reveal-delay-2{transition-delay:.2s;}
+.reveal-delay-3{transition-delay:.3s;}
+.reveal-delay-4{transition-delay:.4s;}
+
+/* ===== BACK TO TOP ===== */
+.back-top{
+  position:fixed;bottom:32px;right:32px;z-index:90;
+  width:44px;height:44px;border-radius:50%;
+  background:var(--blue);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 16px rgba(37,99,235,.4);
+  opacity:0;transform:translateY(8px);
+  transition:all .3s;pointer-events:none;
+}
+.back-top.visible{opacity:1;transform:translateY(0);pointer-events:auto;}
+.back-top:hover{background:var(--blue-dark);transform:translateY(-2px);}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header" id="header">
+  <div class="header-inner">
+    <a href="#" class="logo">
+      <span>SEGA</span>MUSIC
+    </a>
+    <nav class="nav">
+      <a href="#works">作品</a>
+      <a href="#composers">作曲家</a>
+      <a href="#news">ニュース</a>
+      <a href="#about">について</a>
+      <a href="#" class="nav-cta">音楽ライブラリ</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="hero-shape hs1"></div>
+    <div class="hero-shape hs2"></div>
+    <div class="hero-shape hs3"></div>
+    <div class="hero-grid"></div>
+  </div>
+
+  <!-- floating cards right side -->
+  <div class="hero-float">
+    <div class="float-card">
+      <div class="fc-label">New Release</div>
+      <div class="fc-title">SONIC FRONTIERS OST</div>
+      <div class="fc-sub">Tomoya Ohtani · 2022</div>
+      <div class="fc-bar"><div class="fc-bar-fill" style="--w:72%"></div></div>
+    </div>
+    <div class="float-card">
+      <div class="fc-label">Composer Stats</div>
+      <div class="fc-nums">
+        <div class="fc-num"><strong>47</strong><span>作曲家</span></div>
+        <div class="fc-num"><strong>120+</strong><span>タイトル</span></div>
+        <div class="fc-num"><strong>2000+</strong><span>楽曲</span></div>
+      </div>
+    </div>
+    <div class="float-card">
+      <div class="fc-label">Top Track This Week</div>
+      <div class="fc-title">Super Monkey Ball — Main Theme</div>
+      <div class="fc-sub">Hidenori Shoji · 再生 128K</div>
+      <div class="fc-bar"><div class="fc-bar-fill" style="--w:88%"></div></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-eyebrow">SEGA MUSIC ARCHIVE</div>
+      <h1 class="hero-h1">
+        Sound That<br><em>Moves You.</em>
+      </h1>
+      <p class="hero-desc">
+        ソニック、ファンタシースター、龍が如く——<br>
+        SEGAゲームを彩ってきた数千の楽曲と、<br>
+        その作り手たちの物語を探索しよう。
+      </p>
+      <div class="hero-cta">
+        <a href="#works" class="btn-primary">
+          作品を探す
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a href="#" class="btn-secondary">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M6.5 5.5l4 2.5-4 2.5V5.5z" fill="currentColor"/>
+          </svg>
+          音楽を再生
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="hs-item"><strong>120+</strong><span>ゲームタイトル</span></div>
+        <div class="hs-item"><strong>2,000+</strong><span>収録楽曲</span></div>
+        <div class="hs-item"><strong>1983</strong><span>年〜現在</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-track" id="marquee">
+    <span class="marquee-item"><span>SONIC THE HEDGEHOG</span><span class="marquee-dot"></span></span>
+    <span class="marquee-item"><span>FANTASY STAR</span><span class="marquee-dot"></span></span>
+    <span class="marquee-item"><span>YAKUZA / 龍が如く</span><span class="marquee-dot"></span></span>
+    <span class="marquee-item"><span>SPACE HARRIER</span><span class="marquee-dot"></span></span>
+    <span class="marquee-item"><span>VIRTUA FIGHTER</span><span class="marquee-dot"></span></span>
+    <span class="marquee-item"><span>NiGHTS INTO DREAMS</span><span class="marquee-dot"></span></span>
+    <span class="marquee-item"><span>SHENMUE</span><span class="marquee-dot"></span></span>
+    <span class="marquee-item"><span>PERSONA SERIES</span><span class="marquee-dot"></span></span>
+    <span class="marquee-item"><span>SONIC THE HEDGEHOG</span><span class="marquee-dot"></span></span>
+    <span class="marquee-item"><span>FANTASY STAR</span><span class="marquee-dot"></span></span>
+    <span class="marquee-item"><span>YAKUZA / 龍が如く</span><span class="marquee-dot"></span></span>
+    <span class="marquee-item"><span>SPACE HARRIER</span><span class="marquee-dot"></span></span>
+    <span class="marquee-item"><span>VIRTUA FIGHTER</span><span class="marquee-dot"></span></span>
+    <span class="marquee-item"><span>NiGHTS INTO DREAMS</span><span class="marquee-dot"></span></span>
+    <span class="marquee-item"><span>SHENMUE</span><span class="marquee-dot"></span></span>
+    <span class="marquee-item"><span>PERSONA SERIES</span><span class="marquee-dot"></span></span>
+  </div>
+</div>
+
+<!-- NEWS -->
+<section class="section news-section" id="news">
+  <div class="container">
+    <div class="section-header-row reveal">
+      <div>
+        <div class="section-eyebrow">NEWS</div>
+        <h2 class="section-title">最新情報</h2>
+      </div>
+      <a href="#" class="link-more">
+        すべて見る
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+    <div class="news-list">
+      <a href="#" class="news-item reveal">
+        <span class="news-date">2025.03.01</span>
+        <span class="news-tag">リリース</span>
+        <span class="news-title">「ソニック×シャドウ ジェネレーションズ」オリジナルサウンドトラック配信開始</span>
+        <span class="news-arrow">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </a>
+      <a href="#" class="news-item reveal reveal-delay-1">
+        <span class="news-date">2025.02.15</span>
+        <span class="news-tag red">イベント</span>
+        <span class="news-title">SEGA Sound Team 40周年記念コンサート チケット先行販売のお知らせ</span>
+        <span class="news-arrow">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </a>
+      <a href="#" class="news-item reveal reveal-delay-2">
+        <span class="news-date">2025.02.03</span>
+        <span class="news-tag">アーカイブ</span>
+        <span class="news-title">「スペースハリアー」オリジナル楽曲のマスターテープデジタル化プロジェクト完了</span>
+        <span class="news-arrow">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </a>
+      <a href="#" class="news-item reveal reveal-delay-3">
+        <span class="news-date">2025.01.20</span>
+        <span class="news-tag">インタビュー</span>
+        <span class="news-title">大谷智哉氏インタビュー：「フロンティアズ」の音楽制作の裏側を語る</span>
+        <span class="news-arrow">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </a>
+      <a href="#" class="news-item reveal reveal-delay-4">
+        <span class="news-date">2025.01.08</span>
+        <span class="news-tag">リリース</span>
+        <span class="news-title">「龍が如く8」サウンドトラック全曲ストリーミング配信開始</span>
+        <span class="news-arrow">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- WORKS -->
+<section class="section works-section" id="works">
+  <div class="container">
+    <div class="section-header-row reveal">
+      <div>
+        <div class="section-eyebrow">WORKS</div>
+        <h2 class="section-title">注目の作品</h2>
+        <p class="section-sub">SEGAゲームの音楽を時代とジャンルで探索する</p>
+      </div>
+      <a href="#" class="link-more">
+        すべての作品
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+
+    <div class="works-grid">
+      <!-- Featured -->
+      <div class="work-card featured reveal">
+        <div class="work-thumb">
+          <div class="work-thumb-pattern"></div>
+          <div class="work-thumb-icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+              <circle cx="14" cy="14" r="10" stroke="rgba(96,165,250,.6)" stroke-width="1.5"/>
+              <path d="M10 14c0-4 4-8 8-8" stroke="rgba(96,165,250,.6)" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M11 18l6-6" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <span class="work-badge">FEATURED</span>
+          <span class="work-year">1991–2024</span>
+        </div>
+        <div class="work-body">
+          <div class="work-game">SONIC THE HEDGEHOG SERIES</div>
+          <div class="work-title">ソニック・ザ・ヘッジホッグ シリーズ サウンドコレクション</div>
+          <div class="work-desc">初代から最新作まで、ソニックシリーズの全音楽を収録。Masato Nakamura、Jun Senoue、Tomoya Ohtaniら歴代作曲家の楽曲を網羅。</div>
+        </div>
+        <div class="work-footer">
+          <div class="work-tags">
+            <span class="work-chip">ACTION</span>
+            <span class="work-chip">ROCK</span>
+            <span class="work-chip">ELECTRONIC</span>
+            <span class="work-chip">中村正人</span>
+            <span class="work-chip">瀬野啓</span>
+          </div>
+          <div class="work-play">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M4 2.5l8 4.5-8 4.5V2.5z" fill="white"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 1 -->
+      <div class="work-card reveal reveal-delay-1">
+        <div class="work-thumb">
+          <div class="work-thumb-pattern"></div>
+          <div class="work-thumb-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <rect x="3" y="3" width="8" height="8" rx="1" stroke="rgba(96,165,250,.6)" stroke-width="1.5"/>
+              <rect x="13" y="3" width="8" height="8" rx="1" stroke="rgba(96,165,250,.6)" stroke-width="1.5"/>
+              <rect x="3" y="13" width="8" height="8" rx="1" stroke="rgba(96,165,250,.6)" stroke-width="1.5"/>
+              <rect x="13" y="13" width="8" height="8" rx="1" stroke="white" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <span class="work-badge">RPG</span>
+          <span class="work-year">2016–2024</span>
+        </div>
+        <div class="work-body">
+          <div class="work-game">YAKUZA / LIKE A DRAGON</div>
+          <div class="work-title">龍が如くシリーズ</div>
+          <div class="work-desc">ドラマチックなオーケストラからカラオケまで、唯一無二の音楽世界。</div>
+        </div>
+        <div class="work-footer">
+          <div class="work-tags">
+            <span class="work-chip">DRAMA</span>
+            <span class="work-chip">J-POP</span>
+          </div>
+          <div class="work-play">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M4 2.5l8 4.5-8 4.5V2.5z" fill="white"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="work-card reveal reveal-delay-2">
+        <div class="work-thumb">
+          <div class="work-thumb-pattern"></div>
+          <div class="work-thumb-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M12 3L21 8.5V15.5L12 21L3 15.5V8.5L12 3Z" stroke="rgba(96,165,250,.6)" stroke-width="1.5"/>
+              <circle cx="12" cy="12" r="3" stroke="white" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <span class="work-badge">FANTASY</span>
+          <span class="work-year">1987–2023</span>
+        </div>
+        <div class="work-body">
+          <div class="work-game">PHANTASY STAR SERIES</div>
+          <div class="work-title">ファンタシースター シリーズ</div>
+          <div class="work-desc">宇宙叙事詩を彩るシンセサウンドから壮大なオーケストラへ。</div>
+        </div>
+        <div class="work-footer">
+          <div class="work-tags">
+            <span class="work-chip">SYNTH</span>
+            <span class="work-chip">ORCHESTRA</span>
+          </div>
+          <div class="work-play">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M4 2.5l8 4.5-8 4.5V2.5z" fill="white"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="work-card reveal reveal-delay-1">
+        <div class="work-thumb">
+          <div class="work-thumb-pattern"></div>
+          <div class="work-thumb-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" stroke="rgba(96,165,250,.6)" stroke-width="1.5"/>
+              <path d="M8 12h8M12 8v8" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <span class="work-badge">CLASSIC</span>
+          <span class="work-year">1985</span>
+        </div>
+        <div class="work-body">
+          <div class="work-game">SPACE HARRIER</div>
+          <div class="work-title">スペースハリアー</div>
+          <div class="work-desc">中潟憲雄による革新的なFM音源サウンドは今なお語り継がれる。</div>
+        </div>
+        <div class="work-footer">
+          <div class="work-tags">
+            <span class="work-chip">FM SYNTH</span>
+            <span class="work-chip">ARCADE</span>
+          </div>
+          <div class="work-play">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M4 2.5l8 4.5-8 4.5V2.5z" fill="white"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="work-card reveal reveal-delay-2">
+        <div class="work-thumb">
+          <div class="work-thumb-pattern"></div>
+          <div class="work-thumb-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M9 18V5l12-2v13" stroke="rgba(96,165,250,.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="6" cy="18" r="3" stroke="white" stroke-width="1.5"/>
+              <circle cx="18" cy="16" r="3" stroke="rgba(96,165,250,.6)" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <span class="work-badge">RHYTHM</span>
+          <span class="work-year">2001</span>
+        </div>
+        <div class="work-body">
+          <div class="work-game">SAMBA DE AMIGO</div>
+          <div class="work-title">サンバ DE アミーゴ</div>
+          <div class="work-desc">ラテンリズムと陽気なメロディが詰まったリズムゲームの金字塔。</div>
+        </div>
+        <div class="work-footer">
+          <div class="work-tags">
+            <span class="work-chip">LATIN</span>
+            <span class="work-chip">DANCE</span>
+          </div>
+          <div class="work-play">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M4 2.5l8 4.5-8 4.5V2.5z" fill="white"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section features-section" id="about">
+  <div class="container">
+    <div class="section-header reveal" style="text-align:center;">
+      <div class="section-eyebrow" style="margin:0 auto 12px;display:block;text-align:center;padding-left:0;">ABOUT</div>
+      <h2 class="section-title">なぜ SEGA MUSIC か</h2>
+      <p class="section-sub" style="margin:12px auto 0;text-align:center;">ゲーム音楽の歴史を次世代へ伝えるためのアーカイブ</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M19 11H5M19 11C20.1 11 21 11.9 21 13V19C21 20.1 20.1 21 19 21H5C3.9 21 3 20.1 3 19V13C3 11.9 3.9 11 5 11M19 11V9C19 7.9 18.1 7 17 7M5 11V9C5 7.9 5.9 7 7 7M7 7V5C7 3.9 7.9 3 9 3H15C16.1 3 17 3.9 17 5V7M7 7H17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3 class="feature-title">完全アーカイブ</h3>
+        <p class="feature-desc">1983年のアーケード黎明期から現代まで、2,000曲以上の楽曲データを網羅。マスター音源・楽譜・制作エピソードを保存。</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-1">
+        <div class="feature-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M6 20v-2a4 4 0 014-4h4a4 4 0 014 4v2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3 class="feature-title">作曲家の記録</h3>
+        <p class="feature-desc">中村正人、古代裕三、光田康典ら伝説の作曲家から現役クリエイターまで、47名のプロフィールとインタビューを掲載。</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-2">
+        <div class="feature-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M9 18V5l12-2v13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="6" cy="18" r="3" stroke="currentColor" stroke-width="1.8"/>
+            <circle cx="18" cy="16" r="3" stroke="currentColor" stroke-width="1.8"/>
+          </svg>
+        </div>
+        <h3 class="feature-title">ストリーミング試聴</h3>
+        <p class="feature-desc">権利クリアランス済みの楽曲はブラウザで直接試聴可能。お気に入りのプレイリストを作成してシェアしよう。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAND -->
+<div class="stats-band">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item reveal">
+        <div class="stat-num">120<span>+</span></div>
+        <div class="stat-label">ゲームタイトル</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-1">
+        <div class="stat-num">2,000<span>+</span></div>
+        <div class="stat-label">収録楽曲数</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-2">
+        <div class="stat-num">47</div>
+        <div class="stat-label">掲載作曲家</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-3">
+        <div class="stat-num">40<span>年</span></div>
+        <div class="stat-label">アーカイブ期間</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COMPOSERS -->
+<section class="section composers-section" id="composers">
+  <div class="container">
+    <div class="section-header-row reveal">
+      <div>
+        <div class="section-eyebrow">COMPOSERS</div>
+        <h2 class="section-title">作曲家を知る</h2>
+        <p class="section-sub">SEGAサウンドを作り上げた才能たち</p>
+      </div>
+      <a href="#" class="link-more">
+        全員を見る
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+    <div class="composers-grid">
+      <div class="composer-card reveal">
+        <div class="composer-avatar">大</div>
+        <div class="composer-name">大谷智哉</div>
+        <div class="composer-role">Sonic Series</div>
+        <div class="composer-works">Sonic Frontiers, Sonic Forces, Sonic Lost World</div>
+      </div>
+      <div class="composer-card reveal reveal-delay-1">
+        <div class="composer-avatar">中</div>
+        <div class="composer-name">中村正人</div>
+        <div class="composer-role">Sonic Classic</div>
+        <div class="composer-works">Sonic 1, Sonic 2 (MD), 初代クラシック全般</div>
+      </div>
+      <div class="composer-card reveal reveal-delay-2">
+        <div class="composer-avatar" style="background:linear-gradient(135deg,#7C3AED,#A78BFA)">古</div>
+        <div class="composer-name">古代裕三</div>
+        <div class="composer-role">Ys / Phantasy Star</div>
+        <div class="composer-works">イース, ファンタシースター, ソーサリアン</div>
+      </div>
+      <div class="composer-card reveal reveal-delay-3">
+        <div class="composer-avatar" style="background:linear-gradient(135deg,#059669,#34D399)">瀬</div>
+        <div class="composer-name">瀬野啓</div>
+        <div class="composer-role">Sonic Adventure</div>
+        <div class="composer-works">Sonic Adventure 1/2, Shadow the Hedgehog</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-band">
+  <div class="container">
+    <div class="cta-inner reveal">
+      <div class="cta-eyebrow">EXPLORE NOW</div>
+      <h2 class="cta-title">SEGA の音楽を<br>深く探求しよう</h2>
+      <p class="cta-desc">作品、作曲家、時代——あなたのお気に入りのサウンドを見つけてください。</p>
+      <a href="#works" class="btn-white">
+        音楽ライブラリへ
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="f-logo"><span>SEGA</span>MUSIC</div>
+        <p>SEGAゲーム音楽のアーカイブサイト。1983年から現在まで、すべてのサウンドを保存・公開しています。</p>
+      </div>
+      <div class="footer-col">
+        <h5>作品</h5>
+        <ul>
+          <li><a href="#">新着タイトル</a></li>
+          <li><a href="#">クラシック</a></li>
+          <li><a href="#">アーケード</a></li>
+          <li><a href="#">コンソール</a></li>
+          <li><a href="#">スマートフォン</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>探索</h5>
+        <ul>
+          <li><a href="#">作曲家一覧</a></li>
+          <li><a href="#">ジャンル別</a></li>
+          <li><a href="#">年代別</a></li>
+          <li><a href="#">プレイリスト</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>サイト</h5>
+        <ul>
+          <li><a href="#">このサイトについて</a></li>
+          <li><a href="#">お問い合わせ</a></li>
+          <li><a href="#">プライバシーポリシー</a></li>
+          <li><a href="#">利用規約</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 SEGA MUSIC Archive. Fan Site — Not affiliated with SEGA.</div>
+      <div class="footer-links">
+        <a href="#">Twitter</a>
+        <a href="#">YouTube</a>
+        <a href="#">Discord</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- BACK TO TOP -->
+<a href="#" class="back-top" id="backTop" aria-label="ページトップへ">
+  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+    <path d="M9 13V5M5 9l4-4 4 4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</a>
+
+<script>
+// Header scroll
+const header = document.getElementById('header');
+window.addEventListener('scroll',()=>{
+  header.classList.toggle('scrolled',window.scrollY > 40);
+  document.getElementById('backTop').classList.toggle('visible',window.scrollY > 400);
+});
+
+// Scroll reveal
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');}});
+},{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+revealEls.forEach(el=>observer.observe(el));
+
+// Animated counters
+const statNums = document.querySelectorAll('.stat-num');
+const counterObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const el = e.target;
+      const text = el.textContent;
+      const match = text.match(/([\d,]+)/);
+      if(!match) return;
+      const raw = parseInt(match[1].replace(/,/g,''));
+      const suffix = el.querySelector('span')?.textContent||'';
+      const prefix = text.replace(/[\d,]+.*/,'');
+      let start=0;
+      const dur=1400,step=16;
+      const timer=setInterval(()=>{
+        start+=raw/(dur/step);
+        if(start>=raw){start=raw;clearInterval(timer);}
+        const disp=Math.floor(start).toLocaleString('ja');
+        el.innerHTML=`${prefix}${disp}<span>${suffix}</span>`;
+      },step);
+      counterObs.unobserve(el);
+    }
+  });
+},{threshold:0.5});
+statNums.forEach(el=>counterObs.observe(el));
+</script>
+</body>
+</html>

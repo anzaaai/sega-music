@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SEGA MUSIC — ワイヤーフレーム</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0A1628;
+      --dark-blue: #0D1F3C;
+      --blue: #2563EB;
+      --light-blue: #7BA7D4;
+      --blue-bg: #EFF6FF;
+      --blue-tag: #DBEAFE;
+      --text-main: #1F2937;
+      --text-sub: #374151;
+      --text-muted: #6B7280;
+      --text-light: #9CA3AF;
+      --border: #E5E7EB;
+      --bg-light: #F8FAFC;
+      --bg-input: #F9FAFB;
+      --white: #FFFFFF;
+    }
+
+    body {
+      font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+      background: #E8EDF2;
+      color: var(--text-main);
+    }
+
+    /* ===== NAVIGATION ===== */
+    .wf-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #1E3A5F;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      flex-wrap: wrap;
+    }
+    .wf-nav span {
+      color: #aaa;
+      font-size: 13px;
+      margin-right: 8px;
+    }
+    .wf-nav a {
+      color: #93C5FD;
+      font-size: 13px;
+      text-decoration: none;
+      padding: 5px 12px;
+      border-radius: 4px;
+      border: 1px solid #2563EB44;
+      transition: background 0.15s;
+    }
+    .wf-nav a:hover { background: #2563EB44; }
+
+    /* ===== PAGE WRAPPER ===== */
+    .page-section {
+      max-width: 1280px;
+      margin: 40px auto;
+      background: var(--white);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+    }
+    .page-label {
+      background: #1E3A5F;
+      color: #93C5FD;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 0.1em;
+      padding: 8px 20px;
+    }
+
+    /* ===== SHARED: HEADER ===== */
+    .site-header {
+      background: var(--navy);
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 60px;
+    }
+    .site-header .logo {
+      color: var(--white);
+      font-size: 18px;
+      font-weight: bold;
+      letter-spacing: 0.05em;
+    }
+    .site-header nav {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+    .site-header nav a {
+      color: #AABBCC;
+      font-size: 13px;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .site-header nav a.active { color: var(--blue); font-weight: bold; }
+    .site-header nav a.cta { color: var(--blue); }
+
+    /* ===== SHARED: FOOTER ===== */
+    .site-footer {
+      background: var(--navy);
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 60px;
+    }
+    .site-footer .logo { color: var(--white); font-size: 16px; font-weight: bold; }
+    .site-footer .copy { color: var(--text-muted); font-size: 12px; }
+
+    /* ===== SHARED: PAGE HERO ===== */
+    .page-hero {
+      background: var(--dark-blue);
+      height: 160px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .page-hero h1 {
+      color: var(--white);
+      font-size: 40px;
+      font-weight: bold;
+      letter-spacing: 0.08em;
+    }
+    .page-hero p {
+      color: var(--light-blue);
+      font-size: 16px;
+    }
+
+    /* ===== SHARED: BREADCRUMB ===== */
+    .breadcrumb {
+      background: var(--bg-light);
+      height: 40px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 60px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .breadcrumb span { color: var(--text-main); }
+
+    /* ===== TAG ===== */
+    .tag {
+      display: inline-block;
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .tag-blue { background: var(--blue-tag); color: var(--blue); }
+    .tag-red  { background: #FEE2E2; color: #DC2626; }
+
+    /* ===== BUTTON ===== */
+    .btn-primary {
+      display: inline-block;
+      background: var(--blue);
+      color: var(--white);
+      font-size: 14px;
+      font-weight: bold;
+      padding: 12px 32px;
+      border-radius: 6px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-outline {
+      display: inline-block;
+      background: transparent;
+      color: var(--white);
+      font-size: 14px;
+      padding: 12px 32px;
+      border-radius: 6px;
+      border: 1px solid var(--white);
+      text-decoration: none;
+    }
+    .btn-outline-blue {
+      display: inline-block;
+      background: transparent;
+      color: var(--blue);
+      font-size: 13px;
+      padding: 10px 24px;
+      border-radius: 6px;
+      border: 1px solid var(--blue);
+      text-decoration: none;
+    }
+
+    /* ========================================
+       01 TOP
+    ======================================== */
+    .hero-section {
+      background: var(--dark-blue);
+      padding: 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+    .hero-badge {
+      background: var(--blue);
+      color: var(--white);
+      font-size: 11px;
+      font-weight: bold;
+      padding: 6px 16px;
+      border-radius: 20px;
+    }
+    .hero-section h2 {
+      color: var(--white);
+      font-size: 52px;
+      font-weight: bold;
+      text-align: center;
+    }
+    .hero-section p {
+      color: var(--light-blue);
+      font-size: 18px;
+      text-align: center;
+    }
+    .hero-cta {
+      display: flex;
+      gap: 16px;
+      margin-top: 4px;
+    }
+
+    .news-section {
+      padding: 40px 60px;
+      background: var(--white);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .news-section h3 {
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--navy);
+    }
+    .news-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-size: 14px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .news-row .date { color: var(--text-muted); font-size: 13px; min-width: 90px; }
+    .news-row .title { color: var(--text-main); flex: 1; }
+
+    .works-section {
+      padding: 40px 60px;
+      background: var(--bg-light);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .works-section h3 { font-size: 24px; font-weight: bold; color: var(--navy); }
+    .works-section p.sub { font-size: 13px; color: var(--text-muted); margin-top: -12px; }
+    .works-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+    }
+    .works-card {
+      background: var(--dark-blue);
+      border-radius: 8px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-height: 120px;
+    }
+    .works-card .icon { font-size: 22px; }
+    .works-card .title { color: var(--white); font-size: 14px; font-weight: bold; }
+    .works-card .sub { color: var(--light-blue); font-size: 12px; }
+
+    /* ========================================
+       02 NEWS一覧
+    ======================================== */
+    .news-list-body {
+      padding: 48px 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .news-list-body h2 { font-size: 36px; font-weight: bold; color: var(--navy); }
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; }
+    .filter-btn {
+      font-size: 12px;
+      padding: 6px 16px;
+      border-radius: 20px;
+      border: none;
+      cursor: pointer;
+    }
+    .filter-btn.active { background: var(--blue); color: var(--white); }
+    .filter-btn:not(.active) { background: #F1F5F9; color: var(--text-muted); }
+
+    .news-list {
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid var(--border);
+    }
+    .news-list-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+    .news-list-row .date { color: var(--text-muted); font-size: 13px; min-width: 90px; }
+    .news-list-row .text { color: var(--text-main); flex: 1; }
+    .pagination { display: flex; gap: 8px; }
+    .page-btn {
+      width: 34px; height: 34px;
+      border-radius: 4px;
+      border: none;
+      font-size: 13px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .page-btn.active { background: var(--blue); color: var(--white); }
+    .page-btn:not(.active) { background: #F1F5F9; color: var(--text-muted); }
+
+    /* ========================================
+       03 NEWS詳細
+    ======================================== */
+    .detail-body {
+      padding: 48px 60px;
+      display: flex;
+      gap: 48px;
+    }
+    .detail-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .detail-meta { display: flex; gap: 16px; align-items: center; }
+    .detail-main h2 {
+      font-size: 26px;
+      font-weight: bold;
+      color: var(--navy);
+      line-height: 1.4;
+    }
+    .detail-divider { border: none; border-top: 1px solid var(--border); }
+    .detail-main p { font-size: 15px; color: var(--text-sub); line-height: 1.8; }
+    .detail-side { width: 280px; flex-shrink: 0; display: flex; flex-direction: column; gap: 20px; }
+    .detail-side h3 { font-size: 16px; font-weight: bold; color: var(--navy); }
+    .side-card {
+      background: var(--bg-light);
+      border-radius: 6px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .side-card .date { font-size: 12px; color: var(--text-muted); }
+    .side-card .title { font-size: 13px; color: var(--text-main); }
+
+    /* ========================================
+       04 WORKS
+    ======================================== */
+    .works-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      padding: 0 60px;
+      background: var(--white);
+    }
+    .works-tab {
+      font-size: 13px;
+      padding: 0 24px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    .works-tab.active {
+      color: var(--blue);
+      font-weight: bold;
+      border-bottom-color: var(--blue);
+    }
+    .works-body { padding: 40px 60px; display: flex; flex-direction: column; gap: 24px; }
+    .works-cards { display: flex; gap: 20px; flex-wrap: wrap; }
+    .work-card {
+      width: 280px;
+      background: var(--bg-light);
+      border-radius: 8px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .work-card-img {
+      width: 100%;
+      height: 140px;
+      background: var(--blue-tag);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: #93C5FD;
+    }
+    .work-card .title { font-size: 13px; font-weight: bold; color: var(--text-main); }
+    .work-card .date { font-size: 12px; color: var(--text-muted); }
+
+    /* ========================================
+       05 LICENSING
+    ======================================== */
+    .lic-body { padding: 48px 120px; display: flex; flex-direction: column; gap: 36px; }
+    .lic-body .lead { font-size: 16px; color: var(--text-sub); line-height: 1.8; }
+    .lic-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .lic-card {
+      background: var(--blue-bg);
+      border-radius: 12px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-height: 180px;
+    }
+    .lic-card .icon { font-size: 28px; }
+    .lic-card .title { font-size: 16px; font-weight: bold; color: var(--navy); }
+    .lic-card .desc { font-size: 13px; color: var(--text-muted); }
+    .lic-cta {
+      background: var(--dark-blue);
+      border-radius: 12px;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+    .lic-cta h3 { font-size: 22px; font-weight: bold; color: var(--white); }
+    .lic-cta p { font-size: 14px; color: var(--light-blue); }
+
+    /* ========================================
+       06 COMPANY
+    ======================================== */
+    .company-body { padding: 48px 60px; display: flex; gap: 48px; }
+    .company-info { flex: 1; display: flex; flex-direction: column; gap: 0; }
+    .company-info h2 { font-size: 22px; font-weight: bold; color: var(--navy); margin-bottom: 4px; }
+    .info-divider { height: 2px; background: var(--blue); margin-bottom: 0; }
+    .info-row {
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      min-height: 52px;
+    }
+    .info-label {
+      width: 160px;
+      flex-shrink: 0;
+      background: var(--bg-light);
+      height: 100%;
+      min-height: 52px;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      font-size: 13px;
+      font-weight: bold;
+      color: var(--text-muted);
+    }
+    .info-value { padding: 0 20px; font-size: 14px; color: var(--text-main); }
+    .company-map { width: 360px; flex-shrink: 0; display: flex; flex-direction: column; gap: 16px; }
+    .company-map h2 { font-size: 22px; font-weight: bold; color: var(--navy); }
+    .map-box {
+      width: 100%;
+      height: 240px;
+      background: var(--blue-tag);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: #93C5FD;
+    }
+    .map-addr { font-size: 13px; color: var(--text-sub); }
+
+    /* ========================================
+       07 CONTACT
+    ======================================== */
+    .contact-body { padding: 48px 240px; display: flex; flex-direction: column; gap: 28px; align-items: center; }
+    .contact-lead { font-size: 15px; color: var(--text-sub); text-align: center; line-height: 1.8; }
+    .contact-form { width: 100%; display: flex; flex-direction: column; gap: 18px; }
+    .form-field { display: flex; flex-direction: column; gap: 6px; width: 100%; }
+    .form-field label { font-size: 13px; font-weight: bold; color: var(--text-sub); }
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      width: 100%;
+      height: 44px;
+      background: var(--bg-input);
+      border: 1px solid #D1D5DB;
+      border-radius: 6px;
+      padding: 0 16px;
+      font-size: 14px;
+      color: var(--text-light);
+      outline: none;
+      font-family: inherit;
+    }
+    .form-field textarea {
+      height: 120px;
+      padding: 12px 16px;
+      resize: vertical;
+    }
+    .submit-btn {
+      width: 100%;
+      height: 52px;
+      background: var(--blue);
+      color: var(--white);
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      letter-spacing: 0.05em;
+    }
+    .submit-btn:hover { background: #1D4ED8; }
+
+    /* responsive fallback */
+    @media (max-width: 900px) {
+      .works-grid { grid-template-columns: repeat(2, 1fr); }
+      .lic-cards { grid-template-columns: 1fr; }
+      .detail-body, .company-body { flex-direction: column; }
+      .detail-side, .company-map { width: 100%; }
+      .contact-body { padding: 40px 40px; }
+      .lic-body { padding: 40px 40px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav class="wf-nav">
+  <span>SEGA MUSIC ワイヤーフレーム</span>
+  <a href="#top">01 TOP</a>
+  <a href="#news-list">02 NEWS一覧</a>
+  <a href="#news-detail">03 NEWS詳細</a>
+  <a href="#works">04 WORKS</a>
+  <a href="#licensing">05 LICENSING</a>
+  <a href="#company">06 COMPANY</a>
+  <a href="#contact">07 CONTACT</a>
+</nav>
+
+<!-- ========================================
+     01 TOP
+======================================== -->
+<div id="top" class="page-section">
+  <div class="page-label">01 — TOP ( / )</div>
+
+  <header class="site-header">
+    <div class="logo">SEGA MUSIC</div>
+    <nav>
+      <a href="#">NEWS</a>
+      <a href="#">WORKS</a>
+      <a href="#">LICENSING</a>
+      <a href="#">COMPANY</a>
+      <a href="#" class="cta">CONTACT</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero-section">
+    <div class="hero-badge">SEGA MUSIC</div>
+    <h2>音楽で、世界をつなぐ。</h2>
+    <p>ライブ制作 / 楽曲管理 / サウンドプロデュース</p>
+    <div class="hero-cta">
+      <a href="#" class="btn-primary">WORKSを見る</a>
+      <a href="#" class="btn-outline">お問い合わせ</a>
+    </div>
+  </section>
+
+  <!-- NEWS -->
+  <section class="news-section">
+    <h3>NEWS</h3>
+    <div class="news-row">
+      <span class="date">2025.03.15</span>
+      <span class="tag tag-blue">お知らせ</span>
+      <span class="title">SEGA MUSICとしてブランドリニューアルのお知らせ</span>
+    </div>
+    <div class="news-row">
+      <span class="date">2025.02.20</span>
+      <span class="tag tag-blue">事業</span>
+      <span class="title">マネジメント部門 業務提携のお知らせ</span>
+    </div>
+    <div class="news-row">
+      <span class="date">2025.01.10</span>
+      <span class="tag tag-blue">お知らせ</span>
+      <span class="title">年末年始休業のお知らせ</span>
+    </div>
+    <div>
+      <a href="#" class="btn-outline-blue">NEWS一覧を見る →</a>
+    </div>
+  </section>
+
+  <!-- WORKS -->
+  <section class="works-section">
+    <h3>WORKS</h3>
+    <p class="sub">制作実績</p>
+    <div class="works-grid">
+      <div class="works-card">
+        <div class="icon">🎸</div>
+        <div class="title">ライブ・イベント</div>
+        <div class="sub">制作実績一覧</div>
+      </div>
+      <div class="works-card">
+        <div class="icon">📺</div>
+        <div class="title">番組制作 / 配信</div>
+        <div class="sub">番組・配信実績一覧</div>
+      </div>
+      <div class="works-card">
+        <div class="icon">🎵</div>
+        <div class="title">SOUND / CD制作</div>
+        <div class="sub">サウンドプロデュース実績</div>
+      </div>
+      <div class="works-card">
+        <div class="icon">📋</div>
+        <div class="title">楽曲管理</div>
+        <div class="sub">管理楽曲・音楽出版</div>
+      </div>
+      <div class="works-card">
+        <div class="icon">✨</div>
+        <div class="title">その他</div>
+        <div class="sub">その他制作実績</div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="logo">SEGA MUSIC</div>
+    <div class="copy">© 2025 SEGA MUSIC Inc. All Rights Reserved.</div>
+  </footer>
+</div>
+
+
+<!-- ========================================
+     02 NEWS一覧
+======================================== -->
+<div id="news-list" class="page-section">
+  <div class="page-label">02 — NEWS一覧 ( /news/ )</div>
+
+  <header class="site-header">
+    <div class="logo">SEGA MUSIC</div>
+    <nav>
+      <a href="#" class="active">NEWS</a>
+      <a href="#">WORKS</a>
+      <a href="#">LICENSING</a>
+      <a href="#">COMPANY</a>
+      <a href="#" class="cta">CONTACT</a>
+    </nav>
+  </header>
+
+  <div class="breadcrumb">HOME &gt; <span>NEWS</span></div>
+
+  <div class="news-list-body">
+    <h2>NEWS</h2>
+    <div class="filter-bar">
+      <button class="filter-btn active">すべて</button>
+      <button class="filter-btn">お知らせ</button>
+      <button class="filter-btn">事業</button>
+      <button class="filter-btn">採用</button>
+    </div>
+    <div class="news-list">
+      <div class="news-list-row">
+        <span class="date">2025.03.15</span>
+        <span class="tag tag-blue">お知らせ</span>
+        <span class="text">SEGA MUSICとしてブランドリニューアルのお知らせ</span>
+      </div>
+      <div class="news-list-row">
+        <span class="date">2025.02.20</span>
+        <span class="tag tag-blue">事業</span>
+        <span class="text">マネジメント部門 業務提携のお知らせ</span>
+      </div>
+      <div class="news-list-row">
+        <span class="date">2025.01.10</span>
+        <span class="tag tag-blue">お知らせ</span>
+        <span class="text">年末年始休業のお知らせ</span>
+      </div>
+      <div class="news-list-row">
+        <span class="date">2024.12.01</span>
+        <span class="tag tag-red">採用</span>
+        <span class="text">2025年度新卒採用 エントリー開始のお知らせ</span>
+      </div>
+      <div class="news-list-row">
+        <span class="date">2024.11.15</span>
+        <span class="tag tag-blue">事業</span>
+        <span class="text">〇〇アーティストとのマネジメント契約締結のお知らせ</span>
+      </div>
+    </div>
+    <div class="pagination">
+      <button class="page-btn active">1</button>
+      <button class="page-btn">2</button>
+      <button class="page-btn">3</button>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="logo">SEGA MUSIC</div>
+    <div class="copy">© 2025 SEGA MUSIC Inc. All Rights Reserved.</div>
+  </footer>
+</div>
+
+
+<!-- ========================================
+     03 NEWS詳細
+======================================== -->
+<div id="news-detail" class="page-section">
+  <div class="page-label">03 — NEWS詳細 ( /news/記事スラッグ/ )</div>
+
+  <header class="site-header">
+    <div class="logo">SEGA MUSIC</div>
+    <nav>
+      <a href="#" class="active">NEWS</a>
+      <a href="#">WORKS</a>
+      <a href="#">LICENSING</a>
+      <a href="#">COMPANY</a>
+      <a href="#" class="cta">CONTACT</a>
+    </nav>
+  </header>
+
+  <div class="breadcrumb">HOME &gt; <a href="#" style="color:var(--text-muted);text-decoration:none;">NEWS</a> &gt; <span>記事タイトル</span></div>
+
+  <div class="detail-body">
+    <div class="detail-main">
+      <div class="detail-meta">
+        <span style="font-size:13px;color:var(--text-muted);">2025.03.15</span>
+        <span class="tag tag-blue">お知らせ</span>
+      </div>
+      <h2>SEGA MUSICとしてブランドリニューアルのお知らせ</h2>
+      <hr class="detail-divider">
+      <p>この度、株式会社ウェーブマスターは「SEGA MUSIC株式会社」として社名を変更することをお知らせいたします。</p>
+      <p>新しい社名のもと、ライブ・イベント制作、楽曲管理、サウンドプロデュースなど、これまで以上に幅広い音楽エンターテインメント事業に取り組んでまいります。</p>
+      <p>今後とも変わらぬご支援とご愛顧のほど、よろしくお願い申し上げます。</p>
+      <div style="padding-top:16px;">
+        <a href="#" class="btn-outline-blue">← NEWS一覧へ戻る</a>
+      </div>
+    </div>
+    <aside class="detail-side">
+      <h3>関連ニュース</h3>
+      <div class="side-card">
+        <div class="date">2025.02.20</div>
+        <div class="title">マネジメント部門 業務提携のお知らせ</div>
+      </div>
+      <div class="side-card">
+        <div class="date">2025.01.10</div>
+        <div class="title">年末年始休業のお知らせ</div>
+      </div>
+      <div class="side-card">
+        <div class="date">2024.12.01</div>
+        <div class="title">2025年度新卒採用 エントリー開始のお知らせ</div>
+      </div>
+    </aside>
+  </div>
+
+  <footer class="site-footer">
+    <div class="logo">SEGA MUSIC</div>
+    <div class="copy">© 2025 SEGA MUSIC Inc. All Rights Reserved.</div>
+  </footer>
+</div>
+
+
+<!-- ========================================
+     04 WORKS
+======================================== -->
+<div id="works" class="page-section">
+  <div class="page-label">04 — WORKS ( /works/live/ など )</div>
+
+  <header class="site-header">
+    <div class="logo">SEGA MUSIC</div>
+    <nav>
+      <a href="#">NEWS</a>
+      <a href="#" class="active">WORKS</a>
+      <a href="#">LICENSING</a>
+      <a href="#">COMPANY</a>
+      <a href="#" class="cta">CONTACT</a>
+    </nav>
+  </header>
+
+  <div class="page-hero">
+    <h1>WORKS</h1>
+    <p>制作実績</p>
+  </div>
+
+  <div class="works-tabs">
+    <div class="works-tab active">ライブ・イベント</div>
+    <div class="works-tab">番組制作 / 配信</div>
+    <div class="works-tab">SOUND / CD制作</div>
+    <div class="works-tab">楽曲管理</div>
+    <div class="works-tab">その他</div>
+  </div>
+
+  <div class="works-body">
+    <div class="works-cards">
+      <div class="work-card">
+        <div class="work-card-img">[イベント画像]</div>
+        <div class="title">〇〇コンサートツアー 2024</div>
+        <div class="date">2024.11</div>
+      </div>
+      <div class="work-card">
+        <div class="work-card-img">[イベント画像]</div>
+        <div class="title">△△フェスティバル 2024</div>
+        <div class="date">2024.08</div>
+      </div>
+      <div class="work-card">
+        <div class="work-card-img">[イベント画像]</div>
+        <div class="title">□□スペシャルライブ 2024</div>
+        <div class="date">2024.05</div>
+      </div>
+      <div class="work-card">
+        <div class="work-card-img">[イベント画像]</div>
+        <div class="title">◇◇ガラコンサート 2023</div>
+        <div class="date">2023.12</div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="logo">SEGA MUSIC</div>
+    <div class="copy">© 2025 SEGA MUSIC Inc. All Rights Reserved.</div>
+  </footer>
+</div>
+
+
+<!-- ========================================
+     05 LICENSING
+======================================== -->
+<div id="licensing" class="page-section">
+  <div class="page-label">05 — LICENSING ( /licensing/ )</div>
+
+  <header class="site-header">
+    <div class="logo">SEGA MUSIC</div>
+    <nav>
+      <a href="#">NEWS</a>
+      <a href="#">WORKS</a>
+      <a href="#" class="active">LICENSING</a>
+      <a href="#">COMPANY</a>
+      <a href="#" class="cta">CONTACT</a>
+    </nav>
+  </header>
+
+  <div class="page-hero">
+    <h1>LICENSING</h1>
+    <p>楽曲ライセンス・使用許諾</p>
+  </div>
+
+  <div class="lic-body">
+    <p class="lead">SEGA MUSICが管理する楽曲をご利用になりたい方へ。TV・CM・映画・ゲームなど、各種媒体への楽曲使用許諾に関するご相談を承ります。</p>
+
+    <div class="lic-cards">
+      <div class="lic-card">
+        <div class="icon">📺</div>
+        <div class="title">TV・CM利用</div>
+        <div class="desc">テレビ番組、CM、映画などへの楽曲使用</div>
+      </div>
+      <div class="lic-card">
+        <div class="icon">🎮</div>
+        <div class="title">ゲーム・デジタル</div>
+        <div class="desc">ゲーム、アプリ、配信サービスへの楽曲使用</div>
+      </div>
+      <div class="lic-card">
+        <div class="icon">🏢</div>
+        <div class="title">店舗・イベント</div>
+        <div class="desc">店舗BGM、イベント、ライブでの楽曲使用</div>
+      </div>
+    </div>
+
+    <div class="lic-cta">
+      <h3>楽曲使用のお問い合わせ</h3>
+      <p>以下のフォームよりお気軽にご相談ください</p>
+      <a href="#contact" class="btn-primary">お問い合わせはこちら</a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="logo">SEGA MUSIC</div>
+    <div class="copy">© 2025 SEGA MUSIC Inc. All Rights Reserved.</div>
+  </footer>
+</div>
+
+
+<!-- ========================================
+     06 COMPANY
+======================================== -->
+<div id="company" class="page-section">
+  <div class="page-label">06 — COMPANY ( /company/ )</div>
+
+  <header class="site-header">
+    <div class="logo">SEGA MUSIC</div>
+    <nav>
+      <a href="#">NEWS</a>
+      <a href="#">WORKS</a>
+      <a href="#">LICENSING</a>
+      <a href="#" class="active">COMPANY</a>
+      <a href="#" class="cta">CONTACT</a>
+    </nav>
+  </header>
+
+  <div class="page-hero">
+    <h1>COMPANY</h1>
+    <p>会社概要</p>
+  </div>
+
+  <div class="company-body">
+    <div class="company-info">
+      <h2>会社概要</h2>
+      <div class="info-divider"></div>
+      <div class="info-row">
+        <div class="info-label">会社名</div>
+        <div class="info-value">SEGA MUSIC株式会社</div>
+      </div>
+      <div class="info-row">
+        <div class="info-label">設立</div>
+        <div class="info-value">1994年4月</div>
+      </div>
+      <div class="info-row">
+        <div class="info-label">所在地</div>
+        <div class="info-value">東京都品川区</div>
+      </div>
+      <div class="info-row">
+        <div class="info-label">代表取締役</div>
+        <div class="info-value">代表者名</div>
+      </div>
+      <div class="info-row">
+        <div class="info-label">グループ</div>
+        <div class="info-value">株式会社セガ グループ会社</div>
+      </div>
+      <div class="info-row">
+        <div class="info-label">事業内容</div>
+        <div class="info-value">ライブ・イベント制作、楽曲管理、サウンドプロデュース、番組制作</div>
+      </div>
+    </div>
+
+    <div class="company-map">
+      <h2>アクセス</h2>
+      <div class="map-box">[地図]</div>
+      <div class="map-addr">〒140-0000 東京都品川区○○ X-XX-XX</div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="logo">SEGA MUSIC</div>
+    <div class="copy">© 2025 SEGA MUSIC Inc. All Rights Reserved.</div>
+  </footer>
+</div>
+
+
+<!-- ========================================
+     07 CONTACT
+======================================== -->
+<div id="contact" class="page-section">
+  <div class="page-label">07 — CONTACT ( /contact/ )</div>
+
+  <header class="site-header">
+    <div class="logo">SEGA MUSIC</div>
+    <nav>
+      <a href="#">NEWS</a>
+      <a href="#">WORKS</a>
+      <a href="#">LICENSING</a>
+      <a href="#">COMPANY</a>
+      <a href="#" class="active cta">CONTACT</a>
+    </nav>
+  </header>
+
+  <div class="page-hero">
+    <h1>CONTACT</h1>
+    <p>お問い合わせ</p>
+  </div>
+
+  <div class="contact-body">
+    <p class="contact-lead">
+      ご不明な点やお問い合わせは、以下のフォームよりお送りください。<br>
+      担当者より2〜3営業日以内にご返信いたします。
+    </p>
+
+    <form class="contact-form" onsubmit="return false;">
+      <div class="form-field">
+        <label>お名前 <span style="color:#DC2626;">*</span></label>
+        <input type="text" placeholder="山田 太郎">
+      </div>
+      <div class="form-field">
+        <label>会社名</label>
+        <input type="text" placeholder="株式会社○○">
+      </div>
+      <div class="form-field">
+        <label>メールアドレス <span style="color:#DC2626;">*</span></label>
+        <input type="email" placeholder="example@company.com">
+      </div>
+      <div class="form-field">
+        <label>お問い合わせ種別 <span style="color:#DC2626;">*</span></label>
+        <select>
+          <option value="" disabled selected>選択してください</option>
+          <option>楽曲ライセンスについて</option>
+          <option>制作のご依頼</option>
+          <option>マネジメントについて</option>
+          <option>その他</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label>お問い合わせ内容 <span style="color:#DC2626;">*</span></label>
+        <textarea placeholder="お問い合わせ内容をご記入ください"></textarea>
+      </div>
+      <button type="submit" class="submit-btn">送信する</button>
+    </form>
+  </div>
+
+  <footer class="site-footer">
+    <div class="logo">SEGA MUSIC</div>
+    <div class="copy">© 2025 SEGA MUSIC Inc. All Rights Reserved.</div>
+  </footer>
+</div>
+
+<div style="height:60px;"></div>
+
+</body>
+</html>

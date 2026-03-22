@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEGA MUSIC — Design Options</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',Meiryo,sans-serif;overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+
+/* ===== SWITCHER ===== */
+#switcher{
+  position:fixed;bottom:32px;left:50%;transform:translateX(-50%);
+  z-index:9999;
+  background:rgba(10,10,20,.92);
+  backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:60px;
+  padding:8px;
+  display:flex;gap:6px;
+  box-shadow:0 8px 40px rgba(0,0,0,.4);
+}
+.sw-btn{
+  padding:10px 22px;border-radius:50px;
+  font-size:12px;font-weight:700;letter-spacing:.08em;
+  border:none;cursor:pointer;
+  background:transparent;color:rgba(255,255,255,.5);
+  transition:all .25s;
+}
+.sw-btn.active{background:#2563EB;color:#fff;box-shadow:0 4px 16px rgba(37,99,235,.5);}
+.sw-btn:hover:not(.active){background:rgba(255,255,255,.08);color:#fff;}
+
+/* ===== THEME PAGES ===== */
+.theme-page{display:none;}
+.theme-page.active{display:block;}
+
+/* =========================================================
+   THEME A — EDITORIAL BRUTALIST
+   ========================================================= */
+.ta{background:#F5F4F0;color:#0A0A0A;}
+.ta *{font-family:'Helvetica Neue',Arial,sans-serif;}
+
+.ta-header{
+  position:fixed;top:0;left:0;width:100%;z-index:100;
+  mix-blend-mode:multiply;
+  padding:20px 48px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.ta-logo{
+  font-size:15px;font-weight:900;letter-spacing:.06em;
+  color:#0A0A0A;
+  display:flex;align-items:baseline;gap:4px;
+}
+.ta-logo sub{font-size:9px;font-weight:400;letter-spacing:.2em;color:#555;margin-left:4px;}
+.ta-nav{display:flex;gap:28px;}
+.ta-nav a{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#555;transition:color .15s;}
+.ta-nav a:hover{color:#0A0A0A;}
+
+/* HERO */
+.ta-hero{
+  min-height:100vh;
+  display:grid;grid-template-columns:1fr 1fr;
+  position:relative;overflow:hidden;
+}
+/* left panel */
+.ta-hero-left{
+  background:#0A0A0A;
+  padding:120px 64px 80px;
+  display:flex;flex-direction:column;justify-content:space-between;
+  position:relative;overflow:hidden;
+}
+.ta-hero-left::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 59px,
+    rgba(255,255,255,.03) 59px,
+    rgba(255,255,255,.03) 60px
+  );
+}
+.ta-big-text{
+  font-size:clamp(72px,9vw,128px);
+  font-weight:900;
+  line-height:.9;
+  letter-spacing:-.04em;
+  color:#fff;
+  position:relative;z-index:1;
+}
+.ta-big-text .accent{
+  color:transparent;
+  -webkit-text-stroke:1.5px #2563EB;
+}
+.ta-big-text .em{color:#2563EB;}
+.ta-hero-meta{
+  position:relative;z-index:1;
+  display:flex;flex-direction:column;gap:16px;
+}
+.ta-year-tag{
+  font-size:10px;letter-spacing:.3em;text-transform:uppercase;
+  color:rgba(255,255,255,.3);
+  display:flex;align-items:center;gap:12px;
+}
+.ta-year-tag::before{content:'';width:32px;height:1px;background:rgba(255,255,255,.2);}
+.ta-desc{
+  font-size:14px;line-height:1.75;color:rgba(255,255,255,.55);
+  max-width:320px;
+}
+.ta-cta-row{display:flex;gap:12px;align-items:center;}
+.ta-btn{
+  background:#2563EB;color:#fff;
+  font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  padding:14px 28px;border:none;cursor:pointer;
+  clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));
+  transition:background .2s;
+}
+.ta-btn:hover{background:#1D4ED8;}
+.ta-btn-ghost{
+  color:rgba(255,255,255,.4);
+  font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  display:flex;align-items:center;gap:8px;
+  background:none;border:none;cursor:pointer;
+  transition:color .2s;
+}
+.ta-btn-ghost:hover{color:#fff;}
+
+/* right panel */
+.ta-hero-right{
+  background:#F5F4F0;
+  padding:120px 64px 80px;
+  display:flex;flex-direction:column;justify-content:space-between;
+  position:relative;
+}
+/* big rotated number */
+.ta-index-num{
+  position:absolute;
+  right:-20px;top:50%;transform:translateY(-50%) rotate(90deg);
+  font-size:240px;font-weight:900;letter-spacing:-.06em;
+  color:rgba(0,0,0,.04);
+  pointer-events:none;
+  white-space:nowrap;
+}
+.ta-cards-stack{
+  display:flex;flex-direction:column;gap:2px;
+  position:relative;z-index:1;
+  margin-top:80px;
+}
+.ta-card{
+  background:#fff;
+  padding:20px 24px;
+  display:flex;justify-content:space-between;align-items:center;
+  border-bottom:1px solid #E0DFDB;
+  transition:all .2s;
+  cursor:pointer;
+}
+.ta-card:first-child{border-top:1px solid #E0DFDB;}
+.ta-card:hover{padding-left:36px;background:#EDF3FF;}
+.ta-card:hover .ta-card-num{color:#2563EB;}
+.ta-card-num{
+  font-size:11px;font-weight:700;color:#BBB;
+  letter-spacing:.1em;width:36px;flex-shrink:0;
+}
+.ta-card-body{flex:1;padding:0 16px;}
+.ta-card-title{font-size:15px;font-weight:800;color:#0A0A0A;line-height:1.2;}
+.ta-card-sub{font-size:11px;color:#888;margin-top:3px;letter-spacing:.04em;}
+.ta-card-arr{
+  font-size:18px;color:#BBB;
+  transform:rotate(-45deg);
+  transition:all .2s;
+}
+.ta-card:hover .ta-card-arr{color:#2563EB;transform:rotate(0);}
+
+/* right stats */
+.ta-stat-row{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:#E0DFDB;
+  border:1px solid #E0DFDB;
+  position:relative;z-index:1;
+}
+.ta-stat{
+  background:#F5F4F0;
+  padding:20px;
+  text-align:center;
+}
+.ta-stat strong{
+  display:block;font-size:28px;font-weight:900;color:#0A0A0A;letter-spacing:-.02em;
+}
+.ta-stat span{font-size:10px;color:#888;letter-spacing:.1em;text-transform:uppercase;}
+
+/* MARQUEE A */
+.ta-marquee{
+  background:#2563EB;
+  padding:14px 0;overflow:hidden;
+}
+.ta-mtrack{
+  display:flex;gap:48px;
+  animation:mq 18s linear infinite;
+  white-space:nowrap;
+}
+@keyframes mq{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.ta-mitem{
+  font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(255,255,255,.6);
+  display:flex;align-items:center;gap:16px;
+}
+.ta-mitem b{color:#fff;}
+.ta-mdot{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.4);}
+
+/* WORKS A */
+.ta-works{padding:80px 0;background:#F5F4F0;}
+.ta-section-head{
+  display:flex;align-items:baseline;justify-content:space-between;
+  padding:0 64px;margin-bottom:48px;
+  border-bottom:1px solid #E0DFDB;
+  padding-bottom:24px;
+}
+.ta-section-label{
+  font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#888;
+  margin-bottom:4px;
+}
+.ta-section-title{font-size:40px;font-weight:900;letter-spacing:-.03em;color:#0A0A0A;}
+.ta-see-all{
+  font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:#2563EB;display:flex;align-items:center;gap:8px;
+  border-bottom:1px solid #2563EB;padding-bottom:2px;
+}
+.ta-works-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:0;
+  border-top:1px solid #E0DFDB;border-left:1px solid #E0DFDB;
+  margin:0 64px;
+}
+.ta-work-cell{
+  border-right:1px solid #E0DFDB;border-bottom:1px solid #E0DFDB;
+  padding:32px;
+  position:relative;overflow:hidden;
+  transition:background .2s;
+  cursor:pointer;
+}
+.ta-work-cell::before{
+  content:'';position:absolute;
+  left:0;top:0;width:0;height:2px;
+  background:#2563EB;transition:width .3s;
+}
+.ta-work-cell:hover{background:#fff;}
+.ta-work-cell:hover::before{width:100%;}
+.ta-wc-idx{
+  font-size:48px;font-weight:900;letter-spacing:-.04em;
+  color:rgba(0,0,0,.06);margin-bottom:12px;
+  transition:color .2s;
+}
+.ta-work-cell:hover .ta-wc-idx{color:rgba(37,99,235,.12);}
+.ta-wc-game{font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#2563EB;margin-bottom:6px;}
+.ta-wc-title{font-size:18px;font-weight:800;color:#0A0A0A;line-height:1.2;margin-bottom:8px;}
+.ta-wc-desc{font-size:12px;color:#888;line-height:1.6;}
+.ta-wc-foot{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:16px;
+}
+.ta-wc-year{font-size:10px;color:#AAA;letter-spacing:.1em;}
+.ta-wc-arr{
+  width:28px;height:28px;border:1px solid #E0DFDB;
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;
+  transform:rotate(-45deg);
+  transition:all .2s;
+}
+.ta-work-cell:hover .ta-wc-arr{
+  background:#2563EB;border-color:#2563EB;color:#fff;transform:rotate(0);
+}
+
+/* =========================================================
+   THEME B — RETRO ARCADE NEON
+   ========================================================= */
+.tb{background:#FAFAFA;color:#0A0A14;}
+
+/* scanlines overlay */
+.tb-scanlines{
+  position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,20,.015) 2px,
+    rgba(0,0,20,.015) 4px
+  );
+}
+
+.tb-header{
+  position:fixed;top:0;left:0;width:100%;z-index:200;
+  background:#FAFAFA;
+  border-bottom:2px solid #0A0A14;
+  padding:0 48px;height:56px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.tb-logo{
+  font-size:16px;font-weight:900;letter-spacing:.08em;color:#0A0A14;
+  position:relative;
+}
+.tb-logo::after{
+  content:'™';font-size:9px;
+  position:absolute;top:-2px;right:-14px;
+  color:#2563EB;font-weight:900;
+}
+.tb-logo .tblu{color:#2563EB;}
+.tb-nav{display:flex;gap:0;}
+.tb-nav a{
+  font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:#555;padding:0 20px;height:56px;
+  display:flex;align-items:center;
+  border-left:1px solid #E0E0E0;
+  transition:all .15s;
+}
+.tb-nav a:last-child{border-right:1px solid #E0E0E0;}
+.tb-nav a:hover{background:#0A0A14;color:#fff;}
+.tb-nav .tb-nav-cta{background:#2563EB;color:#fff;border-color:#2563EB;}
+.tb-nav .tb-nav-cta:hover{background:#1D4ED8;}
+
+/* HERO B */
+.tb-hero{
+  min-height:100vh;
+  background:#0A0A14;
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:100px 0 60px;
+}
+/* retro grid */
+.tb-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(37,99,235,.15) 1px, transparent 1px),
+    linear-gradient(90deg,rgba(37,99,235,.15) 1px, transparent 1px);
+  background-size:48px 48px;
+  perspective:200px;
+  transform:rotateX(0deg);
+}
+/* horizon glow */
+.tb-glow{
+  position:absolute;
+  left:50%;bottom:20%;transform:translateX(-50%);
+  width:800px;height:200px;
+  background:radial-gradient(ellipse,rgba(37,99,235,.5) 0%,transparent 70%);
+  pointer-events:none;
+}
+.tb-glow2{
+  position:absolute;
+  left:50%;top:20%;transform:translateX(-50%);
+  width:600px;height:300px;
+  background:radial-gradient(ellipse,rgba(37,99,235,.15) 0%,transparent 70%);
+}
+/* scanline on hero */
+.tb-hero-scan{
+  position:absolute;inset:0;
+  background:repeating-linear-gradient(
+    0deg,transparent,transparent 3px,rgba(0,0,30,.1) 3px,rgba(0,0,30,.1) 4px
+  );pointer-events:none;
+}
+
+/* coin insert */
+.tb-coin{
+  position:absolute;top:88px;right:64px;
+  font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(255,255,255,.25);
+  animation:blink 1.2s step-end infinite;
+}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+
+.tb-hero-inner{
+  position:relative;z-index:2;
+  max-width:1200px;margin:0 auto;padding:0 64px;
+  display:grid;grid-template-columns:1fr 480px;
+  gap:64px;align-items:center;
+}
+
+/* arcade screen right */
+.tb-screen-wrap{position:relative;}
+.tb-screen-outer{
+  background:#111;
+  border:8px solid #1C1C2E;
+  border-radius:16px;
+  box-shadow:
+    0 0 0 1px #333,
+    0 0 40px rgba(37,99,235,.3),
+    inset 0 0 60px rgba(0,0,0,.5);
+  overflow:hidden;
+  aspect-ratio:4/3;
+}
+.tb-screen-inner{
+  background:linear-gradient(180deg,#020A20 0%,#061030 100%);
+  height:100%;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:12px;
+  position:relative;
+  overflow:hidden;
+  padding:24px;
+}
+.tb-screen-stars{
+  position:absolute;inset:0;
+  background-image:
+    radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,.6), transparent),
+    radial-gradient(1px 1px at 80% 10%, rgba(255,255,255,.5), transparent),
+    radial-gradient(1px 1px at 40% 70%, rgba(255,255,255,.4), transparent),
+    radial-gradient(1px 1px at 60% 50%, rgba(255,255,255,.6), transparent),
+    radial-gradient(1px 1px at 10% 80%, rgba(255,255,255,.3), transparent),
+    radial-gradient(1px 1px at 90% 60%, rgba(255,255,255,.5), transparent),
+    radial-gradient(1px 1px at 30% 90%, rgba(255,255,255,.4), transparent),
+    radial-gradient(2px 2px at 70% 20%, rgba(255,255,255,.5), transparent);
+}
+.tb-scr-title{
+  font-size:9px;letter-spacing:.4em;text-transform:uppercase;
+  color:rgba(255,255,255,.3);
+}
+.tb-scr-main{
+  font-size:clamp(20px,3.5vw,32px);font-weight:900;letter-spacing:.08em;
+  text-align:center;
+  color:#fff;
+  text-shadow:0 0 20px rgba(37,99,235,.8),0 0 60px rgba(37,99,235,.4);
+}
+.tb-scr-main span{color:#60A5FA;}
+.tb-scr-score{
+  font-size:11px;letter-spacing:.15em;
+  color:rgba(255,255,255,.3);
+}
+.tb-scr-score b{color:#60A5FA;}
+.tb-scr-bar{
+  width:200px;height:4px;background:rgba(255,255,255,.1);border-radius:2px;
+  overflow:hidden;
+}
+.tb-scr-bar-fill{
+  height:100%;
+  background:linear-gradient(90deg,#2563EB,#60A5FA);
+  animation:tbBarAnim 3s ease-out infinite alternate;
+}
+@keyframes tbBarAnim{from{width:30%;}to{width:95%;}}
+.tb-scr-playing{
+  font-size:8px;letter-spacing:.25em;text-transform:uppercase;
+  color:rgba(255,255,255,.25);
+  animation:blink 1.5s step-end infinite;
+}
+.tb-screen-reflections{
+  position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(135deg,rgba(255,255,255,.03) 0%,transparent 60%);
+}
+/* corner decorations */
+.tb-screen-corner{
+  position:absolute;width:12px;height:12px;
+  border-color:#2563EB;border-style:solid;border-width:0;
+}
+.tb-sc-tl{top:8px;left:8px;border-top-width:2px;border-left-width:2px;}
+.tb-sc-tr{top:8px;right:8px;border-top-width:2px;border-right-width:2px;}
+.tb-sc-bl{bottom:8px;left:8px;border-bottom-width:2px;border-left-width:2px;}
+.tb-sc-br{bottom:8px;right:8px;border-bottom-width:2px;border-right-width:2px;}
+
+/* pixel deco outside */
+.tb-pixel-row{
+  display:flex;gap:4px;justify-content:center;margin-top:12px;
+}
+.tb-pixel{
+  width:8px;height:8px;background:#1C1C2E;border:1px solid #2A2A3E;
+}
+.tb-pixel.on{background:#2563EB;border-color:#60A5FA;box-shadow:0 0 6px rgba(96,165,250,.6);}
+
+/* left content */
+.tb-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:9px;letter-spacing:.3em;text-transform:uppercase;
+  color:#60A5FA;margin-bottom:20px;
+}
+.tb-eyebrow::before{
+  content:'▶';color:#2563EB;font-size:8px;
+}
+.tb-h1{
+  font-size:clamp(48px,6vw,80px);font-weight:900;
+  line-height:.95;letter-spacing:-.03em;
+  color:#fff;margin-bottom:20px;
+}
+.tb-h1 .tblu{
+  color:transparent;
+  -webkit-text-stroke:1.5px #2563EB;
+  text-shadow:0 0 30px rgba(37,99,235,.5);
+}
+.tb-h1 .tglow{
+  color:#60A5FA;
+  text-shadow:0 0 20px rgba(96,165,250,.6);
+}
+.tb-h1 small{
+  display:block;font-size:.35em;letter-spacing:.3em;text-transform:uppercase;
+  color:rgba(255,255,255,.4);margin-bottom:8px;font-weight:400;
+}
+.tb-desc{
+  font-size:14px;line-height:1.8;color:rgba(255,255,255,.5);
+  margin-bottom:32px;max-width:440px;
+}
+.tb-cta{display:flex;gap:12px;align-items:center;}
+.tb-btn{
+  background:#2563EB;color:#fff;
+  font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  padding:14px 28px;
+  border:1px solid #2563EB;
+  position:relative;overflow:hidden;
+  transition:all .2s;cursor:pointer;
+  box-shadow:0 0 20px rgba(37,99,235,.4);
+}
+.tb-btn::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent);
+  transform:translateX(-100%);transition:transform .4s;
+}
+.tb-btn:hover::before{transform:translateX(100%);}
+.tb-btn:hover{box-shadow:0 0 40px rgba(37,99,235,.6);}
+.tb-btn-out{
+  background:transparent;color:rgba(255,255,255,.5);
+  font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  padding:14px 28px;
+  border:1px solid rgba(255,255,255,.15);
+  cursor:pointer;transition:all .2s;
+}
+.tb-btn-out:hover{border-color:rgba(255,255,255,.5);color:#fff;}
+
+/* bottom ticker */
+.tb-ticker{
+  position:absolute;bottom:0;left:0;right:0;
+  background:rgba(0,0,0,.6);border-top:1px solid rgba(37,99,235,.2);
+  height:36px;overflow:hidden;display:flex;align-items:center;
+}
+.tb-tick-label{
+  flex-shrink:0;padding:0 16px;
+  font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:#2563EB;background:#0A0A14;height:100%;
+  display:flex;align-items:center;
+  border-right:1px solid rgba(37,99,235,.3);
+  white-space:nowrap;
+}
+.tb-tick-track{
+  flex:1;overflow:hidden;
+}
+.tb-tick-inner{
+  display:flex;gap:64px;
+  animation:mq 15s linear infinite;
+  white-space:nowrap;
+  font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:rgba(255,255,255,.35);
+}
+.tb-tick-inner span{color:rgba(255,255,255,.7);}
+
+/* works section B */
+.tb-works{background:#FAFAFA;padding:80px 0;}
+.tb-works-head{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  padding:0 64px;margin-bottom:48px;
+}
+.tb-section-num{
+  font-size:80px;font-weight:900;color:rgba(0,0,20,.05);
+  line-height:1;margin-bottom:-16px;letter-spacing:-.04em;
+}
+.tb-section-title{font-size:32px;font-weight:900;letter-spacing:-.02em;}
+.tb-section-title span{color:#2563EB;}
+.tb-see{
+  font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:#2563EB;border:1px solid #2563EB;padding:10px 20px;
+  transition:all .2s;
+}
+.tb-see:hover{background:#2563EB;color:#fff;}
+
+.tb-works-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:#E0E0E0;
+  margin:0 64px;border:1px solid #E0E0E0;
+}
+.tb-wc{
+  background:#FAFAFA;padding:28px 24px;
+  position:relative;overflow:hidden;
+  cursor:pointer;transition:background .15s;
+}
+.tb-wc::after{
+  content:'';position:absolute;left:0;bottom:0;right:0;height:2px;
+  background:#2563EB;transform:scaleX(0);transform-origin:left;
+  transition:transform .25s;
+}
+.tb-wc:hover{background:#fff;}
+.tb-wc:hover::after{transform:scaleX(1);}
+.tb-wc-px{
+  font-size:9px;letter-spacing:.2em;text-transform:uppercase;
+  color:#2563EB;margin-bottom:8px;
+  display:flex;align-items:center;gap:6px;
+}
+.tb-wc-px::before{content:'■';font-size:7px;}
+.tb-wc-title{font-size:15px;font-weight:800;color:#0A0A14;margin-bottom:6px;line-height:1.25;}
+.tb-wc-desc{font-size:12px;color:#888;line-height:1.5;}
+.tb-wc-meta{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:16px;
+}
+.tb-wc-yr{font-size:10px;color:#BBB;}
+.tb-wc-dot{
+  width:8px;height:8px;background:#2563EB;
+  clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);
+}
+
+/* =========================================================
+   THEME C — FLUID KINETIC
+   ========================================================= */
+.tc{background:#FFFFFF;color:#0D1117;}
+
+.tc-header{
+  position:fixed;top:0;left:0;width:100%;z-index:100;
+  padding:0 56px;height:72px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.tc-logo{
+  font-size:16px;font-weight:900;letter-spacing:.06em;
+  display:flex;align-items:center;gap:10px;
+}
+.tc-logo-mark{
+  width:32px;height:32px;
+  background:linear-gradient(135deg,#2563EB,#60A5FA);
+  border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+}
+.tc-logo-mark svg{display:block;}
+.tc-nav{display:flex;align-items:center;gap:8px;}
+.tc-nav a{
+  font-size:13px;font-weight:500;color:#555;
+  padding:8px 16px;border-radius:8px;transition:all .15s;
+}
+.tc-nav a:hover{background:#F0F0F0;color:#0D1117;}
+.tc-nav-cta{
+  background:#0D1117!important;color:#fff!important;
+  font-size:13px;font-weight:600;
+  padding:10px 20px!important;border-radius:10px!important;
+}
+.tc-nav-cta:hover{background:#2563EB!important;}
+
+/* HERO C */
+.tc-hero{
+  min-height:100vh;
+  position:relative;overflow:hidden;
+  display:flex;align-items:center;
+}
+/* animated blobs */
+.tc-blob{
+  position:absolute;border-radius:50%;
+  pointer-events:none;
+  filter:blur(80px);
+  opacity:.5;
+}
+.tcb1{
+  width:700px;height:700px;
+  top:-200px;right:-200px;
+  background:radial-gradient(circle,rgba(37,99,235,.25),rgba(96,165,250,.1));
+  animation:blobMove1 12s ease-in-out infinite;
+}
+.tcb2{
+  width:500px;height:500px;
+  bottom:-100px;left:-150px;
+  background:radial-gradient(circle,rgba(96,165,250,.2),rgba(147,197,253,.1));
+  animation:blobMove2 16s ease-in-out infinite;
+}
+.tcb3{
+  width:400px;height:400px;
+  top:40%;left:40%;
+  background:radial-gradient(circle,rgba(37,99,235,.1),transparent);
+  animation:blobMove3 10s ease-in-out infinite;
+}
+@keyframes blobMove1{
+  0%,100%{transform:translate(0,0) scale(1);}
+  33%{transform:translate(-40px,40px) scale(1.05);}
+  66%{transform:translate(40px,-20px) scale(.95);}
+}
+@keyframes blobMove2{
+  0%,100%{transform:translate(0,0) scale(1);}
+  50%{transform:translate(60px,-40px) scale(1.1);}
+}
+@keyframes blobMove3{
+  0%,100%{transform:translate(0,0);}
+  50%{transform:translate(-30px,30px);}
+}
+
+/* noise texture */
+.tc-noise{
+  position:absolute;inset:0;
+  opacity:.025;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  pointer-events:none;
+}
+
+.tc-hero-inner{
+  position:relative;z-index:1;
+  max-width:1200px;margin:0 auto;padding:0 56px;
+  padding-top:72px;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:80px;align-items:center;
+  min-height:100vh;
+}
+
+/* left */
+.tc-tag-row{
+  display:flex;align-items:center;gap:8px;margin-bottom:28px;
+}
+.tc-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  background:#EFF6FF;color:#2563EB;
+  font-size:11px;font-weight:700;letter-spacing:.08em;
+  padding:6px 14px;border-radius:100px;
+}
+.tc-tag::before{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:#2563EB;animation:pulse2 2s infinite;
+}
+@keyframes pulse2{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.6);opacity:.5;}}
+.tc-year{font-size:11px;color:#AAA;letter-spacing:.08em;}
+
+.tc-h1{
+  font-size:clamp(44px,5.5vw,72px);
+  font-weight:900;line-height:1.05;
+  letter-spacing:-.03em;
+  color:#0D1117;
+  margin-bottom:24px;
+}
+.tc-h1 .tcline{display:block;}
+.tc-h1 .tcblue{
+  color:#2563EB;
+  position:relative;display:inline-block;
+}
+.tc-h1 .tcblue::after{
+  content:'';
+  position:absolute;bottom:-4px;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,#2563EB,#60A5FA);
+  border-radius:2px;
+}
+.tc-h1 .tcoutline{
+  color:transparent;
+  -webkit-text-stroke:2px #0D1117;
+}
+.tc-desc{
+  font-size:16px;line-height:1.75;color:#555;
+  margin-bottom:36px;max-width:440px;
+}
+.tc-cta{display:flex;gap:12px;align-items:center;flex-wrap:wrap;}
+.tc-btn-main{
+  background:#0D1117;color:#fff;
+  font-size:14px;font-weight:700;
+  padding:15px 32px;border-radius:12px;
+  display:inline-flex;align-items:center;gap:10px;
+  transition:all .2s;cursor:pointer;border:none;
+  box-shadow:0 4px 16px rgba(13,17,23,.2);
+}
+.tc-btn-main:hover{background:#2563EB;transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,99,235,.35);}
+.tc-btn-main svg{transition:transform .2s;}
+.tc-btn-main:hover svg{transform:translateX(3px);}
+.tc-btn-sub{
+  background:transparent;color:#555;
+  font-size:14px;font-weight:600;
+  padding:15px 24px;border-radius:12px;
+  border:1.5px solid #E0E0E0;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:all .2s;cursor:pointer;
+}
+.tc-btn-sub:hover{border-color:#2563EB;color:#2563EB;background:#EFF6FF;}
+
+.tc-trust{
+  display:flex;align-items:center;gap:16px;margin-top:40px;
+}
+.tc-avatars{display:flex;}
+.tc-av{
+  width:32px;height:32px;border-radius:50%;
+  border:2px solid #fff;
+  background:linear-gradient(135deg,#2563EB,#60A5FA);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;color:#fff;
+  margin-left:-8px;
+}
+.tc-av:first-child{margin-left:0;}
+.tc-trust-text{font-size:12px;color:#888;line-height:1.5;}
+.tc-trust-text strong{color:#0D1117;display:block;}
+
+/* right: stacked cards */
+.tc-right{position:relative;display:flex;flex-direction:column;gap:16px;}
+
+.tc-card-big{
+  background:#fff;
+  border-radius:20px;
+  padding:28px;
+  box-shadow:0 2px 0 #E8EDF3, 0 8px 40px rgba(37,99,235,.08);
+  border:1px solid rgba(37,99,235,.06);
+  transition:transform .3s,box-shadow .3s;
+}
+.tc-card-big:hover{transform:translateY(-4px);box-shadow:0 12px 48px rgba(37,99,235,.14);}
+
+.tc-card-header{
+  display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;
+}
+.tc-card-icon{
+  width:44px;height:44px;border-radius:12px;
+  background:linear-gradient(135deg,#2563EB,#3B82F6);
+  display:flex;align-items:center;justify-content:center;color:#fff;
+}
+.tc-card-badge{
+  font-size:10px;font-weight:700;letter-spacing:.08em;
+  background:#DCFCE7;color:#16A34A;
+  padding:4px 10px;border-radius:100px;
+}
+.tc-card-badge.blue{background:#DBEAFE;color:#2563EB;}
+
+.tc-card-num-row{display:flex;gap:24px;margin-bottom:16px;}
+.tc-card-num strong{font-size:32px;font-weight:900;color:#0D1117;letter-spacing:-.02em;line-height:1;}
+.tc-card-num span{font-size:11px;color:#AAA;margin-top:4px;display:block;}
+
+.tc-mini-bar{height:6px;background:#F0F0F0;border-radius:3px;overflow:hidden;}
+.tc-mini-bar-fill{
+  height:100%;border-radius:3px;
+  background:linear-gradient(90deg,#2563EB,#60A5FA);
+  animation:tcBar 2s 0.5s ease both;
+}
+@keyframes tcBar{from{width:0;}to{width:var(--w,80%);}}
+
+.tc-card-sm-row{display:flex;gap:12px;}
+.tc-card-sm{
+  flex:1;background:#F8FAFC;border-radius:14px;padding:20px;
+  border:1px solid #F0F0F0;transition:border-color .2s;
+}
+.tc-card-sm:hover{border-color:rgba(37,99,235,.2);}
+.tc-card-sm-icon{
+  width:36px;height:36px;border-radius:10px;
+  background:linear-gradient(135deg,#EFF6FF,#DBEAFE);
+  display:flex;align-items:center;justify-content:center;
+  color:#2563EB;margin-bottom:12px;
+}
+.tc-card-sm-val{font-size:22px;font-weight:900;color:#0D1117;letter-spacing:-.02em;}
+.tc-card-sm-lbl{font-size:11px;color:#888;margin-top:2px;}
+
+/* wavy divider */
+.tc-wave{
+  width:100%;height:80px;overflow:hidden;
+  background:#F8FAFC;
+  position:relative;
+}
+.tc-wave::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,#fff 0%,transparent 100%);
+}
+
+/* works C */
+.tc-works{background:#F8FAFC;padding:96px 0;}
+.tc-works-inner{max-width:1200px;margin:0 auto;padding:0 56px;}
+.tc-works-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:56px;}
+.tc-works-eyebrow{
+  font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:#2563EB;margin-bottom:8px;
+  display:flex;align-items:center;gap:8px;
+}
+.tc-works-eyebrow::before{content:'';width:20px;height:2px;background:#2563EB;}
+.tc-works-title{font-size:40px;font-weight:900;letter-spacing:-.03em;color:#0D1117;}
+.tc-works-sub{font-size:14px;color:#888;margin-top:6px;}
+.tc-works-link{
+  font-size:13px;font-weight:700;color:#2563EB;
+  display:inline-flex;align-items:center;gap:6px;
+  padding:12px 24px;border-radius:10px;
+  border:1.5px solid rgba(37,99,235,.25);
+  transition:all .2s;white-space:nowrap;
+}
+.tc-works-link:hover{background:#2563EB;color:#fff;border-color:#2563EB;}
+
+.tc-works-grid{
+  display:grid;grid-template-columns:repeat(12,1fr);
+  gap:16px;
+}
+.tc-wc{
+  background:#fff;border-radius:16px;
+  border:1px solid #F0F0F0;
+  overflow:hidden;
+  transition:all .25s;
+  cursor:pointer;
+}
+.tc-wc:hover{transform:translateY(-6px);box-shadow:0 16px 48px rgba(37,99,235,.1);border-color:rgba(37,99,235,.1);}
+.tc-wc-span6{grid-column:span 6;}
+.tc-wc-span4{grid-column:span 4;}
+.tc-wc-span3{grid-column:span 3;}
+.tc-thumb{
+  aspect-ratio:16/9;
+  background:linear-gradient(135deg,#0A1628,#0D2251);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.tc-thumb-dots{
+  position:absolute;inset:0;
+  background-image:radial-gradient(circle,rgba(37,99,235,.2) 1px,transparent 1px);
+  background-size:24px 24px;
+}
+.tc-thumb-icon{
+  width:52px;height:52px;border-radius:50%;
+  background:rgba(37,99,235,.2);border:1px solid rgba(96,165,250,.3);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;z-index:1;
+  transition:transform .2s;
+}
+.tc-wc:hover .tc-thumb-icon{transform:scale(1.1);}
+.tc-wc-body{padding:20px;}
+.tc-wc-game{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#2563EB;margin-bottom:4px;}
+.tc-wc-title{font-size:16px;font-weight:800;color:#0D1117;margin-bottom:6px;line-height:1.2;}
+.tc-wc-desc{font-size:12px;color:#888;line-height:1.5;}
+
+/* ===== DESIGN LABEL ===== */
+.design-label{
+  position:fixed;top:70px;right:24px;z-index:9999;
+  background:rgba(37,99,235,.9);color:#fff;
+  font-size:11px;font-weight:700;letter-spacing:.1em;
+  padding:6px 14px;border-radius:6px;
+  opacity:.7;transition:opacity .2s;
+  pointer-events:none;
+}
+.design-label:hover{opacity:1;}
+</style>
+</head>
+<body>
+
+<!-- DESIGN LABEL -->
+<div class="design-label" id="designLabel">OPTION A</div>
+
+<!-- SWITCHER -->
+<div id="switcher">
+  <button class="sw-btn active" onclick="switchTheme('a')">A — Editorial</button>
+  <button class="sw-btn" onclick="switchTheme('b')">B — Arcade</button>
+  <button class="sw-btn" onclick="switchTheme('c')">C — Fluid</button>
+</div>
+
+<!-- =====================================
+     THEME A: EDITORIAL BRUTALIST
+     ===================================== -->
+<div class="theme-page active" id="theme-a">
+<div class="ta">
+
+  <!-- header -->
+  <header class="ta-header">
+    <div class="ta-logo">SEGA<sub>MUSIC</sub></div>
+    <nav class="ta-nav">
+      <a href="#">Works</a>
+      <a href="#">Composers</a>
+      <a href="#">Archive</a>
+      <a href="#">About</a>
+    </nav>
+  </header>
+
+  <!-- hero -->
+  <section class="ta-hero">
+    <div class="ta-hero-left">
+      <div class="ta-big-text">
+        <div>SOUND</div>
+        <div class="accent">THAT</div>
+        <div class="em">MOVES</div>
+        <div>YOU.</div>
+      </div>
+      <div class="ta-hero-meta">
+        <div class="ta-year-tag">SEGA SOUND ARCHIVE — 1983–2025</div>
+        <p class="ta-desc">
+          世界を動かした音楽の源流へ。<br>
+          120以上のゲームタイトルと2,000曲以上を収録した<br>SEGAサウンドの完全ドキュメント。
+        </p>
+        <div class="ta-cta-row">
+          <button class="ta-btn">EXPLORE ARCHIVE</button>
+          <button class="ta-btn-ghost">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.2"/><path d="M5 4.5l5 2.5-5 2.5V4.5z" fill="currentColor"/></svg>
+            LISTEN NOW
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="ta-hero-right">
+      <div class="ta-index-num">01</div>
+
+      <div class="ta-cards-stack">
+        <div class="ta-card">
+          <span class="ta-card-num">01</span>
+          <div class="ta-card-body">
+            <div class="ta-card-title">Sonic Frontiers OST</div>
+            <div class="ta-card-sub">大谷智哉 · 2022 · 87 tracks</div>
+          </div>
+          <span class="ta-card-arr">↗</span>
+        </div>
+        <div class="ta-card">
+          <span class="ta-card-num">02</span>
+          <div class="ta-card-body">
+            <div class="ta-card-title">龍が如く8 サウンドトラック</div>
+            <div class="ta-card-sub">毎熊啓人 · 2024 · 112 tracks</div>
+          </div>
+          <span class="ta-card-arr">↗</span>
+        </div>
+        <div class="ta-card">
+          <span class="ta-card-num">03</span>
+          <div class="ta-card-body">
+            <div class="ta-card-title">ファンタシースターオンライン2</div>
+            <div class="ta-card-sub">本田晃弘 · 2023 · 156 tracks</div>
+          </div>
+          <span class="ta-card-arr">↗</span>
+        </div>
+        <div class="ta-card">
+          <span class="ta-card-num">04</span>
+          <div class="ta-card-body">
+            <div class="ta-card-title">Persona 5 Royal OST</div>
+            <div class="ta-card-sub">目黒将司 · 2020 · 110 tracks</div>
+          </div>
+          <span class="ta-card-arr">↗</span>
+        </div>
+        <div class="ta-card">
+          <span class="ta-card-num">05</span>
+          <div class="ta-card-body">
+            <div class="ta-card-title">NiGHTS into Dreams — 完全版</div>
+            <div class="ta-card-sub">瀬上純 · 1996/Remaster · 42 tracks</div>
+          </div>
+          <span class="ta-card-arr">↗</span>
+        </div>
+      </div>
+
+      <div class="ta-stat-row">
+        <div class="ta-stat"><strong>120+</strong><span>タイトル</span></div>
+        <div class="ta-stat"><strong>2K+</strong><span>楽曲</span></div>
+        <div class="ta-stat"><strong>47</strong><span>作曲家</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- marquee -->
+  <div class="ta-marquee">
+    <div class="ta-mtrack">
+      <span class="ta-mitem"><b>SONIC THE HEDGEHOG</b><span class="ta-mdot"></span></span>
+      <span class="ta-mitem"><b>YAKUZA SERIES</b><span class="ta-mdot"></span></span>
+      <span class="ta-mitem"><b>PERSONA SERIES</b><span class="ta-mdot"></span></span>
+      <span class="ta-mitem"><b>PHANTASY STAR</b><span class="ta-mdot"></span></span>
+      <span class="ta-mitem"><b>SPACE HARRIER</b><span class="ta-mdot"></span></span>
+      <span class="ta-mitem"><b>NIGHTS INTO DREAMS</b><span class="ta-mdot"></span></span>
+      <span class="ta-mitem"><b>SHENMUE</b><span class="ta-mdot"></span></span>
+      <span class="ta-mitem"><b>VIRTUA FIGHTER</b><span class="ta-mdot"></span></span>
+      <span class="ta-mitem"><b>SONIC THE HEDGEHOG</b><span class="ta-mdot"></span></span>
+      <span class="ta-mitem"><b>YAKUZA SERIES</b><span class="ta-mdot"></span></span>
+      <span class="ta-mitem"><b>PERSONA SERIES</b><span class="ta-mdot"></span></span>
+      <span class="ta-mitem"><b>PHANTASY STAR</b><span class="ta-mdot"></span></span>
+      <span class="ta-mitem"><b>SPACE HARRIER</b><span class="ta-mdot"></span></span>
+      <span class="ta-mitem"><b>NIGHTS INTO DREAMS</b><span class="ta-mdot"></span></span>
+      <span class="ta-mitem"><b>SHENMUE</b><span class="ta-mdot"></span></span>
+      <span class="ta-mitem"><b>VIRTUA FIGHTER</b><span class="ta-mdot"></span></span>
+    </div>
+  </div>
+
+  <!-- works -->
+  <section class="ta-works">
+    <div class="ta-section-head">
+      <div>
+        <div class="ta-section-label">FEATURED WORKS</div>
+        <div class="ta-section-title">注目作品</div>
+      </div>
+      <a href="#" class="ta-see-all">ALL WORKS →</a>
+    </div>
+    <div class="ta-works-grid">
+      <div class="ta-work-cell">
+        <div class="ta-wc-idx">01</div>
+        <div class="ta-wc-game">SONIC SERIES</div>
+        <div class="ta-wc-title">ソニック・ザ・ヘッジホッグ</div>
+        <div class="ta-wc-desc">初代から最新作まで。スピードと自由を体現したサウンド。</div>
+        <div class="ta-wc-foot">
+          <span class="ta-wc-year">1991–2024</span>
+          <span class="ta-wc-arr">↗</span>
+        </div>
+      </div>
+      <div class="ta-work-cell">
+        <div class="ta-wc-idx">02</div>
+        <div class="ta-wc-game">YAKUZA / RGG</div>
+        <div class="ta-wc-title">龍が如くシリーズ</div>
+        <div class="ta-wc-desc">カラオケからオーケストラまで。圧倒的な音楽的多様性。</div>
+        <div class="ta-wc-foot">
+          <span class="ta-wc-year">2005–2024</span>
+          <span class="ta-wc-arr">↗</span>
+        </div>
+      </div>
+      <div class="ta-work-cell">
+        <div class="ta-wc-idx">03</div>
+        <div class="ta-wc-game">PERSONA SERIES</div>
+        <div class="ta-wc-title">ペルソナシリーズ</div>
+        <div class="ta-wc-desc">目黒将司が生み出すジャジーでスタイリッシュなサウンド。</div>
+        <div class="ta-wc-foot">
+          <span class="ta-wc-year">1996–2024</span>
+          <span class="ta-wc-arr">↗</span>
+        </div>
+      </div>
+      <div class="ta-work-cell">
+        <div class="ta-wc-idx">04</div>
+        <div class="ta-wc-game">CLASSIC ARCADE</div>
+        <div class="ta-wc-title">アーケードクラシックス</div>
+        <div class="ta-wc-desc">FM音源時代の革新。Space Harrier、After Burnerを収録。</div>
+        <div class="ta-wc-foot">
+          <span class="ta-wc-year">1983–1994</span>
+          <span class="ta-wc-arr">↗</span>
+        </div>
+      </div>
+      <div class="ta-work-cell">
+        <div class="ta-wc-idx">05</div>
+        <div class="ta-wc-game">DREAMCAST ERA</div>
+        <div class="ta-wc-title">ドリームキャスト時代</div>
+        <div class="ta-wc-desc">Shenmue、Jet Set Radioが切り拓いた新世代サウンド。</div>
+        <div class="ta-wc-foot">
+          <span class="ta-wc-year">1998–2001</span>
+          <span class="ta-wc-arr">↗</span>
+        </div>
+      </div>
+      <div class="ta-work-cell">
+        <div class="ta-wc-idx">06</div>
+        <div class="ta-wc-game">PHANTASY STAR</div>
+        <div class="ta-wc-title">ファンタシースター</div>
+        <div class="ta-wc-desc">古代裕三による宇宙叙事詩。シンセからオーケストラへ。</div>
+        <div class="ta-wc-foot">
+          <span class="ta-wc-year">1987–2023</span>
+          <span class="ta-wc-arr">↗</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- .ta -->
+</div><!-- theme-a -->
+
+<!-- =====================================
+     THEME B: RETRO ARCADE NEON
+     ===================================== -->
+<div class="theme-page" id="theme-b">
+<div class="tb">
+  <div class="tb-scanlines"></div>
+
+  <!-- header -->
+  <header class="tb-header">
+    <div class="tb-logo"><span class="tblu">SEGA</span>MUSIC</div>
+    <nav class="tb-nav">
+      <a href="#">WORKS</a>
+      <a href="#">COMPOSERS</a>
+      <a href="#">ARCHIVE</a>
+      <a href="#" class="tb-nav-cta">ENTER</a>
+    </nav>
+  </header>
+
+  <!-- hero -->
+  <section class="tb-hero">
+    <div class="tb-grid"></div>
+    <div class="tb-glow"></div>
+    <div class="tb-glow2"></div>
+    <div class="tb-hero-scan"></div>
+    <div class="tb-coin">— INSERT COIN TO CONTINUE —</div>
+
+    <div class="tb-hero-inner">
+      <div>
+        <div class="tb-eyebrow">SEGA SOUND TEAM — SINCE 1983</div>
+        <h1 class="tb-h1">
+          <small>Sound That</small>
+          <span class="tblu">MOVES</span><br>
+          <span class="tglow">YOU.</span>
+        </h1>
+        <p class="tb-desc">
+          アーケードの轟音からコンソールの進化まで——<br>
+          SEGAが世界に刻んだ2,000曲以上の音楽を<br>
+          完全アーカイブ。作曲家とその時代を探索しよう。
+        </p>
+        <div class="tb-cta">
+          <button class="tb-btn">▶ START GAME</button>
+          <button class="tb-btn-out">HIGH SCORES</button>
+        </div>
+      </div>
+
+      <!-- arcade screen -->
+      <div class="tb-screen-wrap">
+        <div class="tb-screen-outer">
+          <div class="tb-screen-inner">
+            <div class="tb-screen-stars"></div>
+            <div class="tb-screen-corner tb-sc-tl"></div>
+            <div class="tb-screen-corner tb-sc-tr"></div>
+            <div class="tb-screen-corner tb-sc-bl"></div>
+            <div class="tb-screen-corner tb-sc-br"></div>
+            <div class="tb-scr-title">NOW PLAYING</div>
+            <div class="tb-scr-main">SONIC<br><span>FRONTIERS</span></div>
+            <div class="tb-scr-score">COMPOSER: <b>大谷智哉</b></div>
+            <div class="tb-scr-bar"><div class="tb-scr-bar-fill"></div></div>
+            <div class="tb-scr-playing">▶ STREAMING · 128K PLAYS</div>
+            <div class="tb-screen-reflections"></div>
+          </div>
+        </div>
+        <div class="tb-pixel-row">
+          <div class="tb-pixel on"></div>
+          <div class="tb-pixel on"></div>
+          <div class="tb-pixel"></div>
+          <div class="tb-pixel on"></div>
+          <div class="tb-pixel on"></div>
+          <div class="tb-pixel"></div>
+          <div class="tb-pixel on"></div>
+          <div class="tb-pixel"></div>
+          <div class="tb-pixel on"></div>
+          <div class="tb-pixel on"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ticker -->
+    <div class="tb-ticker">
+      <div class="tb-tick-label">LATEST</div>
+      <div class="tb-tick-track">
+        <div class="tb-tick-inner">
+          <span><span>NEW</span> Sonic×Shadow Generations OST配信開始 ——</span>
+          <span><span>EVENT</span> SEGA Sound Team 40周年記念コンサート 2025.06 ——</span>
+          <span><span>NEW</span> 龍が如く8 Full Soundtrack streaming ——</span>
+          <span><span>ARCHIVE</span> Space Harrier マスターテープデジタル化完了 ——</span>
+          <span><span>NEW</span> Sonic×Shadow Generations OST配信開始 ——</span>
+          <span><span>EVENT</span> SEGA Sound Team 40周年記念コンサート 2025.06 ——</span>
+          <span><span>NEW</span> 龍が如く8 Full Soundtrack streaming ——</span>
+          <span><span>ARCHIVE</span> Space Harrier マスターテープデジタル化完了 ——</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- works -->
+  <section class="tb-works">
+    <div class="tb-works-head">
+      <div>
+        <div class="tb-section-num">02</div>
+        <div class="tb-section-title">FEATURED <span>WORKS</span></div>
+      </div>
+      <a href="#" class="tb-see">ALL TITLES →</a>
+    </div>
+    <div class="tb-works-grid">
+      <div class="tb-wc">
+        <div class="tb-wc-px">SONIC SERIES</div>
+        <div class="tb-wc-title">ソニック・ザ・ヘッジホッグ</div>
+        <div class="tb-wc-desc">スピードと自由を体現したシリーズ全楽曲を収録。</div>
+        <div class="tb-wc-meta"><span class="tb-wc-yr">1991–2024</span><span class="tb-wc-dot"></span></div>
+      </div>
+      <div class="tb-wc">
+        <div class="tb-wc-px">YAKUZA / RGG</div>
+        <div class="tb-wc-title">龍が如くシリーズ</div>
+        <div class="tb-wc-desc">カラオケからオーケストラまで。圧倒的な音楽世界。</div>
+        <div class="tb-wc-meta"><span class="tb-wc-yr">2005–2024</span><span class="tb-wc-dot"></span></div>
+      </div>
+      <div class="tb-wc">
+        <div class="tb-wc-px">PERSONA SERIES</div>
+        <div class="tb-wc-title">ペルソナシリーズ</div>
+        <div class="tb-wc-desc">目黒将司のジャジーで独創的なサウンドワールド。</div>
+        <div class="tb-wc-meta"><span class="tb-wc-yr">1996–2024</span><span class="tb-wc-dot"></span></div>
+      </div>
+      <div class="tb-wc">
+        <div class="tb-wc-px">CLASSIC ARCADE</div>
+        <div class="tb-wc-title">アーケードクラシックス</div>
+        <div class="tb-wc-desc">FM音源が生んだ革新的サウンドを完全保存。</div>
+        <div class="tb-wc-meta"><span class="tb-wc-yr">1983–1994</span><span class="tb-wc-dot"></span></div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- .tb -->
+</div><!-- theme-b -->
+
+<!-- =====================================
+     THEME C: FLUID KINETIC
+     ===================================== -->
+<div class="theme-page" id="theme-c">
+<div class="tc">
+
+  <!-- header -->
+  <header class="tc-header" style="background:rgba(255,255,255,.85);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,0,0,.05);">
+    <div class="tc-logo">
+      <div class="tc-logo-mark">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M8 2L14 5.5V10.5L8 14L2 10.5V5.5L8 2Z" fill="white"/>
+        </svg>
+      </div>
+      SEGAMUSIC
+    </div>
+    <nav class="tc-nav">
+      <a href="#">作品</a>
+      <a href="#">作曲家</a>
+      <a href="#">アーカイブ</a>
+      <a href="#" class="tc-nav-cta">探索する</a>
+    </nav>
+  </header>
+
+  <!-- hero -->
+  <section class="tc-hero">
+    <div class="tc-blob tcb1"></div>
+    <div class="tc-blob tcb2"></div>
+    <div class="tc-blob tcb3"></div>
+    <div class="tc-noise"></div>
+
+    <div class="tc-hero-inner">
+      <!-- left -->
+      <div>
+        <div class="tc-tag-row">
+          <span class="tc-tag">SEGA MUSIC ARCHIVE</span>
+          <span class="tc-year">1983–2025</span>
+        </div>
+        <h1 class="tc-h1">
+          <span class="tcline">Sound</span>
+          <span class="tcline">That <span class="tcblue">Moves</span></span>
+          <span class="tcline"><span class="tcoutline">You.</span></span>
+        </h1>
+        <p class="tc-desc">
+          SEGAゲームを彩ってきた2,000以上の楽曲と<br>
+          47人の作曲家たちの物語を、<br>
+          ひとつの場所にすべて集めました。
+        </p>
+        <div class="tc-cta">
+          <button class="tc-btn-main">
+            音楽を探索する
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <button class="tc-btn-sub">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M6 5.5l5 2.5-5 2.5V5.5z" fill="currentColor"/>
+            </svg>
+            試聴する
+          </button>
+        </div>
+        <div class="tc-trust">
+          <div class="tc-avatars">
+            <div class="tc-av">大</div>
+            <div class="tc-av" style="background:linear-gradient(135deg,#7C3AED,#A78BFA)">中</div>
+            <div class="tc-av" style="background:linear-gradient(135deg,#059669,#34D399)">古</div>
+            <div class="tc-av" style="background:linear-gradient(135deg,#DC2626,#F87171)">瀬</div>
+          </div>
+          <div class="tc-trust-text">
+            <strong>47人の作曲家</strong>
+            120以上のゲームタイトルのサウンドを収録
+          </div>
+        </div>
+      </div>
+
+      <!-- right cards -->
+      <div class="tc-right">
+        <div class="tc-card-big">
+          <div class="tc-card-header">
+            <div class="tc-card-icon">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M10 2L18 6V14L10 18L2 14V6L10 2Z" stroke="white" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <span class="tc-card-badge blue">更新中</span>
+          </div>
+          <div class="tc-card-num-row">
+            <div class="tc-card-num"><strong>2,048</strong><span>収録楽曲</span></div>
+            <div class="tc-card-num"><strong>120</strong><span>ゲーム</span></div>
+            <div class="tc-card-num"><strong>47</strong><span>作曲家</span></div>
+          </div>
+          <div class="tc-mini-bar"><div class="tc-mini-bar-fill" style="--w:78%"></div></div>
+        </div>
+        <div class="tc-card-sm-row">
+          <div class="tc-card-sm">
+            <div class="tc-card-sm-icon">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M8 2v6.5M8 8.5l2.5-2.5M8 8.5L5.5 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M3 10v3h10v-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="tc-card-sm-val">NEW</div>
+            <div class="tc-card-sm-lbl">Sonic×Shadow OST</div>
+          </div>
+          <div class="tc-card-sm">
+            <div class="tc-card-sm-icon">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <circle cx="8" cy="8" r="5.5" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M6 5.5l5 2.5-5 2.5V5.5z" fill="currentColor"/>
+              </svg>
+            </div>
+            <div class="tc-card-sm-val">40th</div>
+            <div class="tc-card-sm-lbl">Anniversary Concert</div>
+          </div>
+          <div class="tc-card-sm">
+            <div class="tc-card-sm-icon">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M2 12L8 4l4 5 2-3 2 6H2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="tc-card-sm-val">128K</div>
+            <div class="tc-card-sm-lbl">Weekly Plays</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- works -->
+  <section class="tc-works">
+    <div class="tc-works-inner">
+      <div class="tc-works-head">
+        <div>
+          <div class="tc-works-eyebrow">FEATURED WORKS</div>
+          <div class="tc-works-title">注目の作品</div>
+          <div class="tc-works-sub">時代とジャンルを横断するSEGAサウンドの全体像</div>
+        </div>
+        <a href="#" class="tc-works-link">
+          すべて見る
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+      <div class="tc-works-grid">
+        <div class="tc-wc tc-wc-span6">
+          <div class="tc-thumb">
+            <div class="tc-thumb-dots"></div>
+            <div class="tc-thumb-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="9" stroke="rgba(96,165,250,.6)" stroke-width="1.5"/>
+                <path d="M12 4c4.4 0 8 3.6 8 8" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                <circle cx="12" cy="12" r="3" fill="rgba(37,99,235,.6)"/>
+              </svg>
+            </div>
+          </div>
+          <div class="tc-wc-body">
+            <div class="tc-wc-game">SONIC THE HEDGEHOG SERIES</div>
+            <div class="tc-wc-title">ソニック・ザ・ヘッジホッグ コンプリートサウンドコレクション</div>
+            <div class="tc-wc-desc">初代から最新作まで、スピードと自由を体現したシリーズ全楽曲。</div>
+          </div>
+        </div>
+        <div class="tc-wc tc-wc-span6">
+          <div class="tc-thumb">
+            <div class="tc-thumb-dots"></div>
+            <div class="tc-thumb-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <rect x="3" y="7" width="18" height="10" rx="2" stroke="rgba(96,165,250,.6)" stroke-width="1.5"/>
+                <path d="M8 12h8M12 9v6" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+          </div>
+          <div class="tc-wc-body">
+            <div class="tc-wc-game">YAKUZA / LIKE A DRAGON</div>
+            <div class="tc-wc-title">龍が如く シリーズ サウンドトラック全集</div>
+            <div class="tc-wc-desc">ドラマとユーモアが交差する、唯一無二の音楽世界。</div>
+          </div>
+        </div>
+        <div class="tc-wc tc-wc-span4">
+          <div class="tc-thumb">
+            <div class="tc-thumb-dots"></div>
+            <div class="tc-thumb-icon">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M10 2L18 6V14L10 18L2 14V6L10 2Z" stroke="rgba(96,165,250,.6)" stroke-width="1.5"/>
+              </svg>
+            </div>
+          </div>
+          <div class="tc-wc-body">
+            <div class="tc-wc-game">PERSONA SERIES</div>
+            <div class="tc-wc-title">ペルソナシリーズ</div>
+            <div class="tc-wc-desc">ジャズとロックが融合した目黒将司の世界観。</div>
+          </div>
+        </div>
+        <div class="tc-wc tc-wc-span4">
+          <div class="tc-thumb">
+            <div class="tc-thumb-dots"></div>
+            <div class="tc-thumb-icon">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M4 16V8l6-6 6 6v8H4z" stroke="rgba(96,165,250,.6)" stroke-width="1.5"/>
+                <path d="M8 16v-5h4v5" stroke="white" stroke-width="1.5"/>
+              </svg>
+            </div>
+          </div>
+          <div class="tc-wc-body">
+            <div class="tc-wc-game">DREAMCAST ERA</div>
+            <div class="tc-wc-title">ドリームキャスト時代</div>
+            <div class="tc-wc-desc">Shenmue、Jet Set Radioが開いた新世代。</div>
+          </div>
+        </div>
+        <div class="tc-wc tc-wc-span4">
+          <div class="tc-thumb">
+            <div class="tc-thumb-dots"></div>
+            <div class="tc-thumb-icon">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <circle cx="10" cy="10" r="7" stroke="rgba(96,165,250,.6)" stroke-width="1.5"/>
+                <path d="M7 8.5l3 1.5-3 1.5V8.5z" fill="white"/>
+              </svg>
+            </div>
+          </div>
+          <div class="tc-wc-body">
+            <div class="tc-wc-game">CLASSIC ARCADE</div>
+            <div class="tc-wc-title">アーケードクラシックス</div>
+            <div class="tc-wc-desc">FM音源革命。1983年からの音の歴史。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- .tc -->
+</div><!-- theme-c -->
+
+<script>
+function switchTheme(id){
+  document.querySelectorAll('.theme-page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.sw-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('theme-'+id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  const labels={a:'OPTION A — Editorial Brutalist',b:'OPTION B — Retro Arcade',c:'OPTION C — Fluid Kinetic'};
+  document.getElementById('designLabel').textContent=labels[id];
+}
+</script>
+</body>
+</html>

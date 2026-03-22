@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SEGA MUSIC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&family=Onest:wght@300;400;500;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <!-- Loading Screen -->
+  <div class="loading-screen">
+    <div class="loading-logo">
+      <span class="loading-logo__sega">SEGA</span>
+      <span class="loading-logo__music">MUSIC</span>
+    </div>
+    <div class="loading-bar">
+      <div class="loading-bar__progress"></div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <a href="./" class="logo">
+      <span class="logo-sega">SEGA</span>
+      <span class="logo-music">MUSIC</span>
+    </a>
+
+    <nav class="nav" aria-label="メインナビゲーション">
+      <a href="news/" class="nav-link">News</a>
+      <a href="works/" class="nav-link">Works</a>
+      <a href="licensing/" class="nav-link">Licensing</a>
+      <a href="company/" class="nav-link">Company</a>
+      <a href="https://wavemaster-store.com/" class="nav-link nav-link--external" target="_blank" rel="noopener noreferrer">STORE<svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </nav>
+
+    <a href="contact/" class="btn-contact">
+      <span>Contact</span>
+      <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 10L10 1M10 1H2M10 1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+
+    <!-- Hamburger Button (Mobile) -->
+    <button type="button" class="hamburger" aria-label="メニューを開く">
+      <span class="hamburger__line"></span>
+      <span class="hamburger__line"></span>
+      <span class="hamburger__line"></span>
+    </button>
+  </header>
+
+  <!-- Mobile Navigation -->
+  <nav class="mobile-nav" aria-label="モバイルナビゲーション">
+    <button type="button" class="mobile-nav__close" aria-label="メニューを閉じる"></button>
+    <a href="news/" class="mobile-nav__link">News</a>
+    <a href="works/" class="mobile-nav__link">Works</a>
+    <a href="licensing/" class="mobile-nav__link">Licensing</a>
+    <a href="company/" class="mobile-nav__link">Company</a>
+    <a href="https://wavemaster-store.com/" class="mobile-nav__link mobile-nav__link--external" target="_blank" rel="noopener noreferrer">
+      STORE
+      <svg width="14" height="14" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <a href="contact/" class="mobile-nav__contact">
+      Contact
+      <svg width="14" height="14" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 10L10 1M10 1H2M10 1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </nav>
+
+  <!-- Hero Section -->
+  <main class="hero">
+    <!-- Background Video -->
+    <div class="hero-bg">
+      <video class="hero-video" autoplay muted loop playsinline>
+        <source src="assets/img/hero-bg.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <!-- Hero Text -->
+    <div class="hero-content">
+      <h1 class="hero-title">
+        <span class="hero-line reveal reveal-delay-1">
+          <span class="text-ink">SOUNDS</span>
+          <span class="text-blue">THAT</span>
+        </span>
+        <span class="hero-line reveal reveal-delay-2">
+          <span class="text-highlight"><span>MOVE</span></span>
+          <span class="text-ink">YOU.</span>
+        </span>
+      </h1>
+    </div>
+
+    <!-- Copyright (Vertical) -->
+    <div class="copyright">
+      <span>©︎ SEGA MUSIC INC. All Rights Reserved.</span>
+    </div>
+  </main>
+
+  <!-- News Ticker -->
+  <div class="ticker">
+    <div class="ticker-label">
+      <span>News</span>
+    </div>
+    <div class="ticker-track">
+      <div class="ticker-content">
+        <div class="ticker-item">
+          <span class="ticker-date">2025.03.15</span>
+          <span class="ticker-text">「ソニック×シャドウ ジェネレーションズ」オリジナルサウンドトラック 全曲配信開始</span>
+        </div>
+        <span class="ticker-separator">—</span>
+        <div class="ticker-item">
+          <span class="ticker-date">2025.02.28</span>
+          <span class="ticker-text">SEGA Sound Team 40周年記念コンサート チケット先行販売のお知らせ</span>
+        </div>
+        <span class="ticker-separator">—</span>
+        <div class="ticker-item">
+          <span class="ticker-date">2025.02.10</span>
+          <span class="ticker-text">「スペースハリアー」マスターテープデジタル化プロジェクト完了</span>
+        </div>
+        <span class="ticker-separator">—</span>
+        <div class="ticker-item">
+          <span class="ticker-date">2025.01.25</span>
+          <span class="ticker-text">大谷智哉氏インタビュー：Sonic Frontiersの音楽制作の裏側を語る</span>
+        </div>
+        <span class="ticker-separator">—</span>
+        <div class="ticker-item">
+          <span class="ticker-date">2025.01.10</span>
+          <span class="ticker-text">「龍が如く8」サウンドトラック全曲ストリーミング配信開始</span>
+        </div>
+        <span class="ticker-separator">—</span>
+      </div>
+      <div class="ticker-content" aria-hidden="true">
+        <div class="ticker-item">
+          <span class="ticker-date">2025.03.15</span>
+          <span class="ticker-text">「ソニック×シャドウ ジェネレーションズ」オリジナルサウンドトラック 全曲配信開始</span>
+        </div>
+        <span class="ticker-separator">—</span>
+        <div class="ticker-item">
+          <span class="ticker-date">2025.02.28</span>
+          <span class="ticker-text">SEGA Sound Team 40周年記念コンサート チケット先行販売のお知らせ</span>
+        </div>
+        <span class="ticker-separator">—</span>
+        <div class="ticker-item">
+          <span class="ticker-date">2025.02.10</span>
+          <span class="ticker-text">「スペースハリアー」マスターテープデジタル化プロジェクト完了</span>
+        </div>
+        <span class="ticker-separator">—</span>
+        <div class="ticker-item">
+          <span class="ticker-date">2025.01.25</span>
+          <span class="ticker-text">大谷智哉氏インタビュー：Sonic Frontiersの音楽制作の裏側を語る</span>
+        </div>
+        <span class="ticker-separator">—</span>
+        <div class="ticker-item">
+          <span class="ticker-date">2025.01.10</span>
+          <span class="ticker-text">「龍が如く8」サウンドトラック全曲ストリーミング配信開始</span>
+        </div>
+        <span class="ticker-separator">—</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/ticker.js"></script>
+  <script src="assets/js/transitions.js"></script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CONTACT | SEGA MUSIC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&family=Onest:wght@300;400;500;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    html, body { height: auto; overflow: auto; }
+  </style>
+</head>
+<body class="page-body">
+  <!-- Page Enter Overlay -->
+  <div class="page-enter-overlay"></div>
+
+  <!-- Header -->
+  <header class="header header--sub header--transparent">
+    <a href="../" class="logo">
+      <span class="logo-sega">SEGA</span>
+      <span class="logo-music">MUSIC</span>
+    </a>
+
+    <nav class="nav" aria-label="メインナビゲーション">
+      <a href="../news/" class="nav-link">News</a>
+      <a href="../works/" class="nav-link">Works</a>
+      <a href="../licensing/" class="nav-link">Licensing</a>
+      <a href="../company/" class="nav-link">Company</a>
+      <a href="https://wavemaster-store.com/" class="nav-link nav-link--external" target="_blank" rel="noopener noreferrer">STORE<svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </nav>
+
+    <a href="../contact/" class="btn-contact btn-contact--active">
+      <span>Contact</span>
+      <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 10L10 1M10 1H2M10 1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+
+    <!-- Hamburger Button (Mobile) -->
+    <button type="button" class="hamburger" aria-label="メニューを開く">
+      <span class="hamburger__line"></span>
+      <span class="hamburger__line"></span>
+      <span class="hamburger__line"></span>
+    </button>
+  </header>
+
+  <!-- Mobile Navigation -->
+  <nav class="mobile-nav" aria-label="モバイルナビゲーション">
+    <button type="button" class="mobile-nav__close" aria-label="メニューを閉じる"></button>
+    <a href="../news/" class="mobile-nav__link">News</a>
+    <a href="../works/" class="mobile-nav__link">Works</a>
+    <a href="../licensing/" class="mobile-nav__link">Licensing</a>
+    <a href="../company/" class="mobile-nav__link">Company</a>
+    <a href="https://wavemaster-store.com/" class="mobile-nav__link mobile-nav__link--external" target="_blank" rel="noopener noreferrer">
+      STORE
+      <svg width="14" height="14" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <a href="./" class="mobile-nav__contact mobile-nav__contact--active">
+      Contact
+      <svg width="14" height="14" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 10L10 1M10 1H2M10 1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </nav>
+
+  <!-- Page Hero -->
+  <section class="page-hero page-hero--video">
+    <video class="page-hero__video" autoplay muted loop playsinline>
+      <source src="../assets/img/hero-bg.mp4" type="video/mp4">
+    </video>
+    <div class="page-hero__overlay"></div>
+    <div class="page-hero__content">
+      <span class="page-hero__label reveal reveal-delay-1">お問い合わせ</span>
+      <h1 class="page-hero__title reveal reveal-delay-2"><span class="text-highlight"><span>CONTACT</span></span></h1>
+    </div>
+  </section>
+
+  <!-- Breadcrumb -->
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <a href="../">HOME</a>
+    <span>›</span>
+    <span class="breadcrumb__current">CONTACT</span>
+  </nav>
+
+  <!-- Content -->
+  <main class="content content--narrow">
+    <p class="contact-lead reveal reveal-delay-3">
+      ご不明な点やお問い合わせは、以下のフォームよりお送りください。<br>
+      担当者より2〜3営業日以内にご返信いたします。
+    </p>
+
+    <form class="contact-form stagger-children" onsubmit="return false;">
+      <div class="form-field reveal">
+        <label class="form-field__label">
+          お名前<span class="required">*</span>
+        </label>
+        <input type="text" class="form-field__input" placeholder="山田 太郎">
+      </div>
+
+      <div class="form-field reveal">
+        <label class="form-field__label">会社名</label>
+        <input type="text" class="form-field__input" placeholder="株式会社○○">
+      </div>
+
+      <div class="form-field reveal">
+        <label class="form-field__label">
+          メールアドレス<span class="required">*</span>
+        </label>
+        <input type="email" class="form-field__input" placeholder="example@company.com">
+      </div>
+
+      <div class="form-field reveal">
+        <label class="form-field__label">
+          お問い合わせ種別<span class="required">*</span>
+        </label>
+        <select class="form-field__select">
+          <option value="" disabled selected>選択してください</option>
+          <option value="license">楽曲ライセンスについて</option>
+          <option value="production">制作のご依頼</option>
+          <option value="management">マネジメントについて</option>
+          <option value="other">その他</option>
+        </select>
+      </div>
+
+      <div class="form-field reveal">
+        <label class="form-field__label">
+          お問い合わせ内容<span class="required">*</span>
+        </label>
+        <textarea class="form-field__textarea" placeholder="お問い合わせ内容をご記入ください"></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn reveal">送信する</button>
+    </form>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer__logo">
+      <span class="footer__logo-sega">SEGA</span>
+      <span class="footer__logo-music">MUSIC</span>
+    </div>
+    <p class="footer__copy">© 2025 SEGA MUSIC INC. All Rights Reserved.</p>
+  </footer>
+
+  <script src="../assets/js/transitions.js"></script>
+</body>
+</html>

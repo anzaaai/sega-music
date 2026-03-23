@@ -16,7 +16,8 @@
       "Bash(if grep -q '<p class=\"\"footer__copy\"\">© 2025 SEGA MUSIC INC. All Rights Reserved.</p>' \"$file\")",
       "Bash(then)",
       "Bash(fi)",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(ls:*)"
     ]
   }
 }

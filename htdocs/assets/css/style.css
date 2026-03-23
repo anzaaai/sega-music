@@ -24,7 +24,7 @@
   --font-heading: 'Onest', sans-serif;
 
   /* Spacing */
-  --ticker-height: 2.91vw; /* 44px */
+  --ticker-height: 5vh;
 }
 
 /* --------------------------------------------------------------------------
@@ -809,6 +809,8 @@ body.page-body .content {
   align-items: center;
   gap: 1.32vw; /* 20px */
   margin-bottom: 2.12vw; /* 32px */
+  padding-bottom: 1.32vw; /* 20px */
+  border-bottom: 0.13vw solid var(--blue); /* 2px */
 }
 
 .section-title__text {
@@ -1523,7 +1525,6 @@ body.page-body .content {
    -------------------------------------------------------------------------- */
 .info-table {
   width: 100%;
-  border-top: 0.13vw solid var(--blue); /* 2px */
 }
 
 .info-table__row {
@@ -1683,7 +1684,7 @@ body.page-body .content {
   font-family: var(--font-body);
   font-size: 1.32vw; /* 20px */
   line-height: 2;
-  color: var(--muted);
+  color: var(--ink);
   padding: 12vw 4vw 8vw; /* 80px 72px */
   background-color: var(--paper);
   text-align: center;
@@ -1787,7 +1788,7 @@ body.page-body .content {
 
 /* Access Section */
 .company-access {
-  margin-bottom: 2.65vw; /* 40px */
+  margin-bottom: 5.29vw; /* 80px */
 }
 
 .access-content {
@@ -1973,7 +1974,7 @@ body.page-body .content {
 .privacy-intro__title {
   font-family: var(--font-heading);
   font-size: 1.72vw; /* 26px */
-  font-weight: 800;
+  font-weight: 500;
   color: var(--ink);
   line-height: 1.4;
   letter-spacing: 0.02em;
@@ -1988,14 +1989,11 @@ body.page-body .content {
 
 .privacy-section__number {
   font-family: var(--font-heading);
-  font-size: 2.65vw; /* 40px */
-  font-weight: 800;
+  font-size: 1.85vw; /* 28px */
+  font-weight: 500;
   color: var(--blue);
   line-height: 1;
-}
-
-.privacy-section__content {
-  padding-top: 0.26vw; /* 4px */
+  padding-top: 0.2vw;
 }
 
 .privacy-section__title {
@@ -2279,7 +2277,6 @@ body.page-body .content {
   height: 44px;
   background: var(--blue);
   border: none;
-  border-radius: 1vw;
   cursor: pointer;
   z-index: 1001;
   padding: 0;
@@ -2479,6 +2476,18 @@ body.menu-open {
    SP (Mobile) Styles
    -------------------------------------------------------------------------- */
 @media screen and (max-width: 768px) {
+  /* Loading Screen */
+  .loading-logo {
+    font-size: 28px;
+    gap: 6px;
+    margin-bottom: 24px;
+  }
+
+  .loading-bar {
+    width: 140px;
+    height: 3px;
+  }
+
   /* Show decorative ticker on mobile */
   .decorative-ticker {
     display: flex;
@@ -2534,7 +2543,6 @@ body.menu-open {
   .hero-content {
     padding: 0 24px;
     align-items: center;
-    justify-content: center;
   }
 
   .hero-title {
@@ -2547,6 +2555,12 @@ body.menu-open {
     gap: 12px;
     font-size: clamp(36px, 12vw, 60px);
     text-align: left;
+  }
+
+  .hero-you {
+    display: block;
+    width: 100%;
+    margin-top: 8px;
   }
 
   .text-highlight {
@@ -2565,6 +2579,10 @@ body.menu-open {
   }
 
   /* Ticker */
+  .ticker {
+    padding: 0;
+  }
+
   .ticker-label {
     width: 60px;
   }
@@ -2639,6 +2657,12 @@ body.menu-open {
   }
 
   /* Section Title */
+  .section-title {
+    padding-bottom: 16px; /* 20px → 16px */
+    margin-bottom: 24px;
+    border-bottom: 2px solid var(--blue);
+  }
+
   .section-title__text {
     font-size: 13px;
     gap: 4px;
@@ -3039,7 +3063,7 @@ body.menu-open {
   }
 
   .company-access {
-    margin-bottom: 24px;
+    margin-bottom: 48px;
   }
 
   .access-content {
@@ -3098,7 +3122,7 @@ body.menu-open {
 
   .privacy-intro__title {
     font-size: 20px;
-    font-weight: 800;
+    font-weight: 500;
   }
 
   .privacy-section {
@@ -3108,11 +3132,8 @@ body.menu-open {
   }
 
   .privacy-section__number {
-    font-size: 32px;
-    font-weight: 800;
-  }
-
-  .privacy-section__content {
+    font-size: 24px;
+    font-weight: 500;
     padding-top: 2px;
   }
 

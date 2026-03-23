@@ -91,6 +91,22 @@
       担当者より2〜3営業日以内にご返信いたします。
     </p>
 
+    <!-- Notice Section -->
+    <div class="contact-notice reveal reveal-delay-4">
+      <h3 class="contact-notice__title">お問い合わせの際のご注意</h3>
+      <ul class="contact-notice__list">
+        <li>皆様から頂いたメッセージは必ず目を通してサイトに役立ててまいりますが、個別に返信・対応をできない場合があります。ご了承ください。</li>
+        <li>セガのゲームタイトル等の音楽や楽曲の使用、著作権に関しましては、件名で「楽曲使用・音楽著作権について」をお選びください。折り返し、担当者よりご連絡させていただきます。</li>
+        <li>業界関係者や業務関連、取材依頼に関しましては、件名で「取材・業務関係のお問い合わせ」をお選びください。折り返し、担当者よりご連絡させていただきます。</li>
+        <li>皆様から商品やマーケティングに関する企画やアイディア等のご提案をお送りいただいた場合、当社およびセガとそのグループ会社は、このご提案を評価、検討、採用したり秘密にする等の義務を負うことなく、無償で利用することができるものとさせて頂きます。従いまして、全てのご提案は、これにご同意の上でお送り頂いたものと理解し取り扱わせて頂きますので、あらかじめご了承下さい。</li>
+      </ul>
+    </div>
+
+    <!-- Form Section Title -->
+    <div class="section-title reveal reveal-delay-5">
+      <span class="section-title__text">Contact Form<span class="section-title__ja">お問い合わせフォーム</span></span>
+    </div>
+
     <form class="contact-form stagger-children" onsubmit="return false;">
       <div class="form-field reveal">
         <label class="form-field__label">
@@ -113,11 +129,12 @@
 
       <div class="form-field reveal">
         <label class="form-field__label">
-          お問い合わせ種別<span class="required">*</span>
+          件名<span class="required">*</span>
         </label>
         <select class="form-field__select">
           <option value="" disabled selected>選択してください</option>
-          <option value="license">楽曲ライセンスについて</option>
+          <option value="copyright">楽曲使用・音楽著作権について</option>
+          <option value="business">取材・業務関係のお問い合わせ</option>
           <option value="production">制作のご依頼</option>
           <option value="management">マネジメントについて</option>
           <option value="other">その他</option>

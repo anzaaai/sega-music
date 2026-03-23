@@ -792,7 +792,11 @@ body.page-body .content {
 .content--narrow {
   max-width: 63.49vw; /* 960px */
   margin: 0 auto;
-  padding: 3.97vw 4.76vw; /* 60px 72px */
+  padding: 3.97vw 10vw; /* 60px 152px */
+}
+
+.content--single-col {
+  padding: 3.97vw 10vw; /* 60px 152px */
 }
 
 .content--two-col {
@@ -1947,7 +1951,7 @@ body.page-body .content {
 .coming-soon__text {
   font-family: var(--font-heading);
   font-weight: 400;
-  font-size: 3.17vw; /* 48px */
+  font-size: 2.17vw; /* 48px */
   letter-spacing: 0.4vw; /* 6px */
   color: var(--muted);
   margin-bottom: 1.06vw; /* 16px */
@@ -1963,7 +1967,7 @@ body.page-body .content {
    Privacy Policy
    -------------------------------------------------------------------------- */
 .privacy-policy {
-  max-width: 52.91vw; /* 800px */
+  max-width: 63.49vw; /* 960px */
   margin: 0 auto;
 }
 
@@ -2047,6 +2051,47 @@ body.page-body .content {
   color: var(--ink);
   text-align: left;
   margin-bottom: 3.17vw; /* 48px */
+}
+
+.contact-notice {
+  background-color: #FFF;
+  border: 0.07vw solid var(--rule); /* 1px */
+  padding: 2.12vw; /* 32px */
+  margin-bottom: 3.97vw; /* 60px */
+}
+
+.contact-notice__title {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 1.06vw; /* 16px */
+  color: var(--ink);
+  margin-bottom: 1.32vw; /* 20px */
+}
+
+.contact-notice__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.06vw; /* 16px */
+}
+
+.contact-notice__list li {
+  font-family: var(--font-body);
+  font-size: 0.86vw; /* 13px */
+  line-height: 1.8;
+  color: var(--ink);
+  padding-left: 1.06vw; /* 16px */
+  position: relative;
+}
+
+.contact-notice__list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--blue);
+  font-weight: bold;
 }
 
 .contact-form {
@@ -2651,6 +2696,10 @@ body.menu-open {
     padding: 32px 24px;
   }
 
+  .content--single-col {
+    padding: 32px 24px;
+  }
+
   .content--two-col {
     grid-template-columns: 1fr;
     gap: 40px;
@@ -3221,7 +3270,7 @@ body.menu-open {
 
   /* Coming Soon */
   .coming-soon__text {
-    font-size: 32px;
+    font-size: 24px;
     letter-spacing: 4px;
   }
 
@@ -3233,6 +3282,26 @@ body.menu-open {
   .contact-lead {
     font-size: 15px;
     margin-bottom: 32px;
+  }
+
+  .contact-notice {
+    padding: 24px;
+    margin-bottom: 40px;
+  }
+
+  .contact-notice__title {
+    font-size: 15px;
+    margin-bottom: 16px;
+  }
+
+  .contact-notice__list {
+    gap: 14px;
+  }
+
+  .contact-notice__list li {
+    font-size: 13px;
+    line-height: 1.8;
+    padding-left: 16px;
   }
 
   .contact-form {

@@ -349,6 +349,7 @@ a {
   color: var(--ink);
   background-color: transparent;
   overflow: hidden;
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .text-highlight::before {
@@ -392,6 +393,10 @@ a {
   animation: highlightSlideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 2.8s forwards;
 }
 
+.hero .text-highlight.animating-bg::before {
+  animation: var(--bg-animation);
+}
+
 @keyframes heroMoveClip {
   from {
     clip-path: inset(0 100% 0 0);
@@ -418,6 +423,33 @@ a {
   to {
     color: white;
     opacity: 1;
+  }
+}
+
+/* Verb Rotator */
+.verb-rotator {
+  color: white;
+  position: relative;
+  display: inline-block;
+  opacity: 1;
+}
+
+/* Verb Rotator Background Animation */
+@keyframes verbBackgroundShrink {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes verbBackgroundExpand {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
   }
 }
 
@@ -505,6 +537,13 @@ a {
   gap: 0.53vw; /* 8px */
   padding: 0 0.66vw; /* 0 10px */
   white-space: nowrap;
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.3s ease;
+}
+
+.ticker-item:hover {
+  opacity: 0.7;
 }
 
 .ticker-tag {
@@ -775,7 +814,7 @@ body.page-body .content {
 .section-title__text {
   font-family: var(--font-heading);
   font-weight: 500;
-  font-size: 1vw; /* 14px */
+  font-size: 0.7vw; /* 14px */
   letter-spacing: 0.13vw; /* 2px */
   text-transform: uppercase;
   color: var(--muted);
@@ -1387,6 +1426,55 @@ body.page-body .content {
   color: var(--muted);
 }
 
+/* Licensing Managed Music */
+.managed-music {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.65vw; /* 40px */
+}
+
+.managed-music__category {
+  padding: 2.12vw; /* 32px */
+  background-color: #FFF;
+  border: 0.07vw solid var(--rule); /* 1px */
+}
+
+.managed-music__category-title {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 1.19vw; /* 18px */
+  color: var(--blue);
+  margin-bottom: 1.32vw; /* 20px */
+  padding-bottom: 0.79vw; /* 12px */
+  border-bottom: 0.07vw solid var(--rule); /* 1px */
+}
+
+.managed-music__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.79vw; /* 12px */
+}
+
+.managed-music__list li {
+  font-family: var(--font-body);
+  font-size: 0.86vw; /* 13px */
+  line-height: 1.7;
+  color: var(--ink);
+  padding-left: 1.06vw; /* 16px */
+  position: relative;
+}
+
+.managed-music__list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--blue);
+  font-weight: bold;
+}
+
 /* --------------------------------------------------------------------------
    CTA Box
    -------------------------------------------------------------------------- */
@@ -1703,9 +1791,6 @@ body.page-body .content {
 }
 
 .access-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2.65vw; /* 40px */
   margin-top: 2.65vw; /* 40px */
 }
 
@@ -1719,6 +1804,79 @@ body.page-body .content {
   width: 100%;
   height: 100%;
   border: 0;
+}
+
+/* Electronic Advertising Section */
+.company-advertising {
+  margin-bottom: 2.65vw; /* 40px */
+}
+
+.advertising-content {
+  margin-top: 2.65vw; /* 40px */
+  display: flex;
+  flex-direction: column;
+  gap: 3.97vw; /* 60px */
+}
+
+.advertising-subsection__title {
+  font-family: var(--font-heading);
+  font-size: 1.2vw; /* 26px */
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 1.32vw; /* 20px */
+}
+
+.advertising-subsection__text {
+  font-family: var(--font-body);
+  font-size: 0.99vw; /* 15px */
+  line-height: 1.8;
+  color: var(--ink);
+}
+
+.financial-statements {
+  margin-top: 1.59vw; /* 24px */
+}
+
+.financial-statements__company {
+  font-family: var(--font-body);
+  font-size: 1.12vw; /* 17px */
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 1.32vw; /* 20px */
+}
+
+.financial-statements__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.79vw; /* 12px */
+}
+
+.financial-statements__list li {
+  padding-left: 1.32vw; /* 20px */
+  position: relative;
+}
+
+.financial-statements__list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--blue);
+  font-weight: bold;
+}
+
+.financial-statements__link {
+  font-family: var(--font-body);
+  font-size: 0.93vw; /* 14px */
+  color: var(--ink);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.financial-statements__link:hover {
+  color: var(--blue);
 }
 
 .access-info {
@@ -1798,6 +1956,87 @@ body.page-body .content {
   font-family: var(--font-body);
   font-size: 0.93vw; /* 14px */
   color: var(--muted);
+}
+
+/* --------------------------------------------------------------------------
+   Privacy Policy
+   -------------------------------------------------------------------------- */
+.privacy-policy {
+  max-width: 52.91vw; /* 800px */
+  margin: 0 auto;
+}
+
+.privacy-intro {
+  margin-bottom: 3.97vw; /* 60px */
+}
+
+.privacy-intro__title {
+  font-family: var(--font-heading);
+  font-size: 1.72vw; /* 26px */
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
+.privacy-section {
+  display: grid;
+  grid-template-columns: 2.65vw 1fr; /* 40px + rest */
+  gap: 2.65vw; /* 40px */
+  margin-bottom: 2.65vw; /* 40px */
+}
+
+.privacy-section__number {
+  font-family: var(--font-heading);
+  font-size: 2.65vw; /* 40px */
+  font-weight: 800;
+  color: var(--blue);
+  line-height: 1;
+}
+
+.privacy-section__content {
+  padding-top: 0.26vw; /* 4px */
+}
+
+.privacy-section__title {
+  font-family: var(--font-body);
+  font-size: 1.12vw; /* 17px */
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 1.06vw; /* 16px */
+}
+
+.privacy-section__text {
+  font-family: var(--font-body);
+  font-size: 0.99vw; /* 15px */
+  line-height: 2;
+  color: var(--ink);
+  margin-bottom: 1.59vw; /* 24px */
+}
+
+.privacy-section__text:last-child {
+  margin-bottom: 0;
+}
+
+.privacy-definition {
+  margin-bottom: 1.59vw; /* 24px */
+  padding-left: 1.06vw; /* 16px */
+  border-left: 3px solid var(--blue);
+}
+
+.privacy-definition__term {
+  font-family: var(--font-body);
+  font-size: 0.99vw; /* 15px */
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 0.53vw; /* 8px */
+}
+
+.privacy-definition__desc {
+  font-family: var(--font-body);
+  font-size: 0.93vw; /* 14px */
+  line-height: 2;
+  color: var(--ink);
 }
 
 /* --------------------------------------------------------------------------
@@ -2000,6 +2239,25 @@ body.page-body .content {
 }
 
 .footer__logo-music {
+  color: white;
+}
+
+.footer__links {
+  display: flex;
+  gap: 1.32vw; /* 20px */
+  margin-left: auto;
+  margin-right: 1.32vw; /* 20px */
+}
+
+.footer__link {
+  font-family: var(--font-body);
+  font-size: 0.79vw; /* 12px */
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer__link:hover {
   color: white;
 }
 
@@ -2638,6 +2896,31 @@ body.menu-open {
     font-size: 13px;
   }
 
+  /* Managed Music */
+  .managed-music {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .managed-music__category {
+    padding: 20px;
+  }
+
+  .managed-music__category-title {
+    font-size: 16px;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+  }
+
+  .managed-music__list {
+    gap: 10px;
+  }
+
+  .managed-music__list li {
+    font-size: 13px;
+    padding-left: 14px;
+  }
+
   /* CTA Box */
   .cta-box {
     padding: 40px 24px;
@@ -2763,6 +3046,102 @@ body.menu-open {
     grid-template-columns: 1fr;
     gap: 24px;
     margin-top: 24px;
+  }
+
+  .company-advertising {
+    margin-bottom: 32px;
+  }
+
+  .advertising-content {
+    margin-top: 24px;
+    gap: 40px;
+  }
+
+  .advertising-subsection__title {
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+
+  .advertising-subsection__text {
+    font-size: 14px;
+  }
+
+  .financial-statements {
+    margin-top: 16px;
+  }
+
+  .financial-statements__company {
+    font-size: 15px;
+    margin-bottom: 16px;
+  }
+
+  .financial-statements__list {
+    gap: 10px;
+  }
+
+  .financial-statements__list li {
+    padding-left: 16px;
+  }
+
+  .financial-statements__link {
+    font-size: 13px;
+  }
+
+  /* Privacy Policy */
+  .privacy-policy {
+    max-width: 100%;
+  }
+
+  .privacy-intro {
+    margin-bottom: 32px;
+  }
+
+  .privacy-intro__title {
+    font-size: 20px;
+    font-weight: 800;
+  }
+
+  .privacy-section {
+    grid-template-columns: 32px 1fr;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .privacy-section__number {
+    font-size: 32px;
+    font-weight: 800;
+  }
+
+  .privacy-section__content {
+    padding-top: 2px;
+  }
+
+  .privacy-section__title {
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+
+  .privacy-section__text {
+    font-size: 14px;
+    line-height: 1.9;
+    margin-bottom: 20px;
+  }
+
+  .privacy-definition {
+    margin-bottom: 16px;
+    padding-left: 12px;
+  }
+
+  .privacy-definition__term {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+
+  .privacy-definition__desc {
+    font-size: 13px;
+    line-height: 1.9;
   }
 
   .company-access .map-box {
@@ -2894,6 +3273,16 @@ body.menu-open {
 
   .footer__logo {
     font-size: 16px;
+  }
+
+  .footer__links {
+    gap: 16px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .footer__link {
+    font-size: 11px;
   }
 
   .footer__copy {

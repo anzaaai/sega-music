@@ -9,7 +9,14 @@
       "mcp__figma__get_design_context",
       "Bash(open \"http://localhost:8080/news/#figmacapture=8e459e9e-5416-4127-aa85-4e12f6363c26&figmaendpoint=https%3A%2F%2Fmcp.figma.com%2Fmcp%2Fcapture%2F8e459e9e-5416-4127-aa85-4e12f6363c26%2Fsubmit&figmadelay=2000\")",
       "Bash(open:*)",
-      "Bash(npx html-validate:*)"
+      "Bash(npx html-validate:*)",
+      "Bash(grep:*)",
+      "Bash(for file in /Users/il_115/github/sega-music/htdocs/news/detail*.html)",
+      "Bash(do)",
+      "Bash(if grep -q '<p class=\"\"footer__copy\"\">© 2025 SEGA MUSIC INC. All Rights Reserved.</p>' \"$file\")",
+      "Bash(then)",
+      "Bash(fi)",
+      "Bash(done)"
     ]
   }
 }

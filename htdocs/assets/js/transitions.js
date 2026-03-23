@@ -37,6 +37,15 @@
 
       // Handle browser back/forward
       window.addEventListener('popstate', () => this.handlePopState());
+
+      // Handle bfcache (back-forward cache) restoration
+      window.addEventListener('pageshow', (e) => {
+        if (e.persisted) {
+          // Page was restored from bfcache, remove any lingering overlays
+          this.overlay.classList.remove('is-active');
+          this.isTransitioning = false;
+        }
+      });
     }
 
     bindLinks() {

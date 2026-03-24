@@ -19,7 +19,8 @@
       "Bash(done)",
       "Bash(ls:*)",
       "WebFetch(domain:www.kodoukai.or.jp)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(wc:*)"
     ]
   }
 }

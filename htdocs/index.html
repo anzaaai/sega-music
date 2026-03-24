@@ -4,6 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SEGA MUSIC</title>
+  <meta name="description" content="SEGA MUSICは、音楽制作、ライブイベント企画、楽曲管理を手がける総合音楽エンターテインメント企業です。ゲーム音楽からアニメ音楽まで、幅広いコンテンツ制作を行っています。">
+  <meta name="keywords" content="SEGA MUSIC,セガミュージック,ウェーブマスター,音楽制作,ゲーム音楽,アニメ音楽,ライブイベント,楽曲ライセンス">
+
+  <!-- OGP -->
+  <meta property="og:title" content="SEGA MUSIC INC."/>
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://www.sega-music.com/assets/img/ogp.jpg"/>
+  <meta property="og:url" content="https://www.sega-music.com/"/>
+  <meta property="og:description" content="SEGA MUSICは、音楽制作、ライブイベント企画、楽曲管理を手がける総合音楽エンターテインメント企業です。"/>
+  <meta name="twitter:card" content="summary">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&family=Onest:wght@300;400;500;800&display=swap" rel="stylesheet">
@@ -13,8 +24,7 @@
   <!-- Loading Screen -->
   <div class="loading-screen">
     <div class="loading-logo">
-      <span class="loading-logo__sega">SEGA</span>
-      <span class="loading-logo__music">MUSIC</span>
+      <img src="assets/img/logo-w.svg" alt="SEGA MUSIC" class="loading-logo__img">
     </div>
     <div class="loading-bar">
       <div class="loading-bar__progress"></div>
@@ -24,14 +34,13 @@
   <!-- Header -->
   <header class="header">
     <a href="./" class="logo">
-      <span class="logo-sega">SEGA</span>
-      <span class="logo-music">MUSIC</span>
+      <img src="assets/img/logo.svg" alt="SEGA MUSIC" class="logo-img">
     </a>
 
     <nav class="nav" aria-label="メインナビゲーション">
       <a href="news/" class="nav-link">News</a>
       <a href="works/" class="nav-link">Works</a>
-      <a href="licensing/" class="nav-link">Licensing</a>
+      <a href="publishing/" class="nav-link">Music Publishing</a>
       <a href="company/" class="nav-link">Company</a>
       <a href="https://wavemaster-store.com/" class="nav-link nav-link--external" target="_blank" rel="noopener noreferrer">STORE<svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </nav>
@@ -56,7 +65,7 @@
     <button type="button" class="mobile-nav__close" aria-label="メニューを閉じる"></button>
     <a href="news/" class="mobile-nav__link">News</a>
     <a href="works/" class="mobile-nav__link">Works</a>
-    <a href="licensing/" class="mobile-nav__link">Licensing</a>
+    <a href="publishing/" class="mobile-nav__link">Music Publishing</a>
     <a href="company/" class="mobile-nav__link">Company</a>
     <a href="https://wavemaster-store.com/" class="mobile-nav__link mobile-nav__link--external" target="_blank" rel="noopener noreferrer">
       STORE
@@ -83,12 +92,14 @@
     <div class="hero-content">
       <h1 class="hero-title">
         <span class="hero-line reveal reveal-delay-1">
-          <span class="text-ink">SOUNDS</span>
-          <span class="text-blue">THAT</span>
+          <span class="text-ink">SEGA</span>
+          <span class="text-blue">MUSIC</span>
         </span>
-        <span class="hero-line reveal reveal-delay-2">
-          <span class="text-highlight"><span class="verb-rotator">MOVE</span></span>
-          <span class="text-ink hero-you">YOU.</span>
+        <span class="hero-line hero-line--highlight reveal reveal-delay-2">
+          <span class="text-highlight"><span class="verb-rotator-line1">Record Label &</span></span>
+        </span>
+        <span class="hero-line hero-line--highlight reveal reveal-delay-3">
+          <span class="text-highlight"><span class="verb-rotator-line2">Merchandising</span></span>
         </span>
       </h1>
     </div>

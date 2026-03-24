@@ -6,41 +6,75 @@
 (function() {
   'use strict';
 
-  const VERBS = ['MOVE', 'TOUCH', 'DRIVE', 'CONNECT', 'INSPIRE'];
+  const VERBS = [
+    { line1: 'Record Label &', line2: 'Merchandising' },
+    { line1: 'Music & Visual', line2: 'Products' },
+    { line1: 'Music', line2: 'Publishing' },
+    { line1: 'Live Entertainment', line2: 'Productions' }
+  ];
   const INTERVAL = 3000; // 3秒
   const ANIMATION_DURATION = 600; // 0.6秒
 
   function initVerbRotator() {
-    const verbElement = document.querySelector('.verb-rotator');
-    const highlightElement = document.querySelector('.hero .text-highlight');
+    const verbLine1Element = document.querySelector('.verb-rotator-line1');
+    const verbLine2Element = document.querySelector('.verb-rotator-line2');
+    const highlightElements = document.querySelectorAll('.hero .text-highlight');
 
-    if (!verbElement || !highlightElement) return;
+    if (!verbLine1Element || !verbLine2Element || highlightElements.length < 2) return;
 
     let currentIndex = 0;
 
     function rotateVerb() {
-      // 文字を素早くフェードアウト
-      verbElement.style.transition = 'opacity 0.15s linear';
-      verbElement.style.opacity = '0';
+      const line1Container = highlightElements[0];
+      const line2Container = highlightElements[1];
 
-      // 青い背景を0%に縮める
-      highlightElement.style.setProperty('--bg-animation', 'verbBackgroundShrink 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards');
-      highlightElement.classList.add('animating-bg');
+      // 青い背景を縮めるアニメーション
+      line1Container.style.setProperty('--bg-animation', 'verbBackgroundShrink 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards');
+      line2Container.style.setProperty('--bg-animation', 'verbBackgroundShrink 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards');
+      line1Container.classList.add('animating-bg');
+      line2Container.classList.add('animating-bg');
 
-      // 背景が消えたタイミングで動詞を切り替え
+      // テキストをフェードアウト
+      verbLine1Element.style.opacity = '0';
+      verbLine2Element.style.opacity = '0';
+
+      // 背景が縮んだ後、テキストを切り替えて展開
       setTimeout(() => {
+        // アニメーションクラスを削除
+        line1Container.classList.remove('verb-animate', 'animating-bg');
+        line2Container.classList.remove('verb-animate', 'animating-bg');
+        verbLine1Element.style.animation = 'none';
+        verbLine2Element.style.animation = 'none';
+
+        // テキストを切り替え
         currentIndex = (currentIndex + 1) % VERBS.length;
-        verbElement.textContent = VERBS[currentIndex];
+        verbLine1Element.textContent = VERBS[currentIndex].line1;
+        verbLine2Element.textContent = VERBS[currentIndex].line2;
 
-        // 青い背景を100%に広げる
-        highlightElement.style.setProperty('--bg-animation', 'verbBackgroundExpand 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards');
+        // clip-pathをリセット
+        verbLine1Element.style.clipPath = 'inset(0 100% 0 0)';
+        verbLine2Element.style.clipPath = 'inset(0 100% 0 0)';
+        verbLine1Element.style.opacity = '1';
+        verbLine2Element.style.opacity = '1';
 
-        // 少し遅延してから文字をフェードイン
+        // リフロー（再描画）をトリガー
+        void line1Container.offsetWidth;
+        void line2Container.offsetWidth;
+
+        // 1行目: 青い背景を伸ばす + テキストアニメーション
         setTimeout(() => {
-          verbElement.style.transition = 'opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
-          verbElement.style.opacity = '1';
-        }, 100);
-      }, 400);
+          line1Container.style.setProperty('--bg-animation', 'verbBackgroundExpand 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards');
+          line1Container.classList.add('animating-bg');
+          verbLine1Element.style.animation = 'heroMoveClip 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards';
+        }, 50);
+
+        // 2行目: 青い背景を伸ばす + テキストアニメーション（遅延あり）
+        setTimeout(() => {
+          line2Container.style.setProperty('--bg-animation', 'verbBackgroundExpand 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards');
+          line2Container.classList.add('animating-bg');
+          verbLine2Element.style.animation = 'heroMoveClip 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards';
+        }, 650); // 0.6秒遅延
+      }, 400); // 背景が縮むまで待つ
     }
 
     // 初回のアニメーション完了を待ってから開始

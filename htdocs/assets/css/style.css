@@ -336,7 +336,7 @@ a {
   align-items: center;
   gap: 1.32vw; /* 20px */
   font-family: var(--font-heading);
-  font-weight: 300;
+  font-weight: 500;
   font-size: clamp(3vw, 6vw, 6vw); /* 60px, 8vw, 122px */
   line-height: 1.1;
   letter-spacing: -0.02em;

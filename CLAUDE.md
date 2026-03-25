@@ -60,23 +60,27 @@ htdocs/
 │   ├── css/
 │   │   └── style.css       # 全ページ共通スタイル
 │   ├── js/
-│   │   ├── ticker.js           # ニューステロップアニメーション（TOP）
-│   │   ├── mission-ticker.js   # 装飾スクロールアニメーション（COMPANY）
-│   │   └── transitions.js      # ページ遷移アニメーション
+│   │   ├── ticker.js        # ティッカーアニメーション（汎用・統合版）
+│   │   ├── verb-rotator.js  # TOPページverb切り替え
+│   │   └── transitions.js   # ページ遷移アニメーション
 │   └── img/
-│       └── hero-bg.mp4     # ヒーロー背景動画
+│       ├── hero-bg.mp4      # ヒーロー背景動画
+│       ├── logo.svg         # ヘッダーロゴ（カラー）
+│       └── logo-w.svg       # フッターロゴ（白）
 ├── news/
 │   ├── index.html          # NEWS一覧
 │   └── detail.html         # NEWS詳細
 ├── works/
 │   └── index.html          # WORKS一覧
-├── licensing/
-│   └── index.html          # LICENSING
+├── publishing/
+│   └── index.html          # MUSIC PUBLISHING（楽曲ライセンス）
 ├── company/
 │   └── index.html          # COMPANY（会社概要）
-└── contact/
-    ├── index.html          # CONTACT（お問い合わせフォーム）
-    └── complete.html       # 送信完了ページ
+├── contact/
+│   ├── index.html          # CONTACT（お問い合わせフォーム）
+│   └── complete.html       # 送信完了ページ
+└── privacy/
+    └── index.html          # プライバシーポリシー
 ```
 
 ### ページ一覧
@@ -87,10 +91,11 @@ htdocs/
 | NEWS一覧 | `/news/` | フィルター＋ニュース一覧＋ページネーション |
 | NEWS詳細 | `/news/detail.html` | 記事本文＋サイドバー（関連ニュース） |
 | WORKS | `/works/` | 作品一覧 |
-| LICENSING | `/licensing/` | ライセンス案内＋フロー図＋FAQ |
+| MUSIC PUBLISHING | `/publishing/` | 楽曲ライセンス案内＋フロー図＋FAQ＋管理楽曲 |
 | COMPANY | `/company/` | ミッション＋事業内容＋会社概要＋アクセス |
 | CONTACT | `/contact/` | お問い合わせフォーム |
 | 送信完了 | `/contact/complete.html` | フォーム送信完了ページ |
+| プライバシーポリシー | `/privacy/` | 情報セキュリティ・プライバシーポリシー |
 
 ### フォント（実装）
 
@@ -122,9 +127,10 @@ htdocs/
 
 ### フッター
 
-- 背景色: `#444`（変更済み）
-- SEGAロゴ: `white`（視認性向上のため変更）
-- MUSICロゴ: `var(--blue)`
+- 背景色: `#444`
+- ロゴ: `logo-w.svg`（白ロゴ）を使用
+- ロゴサイズ: PC 2.2vw / SP 20px
+- コピーライト表記: `© SEGA MUSIC INC. All Rights Reserved.`（年号なし）
 
 ### TOPページ MOVEアニメーション
 
@@ -136,7 +142,7 @@ htdocs/
 ### COMPANYページ 装飾スクロール
 
 - **装飾テキスト**: "SOUNDS THAT MOVE YOU." を無限スクロール
-- **スクロール速度**: 75px/秒（`mission-ticker.js`）
+- **スクロール速度**: 75px/秒（`ticker.js`内で統合管理）
 - **配置**: `.company-mission`セクション内に配置（PC: 50%、SP: 48vw）
 - **スタイル**: `opacity: 0.1`、フォントサイズ13.24vw（PC）/ 62px（SP）
 
@@ -148,6 +154,25 @@ htdocs/
 - **コンテンツ幅**: PC 10vw左右padding（min-width: 1200px）/ SP 100%（padding: 40px 20px）
 - **SP改行**: `.br-sp`クラスでSP専用改行を実装
 - **text-highlightアニメーション**: 下層ページ遷移時に初期状態を`opacity: 0`で非表示、アニメーションで表示
+
+### JavaScriptリファクタリング（2026-03-24）
+
+- **ticker.js統合**: `mission-ticker.js`を`ticker.js`に統合し、汎用的な`createTicker`関数で両方のティッカーを管理
+- **verb-rotator.js改善**: 設定値を`CONFIG`オブジェクトに集約、マジックナンバーを定数化
+- **W3C準拠対応**:
+  - 装飾SVGに`aria-hidden="true"`と`focusable="false"`を追加
+  - フォーム要素に`id`/`for`/`name`/`required`属性を追加
+  - HTML5バリデーション・WCAG 2.1レベルAA準拠
+
+### アセット管理
+
+- **アイコン命名規則**: Publishing pageアイコンをわかりやすい名前に変更
+  - `icon-tv-cm-movie.png` - TV・CM・映画
+  - `icon-game-app.png` - ゲーム・アプリ
+  - `icon-streaming.png` - 配信・ストリーミング
+  - `icon-store-bgm.png` - 店舗・施設BGM
+  - `icon-event-concert.png` - イベント・コンサート
+  - `icon-merchandise.png` - 商品化・グッズ
 
 ---
 

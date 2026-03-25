@@ -56,13 +56,14 @@
         const href = link.getAttribute('href');
         if (!href) return;
 
-        // Skip external links, anchors, and special links
+        // Skip external links, anchors, PDFs, and special links
         if (
           link.target === '_blank' ||
           href.startsWith('http') ||
           href.startsWith('#') ||
           href.startsWith('mailto:') ||
-          href.startsWith('tel:')
+          href.startsWith('tel:') ||
+          href.endsWith('.pdf')
         ) {
           return;
         }

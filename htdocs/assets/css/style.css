@@ -215,6 +215,7 @@ a {
   color: var(--ink);
   position: relative;
   transition: color 0.2s ease;
+  white-space: nowrap;
 }
 
 .nav-link::after {
@@ -483,7 +484,7 @@ a {
 /* Copyright (Vertical) */
 .copyright {
   position: absolute;
-  right: -6vw;
+  right: -5vw;
   top: 50%;
   transform: translateY(-50%) rotate(-90deg);
   transform-origin: center center;
@@ -496,7 +497,6 @@ a {
   font-weight: 500;
   font-size: 0.7vw; /* 12px */
   letter-spacing: 0.06vw; /* 0.96px */
-  text-transform: uppercase;
   color: var(--muted);
 }
 
@@ -2520,6 +2520,12 @@ body.page-body .content {
   transition: color 0.2s ease;
 }
 
+.footer__link svg {
+  margin-left: 8px;
+  vertical-align: -0.1em;
+  display: inline-block;
+}
+
 .footer__link:hover {
   color: white;
 }
@@ -2668,12 +2674,11 @@ body.page-body .content {
   transform: translateY(0);
 }
 
-.mobile-nav.is-open .mobile-nav__link:nth-child(1) { transition-delay: 0.1s; }
-.mobile-nav.is-open .mobile-nav__link:nth-child(2) { transition-delay: 0.15s; }
-.mobile-nav.is-open .mobile-nav__link:nth-child(3) { transition-delay: 0.2s; }
-.mobile-nav.is-open .mobile-nav__link:nth-child(4) { transition-delay: 0.25s; }
-.mobile-nav.is-open .mobile-nav__link:nth-child(5) { transition-delay: 0.3s; }
-.mobile-nav.is-open .mobile-nav__link:nth-child(6) { transition-delay: 0.35s; }
+.mobile-nav.is-open .mobile-nav__link:nth-child(2) { transition-delay: 0.05s; }
+.mobile-nav.is-open .mobile-nav__link:nth-child(3) { transition-delay: 0.1s; }
+.mobile-nav.is-open .mobile-nav__link:nth-child(4) { transition-delay: 0.15s; }
+.mobile-nav.is-open .mobile-nav__link:nth-child(5) { transition-delay: 0.2s; }
+.mobile-nav.is-open .mobile-nav__link:nth-child(6) { transition-delay: 0.25s; }
 
 .mobile-nav__link:hover,
 .mobile-nav__link.is-active {
@@ -2860,7 +2865,16 @@ body.menu-open {
 
   /* Copyright */
   .copyright {
-    display: none;
+    display: block;
+    position: absolute;
+    right: 20px;
+    top: 94%;
+    transform: none; /* remove rotation for mobile */
+    writing-mode: horizontal-tb;
+  }
+
+  .copyright span {
+    font-size: 10px;
   }
 
   /* Ticker */
@@ -3702,7 +3716,8 @@ body.menu-open {
   }
 
   .footer__links {
-    gap: 16px;
+    flex-direction: column;
+    gap: 12px;
     margin-left: 0;
     margin-right: 0;
   }

@@ -322,22 +322,22 @@ a {
   display: flex;
   align-items: center;
   height: 100%;
-  padding-left: 4.76vw; /* 72px */
+  padding-left: 8vw; /* 72px */
 }
 
 .hero-title {
   display: flex;
   flex-direction: column;
-  gap: 1.32vw; /* 20px */
+  gap: 0.7vw; /* 20px */
 }
 
 .hero-line {
   display: flex;
   align-items: center;
-  gap: 1.32vw; /* 20px */
+  gap: 0.7vw; /* 20px */
   font-family: var(--font-heading);
-  font-weight: 500;
-  font-size: clamp(3vw, 6vw, 6vw); /* 60px, 8vw, 122px */
+  font-weight: 300;
+  font-size: clamp(2.7vw, 5.4vw, 5.4vw);
   line-height: 1.1;
   letter-spacing: -0.02em;
 }
@@ -366,7 +366,7 @@ a {
 .text-highlight {
   position: relative;
   display: inline-block;
-  padding: 0.79vw 0.53vw; /* 12px 8px */
+  padding: 1vw; /* 12px 8px */
   color: var(--ink);
   background-color: transparent;
   overflow: hidden;
@@ -694,15 +694,14 @@ body.page-body .content {
    -------------------------------------------------------------------------- */
 .page-hero {
   position: relative;
-  padding: 7.94vw 4.76vw 5.29vw; /* 120px 72px 80px */
+  padding: 6.2vw 4.76vw 4vw; /* 120px 72px 80px */
   background-color: var(--paper);
   overflow: hidden;
 }
 
 /* Page Hero with Video */
 .page-hero--video {
-  min-height: 26.46vw; /* 400px */
-  padding-top: 10vw; /* Space for header + content */
+  padding-top: 6vw; /* Space for header + content */
   display: flex;
   align-items: center;
 }
@@ -754,7 +753,7 @@ body.page-body .content {
   position: relative;
   font-family: var(--font-heading);
   font-weight: 300;
-  font-size: clamp(3.17vw, 6vw, 5.29vw); /* 48px, 6vw, 80px */
+  font-size: clamp(3vw, 4.8vw, 4.8vw);
   letter-spacing: -0.02em;
   color: var(--ink);
   line-height: 1.1;
@@ -1671,7 +1670,7 @@ body.page-body .content {
   background-color: white;
   color: var(--blue);
   font-family: var(--font-heading);
-  font-weight: 500;
+  font-weight: 700;
   font-size: 0.93vw; /* 14px */
   letter-spacing: 0.07vw; /* 1px */
   text-transform: uppercase;
@@ -2484,7 +2483,7 @@ body.page-body .content {
 .footer__logo {
   display: flex;
   align-items: center;
-  gap: 0.26vw; /* 4px */
+  gap: 5vw; /* 20px */
   font-family: var(--font-heading);
   font-weight: 500;
   font-size: 1.06vw; /* 16px */
@@ -2495,6 +2494,33 @@ body.page-body .content {
 .footer__logo-img {
   height: 2.2vw; /* 約33.26px */
   width: auto;
+}
+
+.footer__social {
+  display: flex;
+  align-items: center;
+  gap: 0.53vw; /* 8px */
+  color: #999;
+  transition: color 0.2s ease;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 0.79vw; /* 12px */
+  letter-spacing: 0.05vw;
+  text-transform: uppercase;
+}
+
+.footer__social:hover {
+  color: var(--blue-l);
+}
+
+.footer__social-text {
+  white-space: nowrap;
+}
+
+.footer__social svg {
+  width: 1.32vw; /* 20px */
+  height: 1.32vw; /* 20px */
+  flex-shrink: 0;
 }
 
 .footer__logo-sega {
@@ -2515,7 +2541,7 @@ body.page-body .content {
 .footer__link {
   font-family: var(--font-body);
   font-size: 0.79vw; /* 12px */
-  color: var(--muted);
+  color: #999;
   text-decoration: none;
   transition: color 0.2s ease;
 }
@@ -2534,6 +2560,59 @@ body.page-body .content {
   font-family: var(--font-body);
   font-size: 0.79vw; /* 12px */
   color: var(--muted);
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Email Contact Banner
+   -------------------------------------------------------------------------- */
+.email-contact-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2.65vw; /* 40px */
+  padding: 3.97vw; /* 60px */
+  background: var(--blue);
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  margin-top: 3.97vw; /* 60px */
+}
+
+.email-contact-banner.is-visible {
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.email-contact-banner:hover {
+  background-color: var(--blue-d);
+  transform: translateY(-0.13vw); /* -2px */
+  box-shadow: 0 0.53vw 1.59vw rgba(26, 85, 227, 0.3); /* 0 8px 24px */
+}
+
+.email-contact-banner__content {
+  flex: 1;
+}
+
+.email-contact-banner__email {
+  font-family: var(--font-heading);
+  font-size: 1.85vw; /* 28px */
+  font-weight: 300;
+  color: white;
+}
+
+.email-contact-banner__arrow {
+  flex-shrink: 0;
+  color: white;
+  transition: transform 0.3s ease;
+}
+
+.email-contact-banner:hover .email-contact-banner__arrow {
+  transform: translateX(0.53vw); /* 8px */
+}
+
+.email-contact-banner__arrow svg {
+  width: 1.98vw; /* 30px */
+  height: 1.98vw; /* 30px */
+  display: block;
 }
 
 /* --------------------------------------------------------------------------
@@ -2679,6 +2758,7 @@ body.page-body .content {
 .mobile-nav.is-open .mobile-nav__link:nth-child(4) { transition-delay: 0.15s; }
 .mobile-nav.is-open .mobile-nav__link:nth-child(5) { transition-delay: 0.2s; }
 .mobile-nav.is-open .mobile-nav__link:nth-child(6) { transition-delay: 0.25s; }
+.mobile-nav.is-open .mobile-nav__link:nth-child(7) { transition-delay: 0.3s; }
 
 .mobile-nav__link:hover,
 .mobile-nav__link.is-active {
@@ -2831,7 +2911,7 @@ body.menu-open {
   }
 
   .hero-title {
-    gap: 16px;
+    gap: 12px;
   }
 
   .hero-line {
@@ -3674,6 +3754,30 @@ body.menu-open {
     font-size: 14px;
   }
 
+  /* Email Contact Banner (Mobile) */
+  .email-contact-banner {
+    gap: 16px;
+    padding: 24px;
+    margin-top: 32px;
+  }
+
+  .email-contact-banner__email {
+    font-size: 18px;
+  }
+
+  .email-contact-banner__arrow svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .email-contact-banner:hover {
+    transform: translateY(-2px);
+  }
+
+  .email-contact-banner:hover .email-contact-banner__arrow {
+    transform: translateX(4px);
+  }
+
   /* Contact Complete */
   .contact-complete__icon svg {
     width: 40px;
@@ -3703,16 +3807,35 @@ body.menu-open {
   .footer {
     flex-direction: column;
     gap: 16px;
-    padding: 32px 24px;
+    padding: 40px 24px;
     text-align: center;
   }
 
   .footer__logo {
+    flex-direction: column;
+    align-items: center;
     font-size: 16px;
+    gap: 16px;
   }
 
   .footer__logo-img {
     height: 32px;
+  }
+
+  .footer__social {
+    font-size: 11px;
+    gap: 8px;
+  }
+
+  .footer__copy {
+    font-size: 11px;
+    order: 999;
+    margin-top: 12px;
+  }
+
+  .footer__social svg {
+    width: 18px;
+    height: 18px;
   }
 
   .footer__links {
@@ -3723,10 +3846,6 @@ body.menu-open {
   }
 
   .footer__link {
-    font-size: 11px;
-  }
-
-  .footer__copy {
     font-size: 11px;
   }
 }

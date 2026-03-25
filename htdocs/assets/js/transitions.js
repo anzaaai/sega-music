@@ -241,26 +241,7 @@
     }
 
     init() {
-      // Add magnetic effect to buttons
-      this.initMagneticButtons();
-    }
-
-    initMagneticButtons() {
-      const buttons = document.querySelectorAll('.btn-contact, .cta-box__btn, .submit-btn');
-
-      buttons.forEach(button => {
-        button.addEventListener('mousemove', (e) => {
-          const rect = button.getBoundingClientRect();
-          const x = e.clientX - rect.left - rect.width / 2;
-          const y = e.clientY - rect.top - rect.height / 2;
-
-          button.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px)`;
-        });
-
-        button.addEventListener('mouseleave', () => {
-          button.style.transform = '';
-        });
-      });
+      // Hover effects initialization (magnetic effect removed)
     }
   }
 

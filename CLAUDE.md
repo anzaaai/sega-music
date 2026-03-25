@@ -174,6 +174,21 @@ htdocs/
   - `icon-event-concert.png` - イベント・コンサート
   - `icon-merchandise.png` - 商品化・グッズ
 
+### UI/UX調整（2026-03-25）
+
+- **外部リンクアイコン**: フッターの外部リンク（コンプライアンス/リスク管理、ウェブアクセシビリティ方針）に8x8pxの外部リンクSVGアイコンを追加
+  - `margin-left: 8px`、`vertical-align: -0.1em`で中央配置
+- **コピーライト表記**: 全ページで`© SEGA MUSIC Inc.`に統一（"Inc."を小文字に変更）
+  - TOPページの`.copyright span`から`text-transform: uppercase`を削除
+- **モバイルレイアウト調整**:
+  - フッターリンクをSPで縦積み表示（`flex-direction: column`、`gap: 12px`）
+  - コピーライトをSPでも表示（画面右下、ニューステロップの上、`bottom: 60px`）
+- **ハンバーガーメニュー**: モバイルナビのスライドイン遅延を調整
+  - News: 0.05s / Works: 0.1s / Music Publishing: 0.15s / Company: 0.2s / Store: 0.25s
+  - `:nth-child()`セレクタをclose button考慮して修正（2番目から開始）
+- **ナビゲーション**: RELEASEリンクを全ページから削除（PC/SPナビ両方）
+- **ページ遷移アニメーション**: PDFファイル（`.pdf`で終わるリンク）も遷移演出をスキップするように追加
+
 ---
 
 ## Figmaデザインファイル

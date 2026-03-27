@@ -11,10 +11,10 @@
     verbs: [
       { line1: 'Record Label &', line2: 'Merchandising' },
       { line1: 'Music & Visual', line2: 'Products' },
-      { line1: 'Music', line2: 'Publishing' },
-      { line1: 'Live Entertainment', line2: 'Productions' }
+      { line1: 'Music Publishing &', line2: 'Licensing' },
+      { line1: 'Live Entertainment', line2: 'Event Production' }
     ],
-    interval: 3000,
+    interval: 5000,
     shrinkDuration: 400,
     line2Delay: 650,
     initialDelay: 6800,

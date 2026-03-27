@@ -2029,6 +2029,15 @@ body.page-body .content {
   margin-bottom: 2.65vw; /* 40px */
 }
 
+.advertising-intro {
+  font-family: var(--font-body);
+  font-size: 0.93vw; /* 14px */
+  color: var(--ink);
+  margin-top: 1.59vw; /* 24px */
+  margin-bottom: 0;
+  line-height: 1.6;
+}
+
 .advertising-content {
   margin-top: 2.65vw; /* 40px */
   display: flex;
@@ -2094,6 +2103,64 @@ body.page-body .content {
 }
 
 .financial-statements__link:hover {
+  color: var(--blue);
+}
+
+/* Financial Statements - Grid Layout */
+.financial-statements-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.97vw; /* 60px */
+  margin-top: 1.59vw; /* 24px */
+}
+
+.financial-statements-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.advertising-subsection__company {
+  font-family: var(--font-body);
+  font-size: 1.12vw; /* 17px */
+  font-weight: 500;
+  color: var(--ink);
+  margin: 0 0 1.32vw 0; /* 20px bottom */
+  line-height: 1.6;
+}
+
+.company-note {
+  font-size: 0.79vw; /* 12px */
+  font-weight: 400;
+  color: var(--muted);
+  display: block;
+  margin-top: 0.53vw; /* 8px */
+}
+
+.financial-statements-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 0.66vw; /* 10px */
+}
+
+.financial-statement-item {
+  font-family: var(--font-body);
+  font-size: 0.93vw; /* 14px */
+  color: var(--ink);
+  text-decoration: none;
+  padding-left: 1.32vw; /* 20px */
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.financial-statement-item::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--blue);
+  font-weight: bold;
+}
+
+.financial-statement-item:hover {
   color: var(--blue);
 }
 
@@ -3550,6 +3617,11 @@ body.menu-open {
     margin-bottom: 32px;
   }
 
+  .advertising-intro {
+    font-size: 13px;
+    margin-top: 16px;
+  }
+
   .advertising-content {
     margin-top: 24px;
     gap: 40px;
@@ -3584,6 +3656,32 @@ body.menu-open {
 
   .financial-statements__link {
     font-size: 13px;
+  }
+
+  /* Financial Statements - Grid Layout (Mobile) */
+  .financial-statements-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    margin-top: 20px;
+  }
+
+  .advertising-subsection__company {
+    font-size: 15px;
+    margin: 0 0 16px 0;
+  }
+
+  .company-note {
+    font-size: 11px;
+    margin-top: 6px;
+  }
+
+  .financial-statements-vertical {
+    gap: 8px;
+  }
+
+  .financial-statement-item {
+    font-size: 13px;
+    padding-left: 16px;
   }
 
   /* Privacy Policy */

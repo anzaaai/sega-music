@@ -1138,6 +1138,16 @@ body.page-body .content {
   color: currentColor;
 }
 
+.article__text-link {
+  color: var(--blue);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.article__text-link:hover {
+  color: var(--blue-d);
+}
+
 /* --------------------------------------------------------------------------
    Sidebar
    -------------------------------------------------------------------------- */

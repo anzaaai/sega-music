@@ -4245,10 +4245,572 @@ body.menu-open {
 }
 
 /* --------------------------------------------------------------------------
+   Release Detail Page
+   -------------------------------------------------------------------------- */
+.rd-layout {
+  display: grid;
+  grid-template-columns: 26vw 1fr;
+  gap: 5.29vw; /* 80px */
+  margin-bottom: 5.29vw;
+  align-items: start;
+}
+
+.rd-jacket__img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+}
+
+.rd-info__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.79vw;
+  margin-bottom: 1.06vw;
+}
+
+.rd-info__date {
+  font-family: var(--font-body);
+  font-size: 0.86vw;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.rd-info__cat {
+  font-family: var(--font-body);
+  font-size: 0.66vw;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--blue);
+  background-color: rgba(26, 85, 227, 0.08);
+  padding: 0.2vw 0.53vw;
+}
+
+.rd-info__title {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 2.38vw; /* 36px */
+  line-height: 1.25;
+  color: var(--ink);
+  margin-bottom: 1.59vw;
+}
+
+.rd-info__divider {
+  width: 3.97vw;
+  height: 2px;
+  background-color: var(--blue);
+  margin-bottom: 1.59vw;
+}
+
+.rd-info__desc {
+  font-family: var(--font-body);
+  font-size: 0.93vw; /* 14px */
+  line-height: 2;
+  color: var(--ink);
+  margin-bottom: 2.12vw;
+}
+
+.rd-info__specs {
+  border-top: 1px solid var(--rule);
+  margin-bottom: 2.65vw;
+}
+
+.rd-info__spec-row {
+  display: grid;
+  grid-template-columns: 8vw 1fr;
+  gap: 1.06vw;
+  padding: 0.79vw 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.rd-info__spec-row dt {
+  font-family: var(--font-body);
+  font-size: 0.79vw;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.rd-info__spec-row dd {
+  font-family: var(--font-body);
+  font-size: 0.86vw;
+  font-weight: 400;
+  color: var(--ink);
+}
+
+.rd-purchase__label {
+  font-family: var(--font-body);
+  font-size: 0.79vw;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-bottom: 0.79vw;
+  display: flex;
+  align-items: center;
+  gap: 0.4vw;
+}
+
+.rd-purchase__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.53vw;
+}
+
+.rd-purchase__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4vw;
+  font-family: var(--font-body);
+  font-size: 0.79vw;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: white;
+  background: var(--blue);
+  text-decoration: none;
+  padding: 0.66vw 1.32vw;
+  clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+  transition: background-color 0.2s ease;
+}
+
+.rd-purchase__btn:hover {
+  background-color: var(--blue-d);
+}
+
+/* YouTube Embed */
+.rd-youtube {
+  padding: 3.3vw 5vw;
+  border-top: 1px solid var(--rule);
+}
+
+.rd-youtube__heading {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.32vw;
+  letter-spacing: 0.1em;
+  color: var(--ink);
+  margin-bottom: 2vw;
+}
+
+.rd-youtube__videos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2vw;
+  width: 100%;
+}
+
+.rd-youtube__video-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+.rd-youtube__video-wrap iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+@media (max-width: 768px) {
+  .rd-youtube { padding: 32px 20px; }
+  .rd-youtube__heading { font-size: 18px; margin-bottom: 20px; }
+  .rd-youtube__videos { gap: 20px; }
+  .rd-youtube__video-wrap { max-width: 100%; }
+}
+
+/* Track List */
+.rd-tracklist {
+  border-top: 1px solid var(--rule);
+  padding-top: 3.17vw;
+  margin-bottom: 3.17vw;
+}
+
+.rd-tracklist__heading {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.32vw; /* 20px */
+  letter-spacing: 0.1em;
+  color: var(--ink);
+  margin-bottom: 2.12vw;
+}
+
+.rd-tracklist__credit {
+  font-family: var(--font-body);
+  font-size: 0.86vw; /* 13px */
+  color: var(--muted);
+  margin-bottom: 2vw;
+}
+
+.rd-tracklist__discs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(28vw, 1fr));
+  gap: 3.17vw;
+}
+
+.rd-tracklist__disc-title {
+  font-family: var(--font-body);
+  font-size: 0.86vw;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--blue);
+  border-left: 2px solid var(--blue);
+  padding-left: 0.79vw;
+  margin-bottom: 1.06vw;
+}
+
+.rd-tracklist__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: track;
+}
+
+.rd-tracklist__list li {
+  counter-increment: track;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0 0.53vw;
+  padding: 0.53vw 0;
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--font-body);
+  font-size: 0.86vw;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+.rd-tracklist__list li::before {
+  content: counter(track, decimal-leading-zero);
+  flex-shrink: 0;
+  width: 2em;
+  font-size: 0.73vw;
+  color: var(--muted);
+  font-weight: 400;
+  padding-top: 0.1em;
+}
+
+.rd-tracklist__note {
+  font-size: 0.73vw;
+  color: var(--muted);
+  display: inline;
+  margin-left: 0.53vw;
+  white-space: nowrap;
+}
+
+/* Release Detail — SP */
+@media (max-width: 768px) {
+  .rd-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .rd-jacket__img {
+    max-width: 280px;
+    margin: 0 auto;
+  }
+
+  .rd-info__date { font-size: 12px; }
+  .rd-info__cat { font-size: 10px; padding: 2px 8px; }
+  .rd-info__title { font-size: 28px; margin-bottom: 16px; }
+  .rd-info__divider { width: 40px; margin-bottom: 16px; }
+  .rd-info__desc { font-size: 14px; margin-bottom: 24px; }
+
+  .rd-info__spec-row {
+    grid-template-columns: 100px 1fr;
+    padding: 10px 0;
+  }
+  .rd-info__spec-row dt { font-size: 12px; }
+  .rd-info__spec-row dd { font-size: 13px; }
+
+  .rd-purchase__label { font-size: 12px; }
+  .rd-purchase__btn { font-size: 12px; padding: 8px 14px; }
+
+  .rd-tracklist { padding-top: 32px; margin-bottom: 32px; }
+  .rd-tracklist__heading { font-size: 18px; margin-bottom: 24px; }
+  .rd-tracklist__credit { font-size: 12px; margin-bottom: 20px; }
+  .rd-tracklist__discs { grid-template-columns: 1fr; gap: 32px; }
+  .rd-tracklist__disc-title { font-size: 12px; padding-left: 10px; }
+  .rd-tracklist__list li { font-size: 13px; grid-template-columns: 2em 1fr; }
+  .rd-tracklist__list li::before { font-size: 11px; }
+  .rd-tracklist__note { font-size: 11px; }
+}
+
+/* --------------------------------------------------------------------------
    Smooth scroll behavior
    -------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Release Page — v2
+   -------------------------------------------------------------------------- */
+
+/* Category Nav */
+.release-nav {
+  position: sticky;
+  top: 4.3vw;
+  z-index: 90;
+  background: var(--paper);
+  border-bottom: 1px solid var(--rule);
+  margin: -3.97vw -10vw 0;
+  padding: 0 10vw;
+}
+
+.release-nav__inner {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.release-nav__inner::-webkit-scrollbar {
+  display: none;
+}
+
+.release-nav__btn {
+  font-family: var(--font-body);
+  font-size: 0.79vw;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 0.93vw 1.06vw;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.2s ease, border-color 0.2s ease;
+  margin-bottom: -1px;
+}
+
+.release-nav__btn:hover {
+  color: var(--ink);
+}
+
+.release-nav__btn.is-active {
+  color: var(--blue);
+  border-bottom-color: var(--blue);
+  font-weight: 700;
+}
+
+/* Year Index Bar */
+.release-year-bar {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin: 2vw 0 1.59vw;
+  border-bottom: 1px solid var(--rule);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.release-year-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.release-year-btn {
+  font-family: var(--font-heading);
+  font-size: 0.79vw;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 0.53vw 0.79vw;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.2s ease, border-color 0.2s ease;
+  margin-bottom: -1px;
+}
+
+.release-year-btn:hover {
+  color: var(--ink);
+}
+
+.release-year-btn.is-active {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+  font-weight: 700;
+}
+
+/* Count Badge */
+.release-count {
+  font-family: var(--font-body);
+  font-size: 0.73vw;
+  color: var(--muted);
+  margin-left: auto;
+  white-space: nowrap;
+  padding-bottom: 0.53vw;
+}
+
+/* Year Group Header */
+.release-year-group {
+  margin-bottom: 3.17vw;
+}
+
+.release-year-group__label {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 0.73vw;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 1.06vw;
+  padding-bottom: 0.4vw;
+  border-bottom: 1px solid var(--rule);
+}
+
+/* Release Grid */
+.release-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.59vw 1.59vw;
+  margin-bottom: 2.12vw;
+}
+
+.release-card {
+  display: block;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.release-card__img-wrap {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background-color: #E8E8E8;
+  margin-bottom: 0.66vw;
+}
+
+.release-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.release-card__overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(26, 85, 227, 0.82);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.release-card__overlay-text {
+  font-family: var(--font-body);
+  font-size: 0.73vw;
+  font-weight: 500;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 0.4vw;
+}
+
+.release-card:hover .release-card__img {
+  transform: scale(1.04);
+}
+
+.release-card:hover .release-card__overlay {
+  opacity: 1;
+}
+
+.release-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.26vw;
+}
+
+.release-card__date {
+  font-family: var(--font-body);
+  font-size: 0.66vw;
+  color: var(--muted);
+}
+
+.release-card__title {
+  font-family: var(--font-body);
+  font-size: 0.9vw;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.45;
+  margin: 0;
+}
+
+.release-card__cat {
+  display: none;
+}
+
+/* No results */
+.release-empty {
+  display: none;
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 4vw 0;
+  font-family: var(--font-body);
+  font-size: 0.86vw;
+  color: var(--muted);
+}
+
+/* Release — SP */
+@media (max-width: 768px) {
+  .release-nav {
+    top: 56px;
+    margin: -40px -20px 0;
+    padding: 0 20px;
+  }
+
+  .release-nav__btn {
+    font-size: 11px;
+    padding: 10px 12px;
+  }
+
+  .release-year-btn {
+    font-size: 11px;
+    padding: 6px 10px;
+  }
+
+  .release-count {
+    font-size: 10px;
+  }
+
+  .release-year-group__label {
+    font-size: 10px;
+    margin-bottom: 12px;
+  }
+
+  .release-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .release-card__img-wrap {
+    margin-bottom: 6px;
+  }
+
+  .release-card__overlay-text {
+    font-size: 11px;
+  }
+
+  .release-card__date {
+    font-size: 10px;
+  }
+
+  .release-card__title {
+    font-size: 11px;
+  }
+
+  .release-empty {
+    font-size: 13px;
   }
 }

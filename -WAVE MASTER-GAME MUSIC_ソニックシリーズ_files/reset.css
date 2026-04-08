@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+* {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	font-size: 100%;
+	border: none;
+}
+
+.link{
+	font-size: 14px;
+	font-weight: 600;
+	color: #FF961F;
+}
+
+.link2{
+	color: #FF961F;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+
+
+
+img {
+	vertical-align: top;
+}

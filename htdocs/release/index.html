@@ -65,36 +65,42 @@
   </nav>
 
   <main class="content">
+    <div class="release-layout">
 
-    <!-- Category Nav -->
-    <nav class="release-nav" aria-label="カテゴリ">
-      <div class="release-nav__inner">
-        <button type="button" class="release-nav__btn is-active" data-cat="all">ALL</button>
-        <button type="button" class="release-nav__btn" data-cat="arcade">アーケード</button>
-        <button type="button" class="release-nav__btn" data-cat="consumer">コンシューマー</button>
-        <button type="button" class="release-nav__btn" data-cat="pachinko">ぱちんこ / パチスロ</button>
-        <button type="button" class="release-nav__btn" data-cat="sonic">ソニック</button>
-        <button type="button" class="release-nav__btn" data-cat="sakura">サクラ大戦</button>
-        <button type="button" class="release-nav__btn" data-cat="pso">ファンタシースター</button>
-        <button type="button" class="release-nav__btn" data-cat="chunithm">CHUNITHM</button>
-        <button type="button" class="release-nav__btn" data-cat="maimai">maimai</button>
-        <button type="button" class="release-nav__btn" data-cat="readyyy">Readyyy!</button>
-        <button type="button" class="release-nav__btn" data-cat="voice">声優 / ドラマCD</button>
-        <button type="button" class="release-nav__btn" data-cat="shining">シャイニング</button>
-        <button type="button" class="release-nav__btn" data-cat="tv">TV・映画 etc.</button>
+      <!-- Sidebar -->
+      <aside class="release-sidebar">
+        <nav class="release-nav" aria-label="カテゴリ">
+          <p class="release-nav__label">CATEGORY</p>
+          <div class="release-nav__inner">
+            <button type="button" class="release-nav__btn is-active" data-cat="all">ALL</button>
+            <button type="button" class="release-nav__btn" data-cat="arcade">アーケード</button>
+            <button type="button" class="release-nav__btn" data-cat="consumer">コンシューマー</button>
+            <button type="button" class="release-nav__btn" data-cat="pachinko">ぱちんこ / パチスロ</button>
+            <button type="button" class="release-nav__btn" data-cat="sonic">ソニック</button>
+            <button type="button" class="release-nav__btn" data-cat="sakura">サクラ大戦</button>
+            <button type="button" class="release-nav__btn" data-cat="pso">ファンタシースター</button>
+            <button type="button" class="release-nav__btn" data-cat="chunithm">CHUNITHM</button>
+            <button type="button" class="release-nav__btn" data-cat="maimai">maimai</button>
+            <button type="button" class="release-nav__btn" data-cat="readyyy">Readyyy!</button>
+            <button type="button" class="release-nav__btn" data-cat="voice">声優 / ドラマCD</button>
+            <button type="button" class="release-nav__btn" data-cat="shining">シャイニング</button>
+            <button type="button" class="release-nav__btn" data-cat="tv">TV・映画 etc.</button>
+          </div>
+        </nav>
+
+        <div class="release-year-bar" id="yearBar" aria-label="年別フィルター">
+          <!-- populated by JS -->
+        </div>
+      </aside>
+
+      <!-- Catalog -->
+      <div class="release-main">
+        <div id="releaseCatalog">
+          <!-- populated by JS -->
+        </div>
       </div>
-    </nav>
 
-    <!-- Year Index Bar -->
-    <div class="release-year-bar" id="yearBar" aria-label="年別フィルター">
-      <!-- populated by JS -->
     </div>
-
-    <!-- Release Catalog — grouped by year, populated by JS -->
-    <div id="releaseCatalog">
-      <!-- populated by JS -->
-    </div>
-
   </main>
 
   <footer class="footer">
@@ -590,15 +596,8 @@
 
     let html = `<button type="button" class="release-year-btn${activeYear === "all" ? " is-active" : ""}" data-year="all">ALL</button>`;
     years.forEach(y => {
-      const count = RELEASES.filter(r => {
-        const catOk = activeCat === "all" || r.cat === activeCat;
-        return catOk && r.date.split(".")[0] === y;
-      }).length;
-      html += `<button type="button" class="release-year-btn${activeYear === y ? " is-active" : ""}" data-year="${y}">${y}<span style="margin-left:4px;font-size:0.6em;opacity:0.6">(${count})</span></button>`;
+      html += `<button type="button" class="release-year-btn${activeYear === y ? " is-active" : ""}" data-year="${y}">${y}</button>`;
     });
-
-    const total = filtered.length;
-    html += `<span class="release-count">${total}件</span>`;
     bar.innerHTML = html;
 
     bar.querySelectorAll(".release-year-btn").forEach(btn => {
@@ -659,6 +658,21 @@
     });
 
     catalog.innerHTML = html;
+
+    // Staggered fadeUp on each card
+    const cards = catalog.querySelectorAll(".release-card, .release-card--no-link");
+    cards.forEach((card, i) => {
+      card.style.opacity = "0";
+      card.style.transform = "translateY(16px)";
+      card.style.transition = "none";
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          card.style.transition = `opacity 0.45s cubic-bezier(0.16,1,0.3,1) ${Math.min(i * 18, 300)}ms, transform 0.45s cubic-bezier(0.16,1,0.3,1) ${Math.min(i * 18, 300)}ms`;
+          card.style.opacity = "1";
+          card.style.transform = "translateY(0)";
+        });
+      });
+    });
   }
 
   function renderAll() {
@@ -683,6 +697,17 @@
   // Init
   // ============================================================
   renderAll();
+
+  // bfcache 復元時（戻るボタンなど）にカードが非表示のまま残るのを防ぐ
+  window.addEventListener("pageshow", (e) => {
+    if (e.persisted) {
+      document.querySelectorAll(".release-card, .release-card--no-link").forEach(card => {
+        card.style.transition = "none";
+        card.style.opacity = "1";
+        card.style.transform = "translateY(0)";
+      });
+    }
+  });
   </script>
 </body>
 </html>

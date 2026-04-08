@@ -41,9 +41,14 @@
       // Handle bfcache (back-forward cache) restoration
       window.addEventListener('pageshow', (e) => {
         if (e.persisted) {
-          // Page was restored from bfcache, remove any lingering overlays
-          this.overlay.classList.remove('is-active');
+          // page-transition overlay
+          this.overlay.classList.remove('is-active', 'is-entering');
           this.isTransitioning = false;
+          // page-enter-overlay
+          const enterOverlay = document.querySelector('.page-enter-overlay');
+          if (enterOverlay) {
+            enterOverlay.style.display = 'none';
+          }
         }
       });
     }
@@ -88,10 +93,7 @@
     }
 
     handlePopState() {
-      this.overlay.classList.add('is-entering');
-      setTimeout(() => {
-        window.location.reload();
-      }, CONFIG.transitionDuration);
+      // bfcache復元時は pageshow で処理されるためここでは何もしない
     }
 
     wait(ms) {

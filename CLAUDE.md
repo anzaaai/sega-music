@@ -96,6 +96,10 @@ htdocs/
 | CONTACT | `/contact/` | お問い合わせフォーム |
 | 送信完了 | `/contact/complete.html` | フォーム送信完了ページ |
 | プライバシーポリシー | `/privacy/` | 情報セキュリティ・プライバシーポリシー |
+| RELEASE一覧 | `/release/` | カテゴリ＋年フィルター付きリリース一覧 |
+| RELEASE詳細（consumer） | `/release/consumer/` | コンシューマーゲームサントラ詳細ページ群 |
+| RELEASE詳細（arcade） | `/release/arcade/` | アーケードゲームサントラ詳細ページ群 |
+| RELEASE詳細（pachinko） | `/release/pachinko/` | パチスロ系サントラ詳細ページ群 |
 
 ### フォント（実装）
 
@@ -188,6 +192,51 @@ htdocs/
   - `:nth-child()`セレクタをclose button考慮して修正（2番目から開始）
 - **ナビゲーション**: RELEASEリンクを全ページから削除（PC/SPナビ両方）
 - **ページ遷移アニメーション**: PDFファイル（`.pdf`で終わるリンク）も遷移演出をスキップするように追加
+
+### RELEASEページ 大幅リニューアル（2026-04-14）
+
+- **レイアウト変更**: 2カラム構成（PCサイドバー + メインコンテンツ）
+  - `.release-layout`: `grid-template-columns: 13vw 1fr; gap: 0 3.3vw; margin-top: -3.97vw`
+  - `.release-sidebar`: PCでsticky（`top: 5.5vw`）、SPでsticky（`top: 56px`）
+- **フィルターUI**: ピル型ボタン（`border-radius: 99px`）
+  - カテゴリ: ALL / consumer / arcade / pachinko / maimai など
+  - YEARフィルター: `#yearBar`、ALL + 各年のピル
+  - アクティブ状態: `background: var(--blue)` + 白テキスト（カテゴリ・年とも）
+  - PCでは縦積み（`flex-direction: column`）、SPでは横スクロール（`flex-direction: row`）
+- **カード表示**: 4カラムグリッド（`.release-grid`）
+  - ロールオーバー: `rgba(26, 85, 227, 0.82)` の青オーバーレイ
+  - SP: タイトルフォントサイズ 13px
+- **フィルター切替アニメーション**: staggered fadeUp（18ms間隔、最大300ms上限）
+  - `requestAnimationFrame` × 2でCSS transitionを確実にトリガー
+- **bfcache対応**: `pageshow` イベントでカードの `opacity: 0` / `translateY` をリセット
+- **RELEASES配列のリンク管理**:
+  - `url: ""` → クリック不可div（`.release-card--no-link`）
+  - `local: true` → 内部リンク（`target`なし）
+  - `url: "https://..."` → 外部リンク（`target="_blank"`）
+- **詳細ページ作成済み**（wave-master.comソースから）:
+  - `consumer/gosega.html` — GO SEGA（4disc / 108tracks）
+  - `consumer/puyopop.html` — ぷよぷよパズルポップ（39tracks、YouTube: pBN_QzlI1I8）
+  - `consumer/br.html` — BURNING RANGERS（既存）
+  - `arcade/src.html` — SEGA RALLY CHAMPIONSHIP（2disc / 43tracks、YouTube: 3wQ_BDjZIAc, kHHcW7Ff_SY）
+  - `arcade/swdc.html` — SEGA World Drivers Championship（37tracks）
+  - `arcade/astrocitymini.html` — ASTRO CITY mini（15tracks、YouTube: sV6utJsZ9GQ）
+  - `pachinko/du3.html` — DISC UP ULTRAREMIX（34tracks）
+  - `pachinko/du25th.html` — DISC UP 25th Anniversary Collection（既存）
+
+### 詳細ページ（rd-*）共通仕様
+
+- **構成**: `rd-layout`（ジャケット + info）、`rd-youtube`（任意）、`rd-tracklist`、`article__back`
+- **YouTube埋め込み**: ソースにYouTubeがある場合は `rd-youtube` セクションを追加
+  - `rd-youtube__heading` は左寄せ、"LISTEN"
+  - `rd-youtube__video-wrap`: `aspect-ratio: 16/9`、中央寄せ（`align-items: center; width: 100%`）
+- **トラックリスト**: `rd-tracklist__credit` でコンポーザークレジットを表示（`font-size: 0.86vw; color: var(--muted)`）
+- **breadcrumb**: パンくずリストで階層を表示（HOME > RELEASE > タイトル）
+
+### ページ遷移アニメーション修正（2026-04-14）
+
+- **bfcache（戻るボタン）バグ修正**: `transitions.js`の`handlePopState()`を空にし、`pageshow`イベントで両オーバーレイをリセット
+  - `page-transition`オーバーレイ: `classList.remove('is-active', 'is-entering')`
+  - `page-enter-overlay`: `style.display = 'none'`
 
 ---
 

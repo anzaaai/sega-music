@@ -58,7 +58,12 @@
       "Bash(curl -sL --max-time 15 \"https://web.archive.org/web/2023/http://www.wave-master.com/wme/pastelkids/index.html\" -o /tmp/pastelkids_wb.html)",
       "WebFetch(domain:wave-master.com)",
       "Bash(curl -sL --max-time 15 \"https://www.wave-master.com/ent/src/\")",
-      "Bash(curl -sL --max-time 15 \"https://www.wave-master.com/ent/astrocitymini/\")"
+      "Bash(curl -sL --max-time 15 \"https://www.wave-master.com/ent/astrocitymini/\")",
+      "Bash(sed -i '' 's|content=\"SEGA MUSIC株式会社（旧：株式会社ウェーブマスター）の会社概要。|content=\"株式会社セガ・ミュージック（旧：株式会社ウェーブマスター）の会社概要。|g' company/index.html)",
+      "Bash(sed -i '' 's|content=\"SEGA MUSICは、音楽制作|content=\"株式会社セガ・ミュージックは、音楽制作|g' index.html)",
+      "Bash(sed -i '' 's|content=\"SEGA MUSICのリリース作品一覧。|content=\"株式会社セガ・ミュージックのリリース作品一覧。|g' release/index.html)",
+      "Bash(sed -i '' 's|content=\"SEGA MUSIC株式会社の情報セキュリティ・プライバシーポリシー。\"|content=\"株式会社セガ・ミュージックの情報セキュリティ・プライバシーポリシー。\"|g' privacy/index.html)",
+      "Bash(sed -i '' 's|content=\"SEGA MUSICへのお問い合わせフォーム。|content=\"株式会社セガ・ミュージックへのお問い合わせフォーム。|g' contact/index.html)"
     ]
   }
 }

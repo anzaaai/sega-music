@@ -20,7 +20,8 @@
       "Bash(ls:*)",
       "WebFetch(domain:www.kodoukai.or.jp)",
       "Bash(find:*)",
-      "Bash(wc:*)"
+      "Bash(wc:*)",
+      "Bash(xargs sed *)"
     ]
   }
 }

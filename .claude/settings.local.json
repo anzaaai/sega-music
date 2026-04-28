@@ -63,7 +63,8 @@
       "Bash(sed -i '' 's|content=\"SEGA MUSICは、音楽制作|content=\"株式会社セガ・ミュージックは、音楽制作|g' index.html)",
       "Bash(sed -i '' 's|content=\"SEGA MUSICのリリース作品一覧。|content=\"株式会社セガ・ミュージックのリリース作品一覧。|g' release/index.html)",
       "Bash(sed -i '' 's|content=\"SEGA MUSIC株式会社の情報セキュリティ・プライバシーポリシー。\"|content=\"株式会社セガ・ミュージックの情報セキュリティ・プライバシーポリシー。\"|g' privacy/index.html)",
-      "Bash(sed -i '' 's|content=\"SEGA MUSICへのお問い合わせフォーム。|content=\"株式会社セガ・ミュージックへのお問い合わせフォーム。|g' contact/index.html)"
+      "Bash(sed -i '' 's|content=\"SEGA MUSICへのお問い合わせフォーム。|content=\"株式会社セガ・ミュージックへのお問い合わせフォーム。|g' contact/index.html)",
+      "Bash(node -e ' *)"
     ]
   }
 }
